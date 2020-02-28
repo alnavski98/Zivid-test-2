@@ -16,7 +16,7 @@ namespace zivid_test
         { 
             get 
             {
-                if (this.getRow() == 0 || this.getColumn() == 0)
+                if (this.getRowSize() == 0 || this.getColumnSize() == 0)
                 {
                     return true;
                 }
@@ -59,7 +59,7 @@ namespace zivid_test
         /// in the row
         /// </summary>
         /// <returns></returns>
-        public int getColumn()
+        public int getColumnSize()
         {
             if (coordinate3d.Count() == 0)
             {
@@ -72,7 +72,7 @@ namespace zivid_test
         /// Same but for column
         /// </summary>
         /// <returns></returns>
-        public int getRow()
+        public int getRowSize()
         {
             if (coordinate3d.Count() == 0)
             {

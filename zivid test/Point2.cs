@@ -22,6 +22,6 @@ namespace zivid_test
 
         }
 
-        int a = 2;
+        //int a = 2;
     }
 }

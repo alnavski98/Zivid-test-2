@@ -225,12 +225,15 @@ namespace zivid_test
 
         public static void PointCloudToPicture(PointCloud pc)
         {
-            var xDim = pc.getXDimension();
-            var yDim = pc.getYDimension();
+            var xDim = pc.getColumnSize();
+            var yDim = pc.getRowSize();
 
             var scale = 255.0f / (pc.getMaxZ() - pc.getMinZ());
             var translationMin = (0 - pc.getMinZ());
             var translationMax = Math.Abs(255 - pc.getMaxZ());
+
+            var zValues = new List<float>();
+
 
             try
             {
