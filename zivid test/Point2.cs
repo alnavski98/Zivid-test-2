@@ -21,5 +21,7 @@ namespace zivid_test
         {
 
         }
+
+        int a = 1;
     }
 }
