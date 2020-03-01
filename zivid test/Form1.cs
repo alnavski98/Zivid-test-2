@@ -212,7 +212,7 @@ namespace zivid_test
         private void button1_Click(object sender, EventArgs e)
         {
             var fileTransferer = new FileTransfer();
-            var myPointcloud = fileTransferer.readFromFile(blFileNames[0]);
+            var myPointcloud = fileTransferer.readFromFile(blFileNames[1]);
             PointCloudHelpers.PointCloudToPicture(myPointcloud);
         }
     }

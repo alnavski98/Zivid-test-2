@@ -223,6 +223,11 @@ namespace zivid_test
             var threshold = 3.0f; //Change value for threshold depending on testresult 
         }*/
 
+        /// <summary>
+        /// Converts a pointcloud object to a 2D "heatmap" 
+        /// in black and white
+        /// </summary>
+        /// <param name="pc"></param>
         public static void PointCloudToPicture(PointCloud pc)
         {
             var xDim = pc.getColumnSize();
@@ -262,7 +267,7 @@ namespace zivid_test
                     }
 
                 } // end for
-                bmp.Save("minfil.png", ImageFormat.Png);
+                bmp.Save("minfil3.png", ImageFormat.Png);
             }
             catch(Exception ex)
             {
