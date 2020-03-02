@@ -33,7 +33,10 @@ namespace zivid_test
     /// </summary>
     public static class PointCloudHelpers
     {
-        
+        private static bool isOutOfRange(float value, float lowerQuartile, float upperQuartile)
+        {
+            return ((value > upperQuartile) || (value < lowerQuartile));
+        }
         
         /// <summary>
         /// Converting 3D float array to point cloud
@@ -254,11 +257,17 @@ namespace zivid_test
             }
 
             zValues = zValues.Where(t => !float.IsNaN(t)).ToList();
+            var zUpperQuartile = 0.75f * pc.getMaxZ();
+            var zLowerQuartile = 0.25f * pc.getMaxZ();
 
-            var zUpperQuartile = 0.75 * pc.getMaxZ();
-            var zLowerQuartile = 0.25 * pc.getMaxZ();
+            var zVal = zValues.ToArray();
 
-            
+
+                zValues.Where(t => isOutOfRange(zValues[i], zLowerQuartile, zUpperQuartile)).ToList();
+
+
+            Console.WriteLine(zUpperQuartile);
+            Console.WriteLine(zLowerQuartile);
 
 
             try
