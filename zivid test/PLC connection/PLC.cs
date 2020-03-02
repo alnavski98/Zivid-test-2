@@ -68,21 +68,24 @@ namespace zivid_test
                             NetworkStream stream = client.GetStream();
 
                             int i;
+                            // Starts one work in parallel
                             for (int k = 0; k < 1; k++)
                             {
                                 Task threshold = Task.Factory.StartNew(() =>
                                 {
+                                    // Enter the listening loop.
                                     while (true)
                                     {
                                         // if snapshot deviates from baseline, then send a stop signal to PLC
                                         if (CameraFunctions.distance>10000)
                                         {
-                                            
+                                            // the stop signal
                                             byte[] msg = System.Text.Encoding.ASCII.GetBytes("feil");
 
-                                            // Send back a response. Stoping the automation system
+                                            // Sends the stop signal. (Stoping the automation system)
                                             stream.Write(msg, 0, msg.Length);
                                             zivid_test.Program.f.WriteTextSafe("Sent: feil ");
+                                            // currently it sends a stop signal every 1 sec, but we should see if sending just one is needed
                                             Thread.Sleep(1000);
                                         }
                                     }
@@ -90,22 +93,22 @@ namespace zivid_test
                             }
                             
                             // Loop to receive all the data sent by the client.
-                            while ((i = stream.Read(bytes, 0, bytes.Length)) != 0) //True while bits are still in message?  //her venter koden på tekst
+                            while ((i = stream.Read(bytes, 0, bytes.Length)) != 0) //True while message is not 0 
                             {
-                                // a picture will be taken when something is recieved from the PLC
-                                //zivid_test.ZividCAM.snapshot();
-                                // Translate data bytes to a ASCII string.
-                                data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-                                
-                                zivid_test.Program.f.WriteTextSafe("baseline: " + data);
-                                
-                                
-
-                                char Number = data[2];
                                 // a picture will be taken when something is recieved from the PLC
                                 CameraFunctions functions = new CameraFunctions();
                                 functions.snapshotDistance();
-                                // 
+
+                                // Translate data bytes from PLC to an ASCII string.
+                                data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                                // writes out the deviation number called distance to logg window
+                                zivid_test.Program.f.WriteTextSafe("baseline: " + data + Environment.NewLine + CameraFunctions.distance);
+                                
+
+
+                                char Number = data[2];
+                                
+                                 
                                 if (Number=='1')    //this could be where we logg whitch baseline is currently running
                                 {
                                     zivid_test.Program.f.WriteTextSafe("1. er dette synlig?");
@@ -132,7 +135,7 @@ namespace zivid_test
                     }
                     catch (SocketException e)
                     {
-                        //frm1.LoggTXT.Text = "SocketException: ";
+                        
                         zivid_test.Program.f.WriteTextSafe("SocketException: " + e);
                     }
                     finally
@@ -141,7 +144,7 @@ namespace zivid_test
                         server.Stop();
                     }
 
-                    //frm1.LoggTXT.Text = "\nHit enter to continue...";
+                    
                     Console.Read();
                 }, token1);
             }
