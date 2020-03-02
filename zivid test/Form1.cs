@@ -39,7 +39,7 @@ namespace zivid_test
         {     
             InitializeComponent(); //Initializes form
         }
-
+        //noe
         public void WriteTextSafe(string text)
         {
             if (LoggTXT.InvokeRequired)
