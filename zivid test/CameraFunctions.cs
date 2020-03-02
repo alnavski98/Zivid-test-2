@@ -32,6 +32,7 @@ namespace zivid_test
         public static float distance;
         public string fileName = "Threshold data 4.csv";
 
+        // takes snapshot, compares it whit baseline and gives distance as deviation
         public void snapshotDistance()
         {
             // for (int i = 0; i < 25; i++)
@@ -42,16 +43,12 @@ namespace zivid_test
             snaps.Add(pointCloud);
             pc = PointCloudHelpers.calcAvg(snaps);
 
+            //if baseline is taken, calculate distance. else dont
             if (zivid_test.Program.f.runBaseline)
             {
-                //var sw = new Stopwatch();
                 distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, avgPc.coordinate3d);
-                //string distance1 = distance.ToString();
                 FileTransfer.writeCSV(fileName, distance);
                 Console.WriteLine(distance);
-                //sw.Stop();
-                //var elapsedMs = sw.ElapsedMilliseconds;
-                //Console.WriteLine("Time taken:" + elapsedMs);
             }
             else
             {
