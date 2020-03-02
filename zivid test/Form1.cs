@@ -32,6 +32,9 @@ namespace zivid_test
         public string fileName = "Threshold data 3.csv";
         public float distance;
 
+
+        int a=1;
+
         public Form1()
         {     
             InitializeComponent(); //Initializes form
