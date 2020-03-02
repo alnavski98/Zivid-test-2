@@ -33,13 +33,13 @@ namespace zivid_test
         public float distance;
 
 
-        int a=4;
+        int a=5;
 
         public Form1()
         {     
             InitializeComponent(); //Initializes form
         }
-
+        //noe
         public void WriteTextSafe(string text)
         {
             if (LoggTXT.InvokeRequired)
