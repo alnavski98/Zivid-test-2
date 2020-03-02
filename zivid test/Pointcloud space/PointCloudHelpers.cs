@@ -241,13 +241,25 @@ namespace zivid_test
 
             for (int i = 0; i < pc.coordinate3d.Count(); i++)
             {
-                Parallel.For(
+                for (int j = 0; j < pc.coordinate3d[0].Count(); j++)
+                {
+                    zValues.Add(pc.coordinate3d[i][j].Z);
+                }
+                /*Parallel.For(
                         0, pc.coordinate3d[0].Count(), j =>
                         {
                             zValues.Add(pc.coordinate3d[i][j].Z);
                         }
-                    );
+                    );*/
             }
+
+            zValues = zValues.Where(t => !float.IsNaN(t)).ToList();
+
+            var zUpperQuartile = 0.75 * pc.getMaxZ();
+            var zLowerQuartile = 0.25 * pc.getMaxZ();
+
+            
+
 
             try
             {
@@ -267,7 +279,6 @@ namespace zivid_test
                         if (matte > 255 || matte < 0)
                         {
                             matte = 0;
-                            int bp = 0;
                         }
 
                         Color c = new Color();
