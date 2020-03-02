@@ -59,20 +59,7 @@ namespace zivid_test
             }
             //Thread.Sleep(600);
             // }
-
-            //runSnapshot = true;
-            /* if (ZividCAM.snapshot())
-             {
-                 LoggTXT.Text = "Successfully connected to camera";
-             }
-             else
-             {
-                 LoggTXT.Text = "Warning: Must connect to camera before taking snapshot";
-             } */
-            //ZividCAM.picture();*/
-
-            //var cameraFunction = new CameraFunctions();
-            //cameraFunction.snapshot();
+            
         }
 
     }
