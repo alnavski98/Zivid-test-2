@@ -235,10 +235,19 @@ namespace zivid_test
 
             var scale = 255.0f / (pc.getMaxZ() - pc.getMinZ());
             var translationMin = (0 - pc.getMinZ());
-            var translationMax = Math.Abs(255 - pc.getMaxZ());
+            //var translationMax = Math.Abs(255 - pc.getMaxZ());
 
             var zValues = new List<float>();
 
+            for (int i = 0; i < pc.coordinate3d.Count(); i++)
+            {
+                Parallel.For(
+                        0, pc.coordinate3d[0].Count(), j =>
+                        {
+                            zValues.Add(pc.coordinate3d[i][j].Z);
+                        }
+                    );
+            }
 
             try
             {
