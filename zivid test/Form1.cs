@@ -33,7 +33,7 @@ namespace zivid_test
         public float distance;
 
 
-        int a=2;
+        int a=3;
 
         public Form1()
         {     
