@@ -33,6 +33,7 @@ namespace zivid_test
     /// </summary>
     public static class PointCloudHelpers
     {
+        
         private static bool isOutOfRange(float value, float lowerQuartile, float upperQuartile)
         {
             return ((value > upperQuartile) || (value < lowerQuartile));
@@ -263,13 +264,13 @@ namespace zivid_test
             var zVal = zValues.ToArray();
 
 
-                zValues.Where(t => isOutOfRange(zValues[i], zLowerQuartile, zUpperQuartile)).ToList();
+                //zValues.Where(t => isOutOfRange(zValues[i], zLowerQuartile, zUpperQuartile)).ToList();
 
 
             Console.WriteLine(zUpperQuartile);
             Console.WriteLine(zLowerQuartile);
             //Ask about this, want to reduce the list to only include z values within a range of the lower quartile to
-            //the upper quartile and only assign black/white "coloring" accordingly
+            //the upper quartile and only assign black/white "coloring" accordingly.
 
             try
             {
@@ -297,18 +298,49 @@ namespace zivid_test
                     }
 
                 } // end for
+
                 bmp.Save("minfil3.png", ImageFormat.Png);
             }
             catch(Exception ex)
             {
                 int a = 1;
             }
-              
-
-
-
-
         }
 
+        //Copied code from internet, median filter
+        public static void MedianFiltering(Bitmap bm)
+        {
+            List<byte> termsList = new List<byte>();  //Makes new list of bytes called termsList
+
+            byte[,] image = new byte[bm.Width, bm.Height];  //Makes new 2D array called image with bitmaps width and height as inputs
+
+            //Convert to Grayscale 
+            for (int i = 0; i < bm.Width; i++)  
+            {
+                for (int j = 0; j < bm.Height; j++)
+                {
+                    var c = bm.GetPixel(i, j);
+                    byte gray = (byte)(.333 * c.R + .333 * c.G + .333 * c.B);
+                    image[i, j] = gray;
+                }
+            }
+
+            //applying Median Filtering 
+            for (int i = 0; i <= bm.Width - 3; i++)
+                for (int j = 0; j <= bm.Height - 3; j++)
+                {
+                    for (int x = i; x <= i + 2; x++)
+                        for (int y = j; y <= j + 2; y++)
+                        {
+                            termsList.Add(image[x, y]);
+                        }
+                    byte[] terms = termsList.ToArray();
+                    termsList.Clear();
+                    Array.Sort<byte>(terms);
+                    Array.Reverse(terms);
+                    byte color = terms[4];
+                    bm.SetPixel(i + 1, j + 1, Color.FromArgb(color, color, color));
+                }
+        }
     }
 }

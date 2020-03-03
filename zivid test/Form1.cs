@@ -218,5 +218,10 @@ namespace zivid_test
             var myPointcloud = fileTransferer.readFromFile(blFileNames[1]);
             PointCloudHelpers.PointCloudToPicture(myPointcloud);
         }
+
+        private void btn_apply_median_filter_Click(object sender, EventArgs e)
+        {
+            //PointCloudHelpers.MedianFiltering();
+        }
     }
 }

@@ -44,6 +44,8 @@
             this.btn_disconnect = new System.Windows.Forms.Button();
             this.btn_load_baselines = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btn_apply_median_filter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IrisTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCntTXT)).BeginInit();
@@ -256,11 +258,32 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(0, 0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 18;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // btn_apply_median_filter
+            // 
+            this.btn_apply_median_filter.Location = new System.Drawing.Point(506, 303);
+            this.btn_apply_median_filter.Name = "btn_apply_median_filter";
+            this.btn_apply_median_filter.Size = new System.Drawing.Size(157, 39);
+            this.btn_apply_median_filter.TabIndex = 19;
+            this.btn_apply_median_filter.Text = "Apply median filter";
+            this.btn_apply_median_filter.UseVisualStyleBackColor = true;
+            this.btn_apply_median_filter.Click += new System.EventHandler(this.btn_apply_median_filter_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 611);
+            this.Controls.Add(this.btn_apply_median_filter);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_load_baselines);
             this.Controls.Add(this.btn_disconnect);
@@ -307,6 +330,8 @@
         private System.Windows.Forms.Button btn_disconnect;
         private System.Windows.Forms.Button btn_load_baselines;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_apply_median_filter;
     }
 }
 
