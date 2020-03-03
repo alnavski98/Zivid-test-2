@@ -268,7 +268,8 @@ namespace zivid_test
 
             Console.WriteLine(zUpperQuartile);
             Console.WriteLine(zLowerQuartile);
-
+            //Ask about this, want to reduce the list to only include z values within a range of the lower quartile to
+            //the upper quartile and only assign black/white "coloring" accordingly
 
             try
             {
