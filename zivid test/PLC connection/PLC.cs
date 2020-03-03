@@ -73,20 +73,28 @@ namespace zivid_test
                             {
                                 Task threshold = Task.Factory.StartNew(() =>
                                 {
+                                    float j = 0;
+
                                     // Enter the listening loop.
                                     while (true)
                                     {
+                                        
                                         // if snapshot deviates from baseline, then send a stop signal to PLC
-                                        if (CameraFunctions.distance>10000)
+                                        if (CameraFunctions.distance>30000)
                                         {
-                                            // the stop signal
-                                            byte[] msg = System.Text.Encoding.ASCII.GetBytes("feil");
+                                            if( j != CameraFunctions.distance)
+                                            {
+                                                // the stop signal
+                                                byte[] msg = System.Text.Encoding.ASCII.GetBytes("feil");
 
-                                            // Sends the stop signal. (Stoping the automation system)
-                                            stream.Write(msg, 0, msg.Length);
-                                            zivid_test.Program.f.WriteTextSafe("Sent: feil ");
-                                            // currently it sends a stop signal every 1 sec, but we should see if sending just one is needed
-                                            Thread.Sleep(1000);
+                                                // Sends the stop signal. (Stoping the automation system)
+                                                stream.Write(msg, 0, msg.Length);
+                                                zivid_test.Program.f.WriteTextSafe("Sent: feil ");
+                                                // currently it sends a stop signal every 1 sec, but we should see if sending just one is needed
+                                                j = CameraFunctions.distance;
+                                            }
+
+                                            
                                         }
                                     }
                                 });
