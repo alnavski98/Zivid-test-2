@@ -10,6 +10,7 @@ using System.Runtime.Serialization;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
+using LinqStatistics;
 
 namespace zivid_test
 {
@@ -34,10 +35,7 @@ namespace zivid_test
     public static class PointCloudHelpers
     {
         
-        private static bool isOutOfRange(float value, float lowerQuartile, float upperQuartile)
-        {
-            return ((value > upperQuartile) || (value < lowerQuartile));
-        }
+
         
         /// <summary>
         /// Converting 3D float array to point cloud
@@ -190,34 +188,30 @@ namespace zivid_test
         {
             int a = 0;
             var totDist = 0.0f;
+            var threshold = 1.0f;
+            List<Point3> point3 = new List<Point3>();
             for (int i = 0; i < pc.Count(); i++)
             {
                 float[] length = new float[pc[0].Count()];
-                //float[] y = new float[pc[0].Count()];
-                //float[] z = new float[pc[0].Count()];
                 Parallel.For(
                         0, pc[0].Count(), j =>
                         {
-                            //x[j] = (pc[i][j].X - baseline[i][j].X) * (pc[i][j].X - baseline[i][j].X);
-                            //y[j] = (pc[i][j].Y - baseline[i][j].Y) * (pc[i][j].Y - baseline[i][j].Y);
-                            //z[j] = (pc[i][j].Z - baseline[i][j].Z) * (pc[i][j].Z - baseline[i][j].Z);
-
                             length[j] = p2pLengthSquared(pc[i][j], baseline[i][j]);
+                            if(length[j] > threshold)
+                            {
+                                lock (point3)
+                                {
+                                    point3.Add(pc[i][j]);
+                                }
+                            }
                         }
                         
                 );
-                
-                /*for (int j = 0; j < pc[0].Count(); j++)  
-                {
-                    x[j] = (pc[i][j].X - baseline[i][j].X) * (pc[i][j].X - baseline[i][j].X);   
-                    y[j] = (pc[i][j].Y - baseline[i][j].Y) * (pc[i][j].Y - baseline[i][j].Y);
-                    z[j] = (pc[i][j].Z - baseline[i][j].Z) * (pc[i][j].Z - baseline[i][j].Z);
-                }    */                                             
+                                                   
                 var nn = length.Where(t => !float.IsNaN(t));
-                //var nn2 = y.Where(t => !float.IsNaN(t));
-                //var nn3 = z.Where(t => !float.IsNaN(t));
                 totDist += nn.Sum(); // + nn2.Sum() + nn3.Sum();
             }
+                
             return (float)Math.Sqrt(totDist); 
             //Return square root of totDist (for now returns
         }             //a non zero number even with baseline being the same as the picture)
@@ -237,38 +231,49 @@ namespace zivid_test
             var xDim = pc.getColumnSize();
             var yDim = pc.getRowSize();
 
-            var scale = 255.0f / (pc.getMaxZ() - pc.getMinZ());
-            var translationMin = (0 - pc.getMinZ());
+            //var scale = 255.0f / (pc.getMaxZ() - pc.getMinZ());
+            //var translationMin = (0 - pc.getMinZ());
             //var translationMax = Math.Abs(255 - pc.getMaxZ());
 
             var zValues = new List<float>();
 
             for (int i = 0; i < pc.coordinate3d.Count(); i++)
             {
-                for (int j = 0; j < pc.coordinate3d[0].Count(); j++)
+                /*for (int j = 0; j < pc.coordinate3d[0].Count(); j++)
                 {
                     zValues.Add(pc.coordinate3d[i][j].Z);
-                }
-                /*Parallel.For(
+                }*/
+                Parallel.For(
                         0, pc.coordinate3d[0].Count(), j =>
                         {
-                            zValues.Add(pc.coordinate3d[i][j].Z);
+                            lock (zValues)
+                            {
+                                zValues.Add(pc.coordinate3d[i][j].Z);
+                            }
                         }
-                    );*/
+                    );
             }
 
-            zValues = zValues.Where(t => !float.IsNaN(t)).ToList();
-            var zUpperQuartile = 0.75f * pc.getMaxZ();
-            var zLowerQuartile = 0.25f * pc.getMaxZ();
+            // interquartile Range 
 
-            var zVal = zValues.ToArray();
+            var q2 = zValues.Median();
+            var q3 = zValues.Where(t => t > q2).Median() * 2.5f;
+            var q1 = zValues.Where(t => t < q2).Median() * 2.5f;
+            //interquartile Range
+
+            var scale = 255.0f / (q3 - q1);
+            var translation = (0 - q1);
+
+            zValues = zValues.Where(t => !float.IsNaN(t)).ToList();
+            
+
+
 
 
                 //zValues.Where(t => isOutOfRange(zValues[i], zLowerQuartile, zUpperQuartile)).ToList();
 
 
-            Console.WriteLine(zUpperQuartile);
-            Console.WriteLine(zLowerQuartile);
+
             //Ask about this, want to reduce the list to only include z values within a range of the lower quartile to
             //the upper quartile and only assign black/white "coloring" accordingly.
 
@@ -276,71 +281,77 @@ namespace zivid_test
             {
                 Bitmap bmp = new Bitmap(yDim, xDim);
 
+                //List<byte> termsList = new List<byte>();  
+
+                //byte[,] image = new byte[bm.Width, bm.Height];
+
                 for (int i = 0; i < yDim; i++)
                 {
 
                     for (int j = 0; j < xDim; j++)
                     {
 
-                        var matte = (int)Math.Round(pc.coordinate3d[i][j].Z * (scale) + translationMin, 0);
+                        var matte = (int)Math.Round(pc.coordinate3d[i][j].Z * (scale) + translation, 0);
                         if(matte == float.NaN)
                         {
                             matte = 0;
                         }
-                        if (matte > 255 || matte < 0)
+                        if (matte > 255)
+                        {
+                            matte = 255;
+                        }
+                        else if (matte < 0)
                         {
                             matte = 0;
                         }
 
                         Color c = new Color();
                         c = Color.FromArgb(255, matte, matte, matte);
+                        //byte gray = (byte)(.333 * c.R + .333 * c.G + .333 * c.B);
                         bmp.SetPixel(i, j, c);
                     }
 
                 } // end for
 
-                bmp.Save("minfil3.png", ImageFormat.Png);
+                bmp.Save("minfil4.png", ImageFormat.Png);
             }
             catch(Exception ex)
             {
                 int a = 1;
             }
         }
-
-        //Copied code from internet, median filter
-        public static void MedianFiltering(Bitmap bm)
+        
+        public static Point3 calcCoG(List<Point3> points)
         {
-            List<byte> termsList = new List<byte>();  //Makes new list of bytes called termsList
-
-            byte[,] image = new byte[bm.Width, bm.Height];  //Makes new 2D array called image with bitmaps width and height as inputs
-
-            //Convert to Grayscale 
-            for (int i = 0; i < bm.Width; i++)  
-            {
-                for (int j = 0; j < bm.Height; j++)
-                {
-                    var c = bm.GetPixel(i, j);
-                    byte gray = (byte)(.333 * c.R + .333 * c.G + .333 * c.B);
-                    image[i, j] = gray;
-                }
-            }
-
-            //applying Median Filtering 
-            for (int i = 0; i <= bm.Width - 3; i++)
-                for (int j = 0; j <= bm.Height - 3; j++)
-                {
-                    for (int x = i; x <= i + 2; x++)
-                        for (int y = j; y <= j + 2; y++)
-                        {
-                            termsList.Add(image[x, y]);
-                        }
-                    byte[] terms = termsList.ToArray();
-                    termsList.Clear();
-                    Array.Sort<byte>(terms);
-                    Array.Reverse(terms);
-                    byte color = terms[4];
-                    bm.SetPixel(i + 1, j + 1, Color.FromArgb(color, color, color));
-                }
+            return new Point3(points.Select(t => t.X).Average(), points.Select(t => t.Y).Average(), points.Select(t => t.Z).Average());
         }
+
+        /*public static List<Point3> orderedToUnordered(PointCloud pc)
+        {
+
+        }*/
+
+        public static List<Point3> orderToChaos(List<List<Point3>> points)
+        {
+            var nonnan2 = new List<Point3>();
+            Parallel.For(
+                   0, points.Count, i => {
+                               // If point is not NaN, add to unordered list
+                               var nn = points[i].Where(t => point3IsNaN(t));
+                       lock (nonnan2)
+                       {
+                           nonnan2.AddRange(nn);
+                       }
+                   }
+            );
+            return nonnan2;
+        }
+
+        public static bool point3IsNaN(Point3 v)
+        {
+            return (float.IsNaN(v.X) || float.IsNaN(v.Y) || float.IsNaN(v.Z));
+        }
+
     }
 }
+

@@ -119,6 +119,8 @@ namespace zivid_test
             return minValue;
         }
 
+        
+
     }
 
     /// <summary>
