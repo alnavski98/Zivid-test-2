@@ -80,7 +80,7 @@ namespace zivid_test
                                     {
                                         
                                         // if snapshot deviates from baseline, then send a stop signal to PLC
-                                        if (CameraFunctions.distance>10000)
+                                        if (CameraFunctions.distance>30000)
                                         {
                                             if( j != CameraFunctions.distance)
                                             {
@@ -91,7 +91,6 @@ namespace zivid_test
                                                 stream.Write(msg, 0, msg.Length);
                                                 zivid_test.Program.f.WriteTextSafe("Sent: feil ");
                                                 // currently it sends a stop signal every 1 sec, but we should see if sending just one is needed
-                                                Thread.Sleep(1000);
                                                 j = CameraFunctions.distance;
                                             }
 
