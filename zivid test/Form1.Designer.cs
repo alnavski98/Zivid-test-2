@@ -168,7 +168,7 @@
             // 
             // LoggTXT
             // 
-            this.LoggTXT.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.LoggTXT.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LoggTXT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoggTXT.Location = new System.Drawing.Point(16, 599);
@@ -180,7 +180,6 @@
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(12, 566);
@@ -361,7 +360,7 @@
             this.Controls.Add(this.btn_assist_mode);
             this.Controls.Add(this.btn_connect);
             this.Controls.Add(this.btn_snapshot);
-            this.MaximumSize = new System.Drawing.Size(1916, 1071);
+            this.MaximumSize = new System.Drawing.Size(1860, 1071);
             this.MinimumSize = new System.Drawing.Size(1003, 918);
             this.Name = "Form1";
             this.Text = "Form1";
