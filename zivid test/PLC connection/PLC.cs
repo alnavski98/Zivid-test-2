@@ -99,6 +99,10 @@ namespace zivid_test
 
                                             
                                         }
+                                        if (cancel)
+                                        {
+                                            client.Close();
+                                        }
                                     }
                                 },token1);
                             }
@@ -167,11 +171,11 @@ namespace zivid_test
                 }, token1);
             }
             
-            if (cancel)
+            /*if (cancel)
             {
                 source1.Cancel();
                 zivid_test.Program.f.WriteTextSafe("Disconected PLC ");
-            }
+            }*/
         }
 
     }
