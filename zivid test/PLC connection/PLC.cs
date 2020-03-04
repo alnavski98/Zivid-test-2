@@ -17,12 +17,14 @@ namespace zivid_test
         public static CancellationTokenSource source1 = new CancellationTokenSource();
         public CancellationToken token1 = source1.Token;
 
+        public Task threshold = new Task(() => { });
         public void plcListner()
         {
 
             //makes it posible to cancel the task
             CancellationTokenSource source1 = new CancellationTokenSource();
             CancellationToken token1 = source1.Token;
+            
 
             if (j)
             {
@@ -74,7 +76,7 @@ namespace zivid_test
                             // Starts one work in parallel
                             for (int k = 0; k < 1; k++)
                             {
-                                Task threshold = Task.Factory.StartNew(() =>
+                                 threshold = Task.Factory.StartNew(() =>
                                 {
                                     float j = 0;
 
@@ -101,58 +103,64 @@ namespace zivid_test
                                         }
                                         if (cancel)
                                         {
+                                            Thread.Sleep(50);
                                             client.Close();
                                             zivid_test.Program.f.WriteTextSafe("Disconected PLC ");
-                                            source1.Cancel();
+                                           // source1.Cancel();
                                             token1.ThrowIfCancellationRequested();
                                         }
                                     }
                                 },token1);
                             }
-                            
+
                             // Loop to receive all the data sent by the client.
-                            while ((i = stream.Read(bytes, 0, bytes.Length)) != 0) //True while message is not 0 
+                            try
                             {
-                                // a picture will be taken when something is recieved from the PLC
-                                CameraFunctions functions = new CameraFunctions();
-                                functions.snapshotDistance();
-
-                                // Translate data bytes from PLC to an ASCII string.
-                                data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-                                // writes out the deviation number called distance to logg window
-                                zivid_test.Program.f.WriteTextSafe("baseline: " + data + Environment.NewLine + CameraFunctions.distance);
-                                
 
 
-                                char Number = data[2];
-                                
-                                 
-                                if (Number == '1')    //this could be where we logg whitch baseline is currently running
+                                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0) //True while message is not 0 
                                 {
-                                    zivid_test.Program.f.WriteTextSafe("1. Startposisjon uten delay");
-                                }
-                                else if (Number == '2')
-                                {
-                                    zivid_test.Program.f.WriteTextSafe("2. Sluttposisjon uten delay.");
-                                }
-                                else if (Number == '3')
-                                {
-                                    zivid_test.Program.f.WriteTextSafe("3. Startposisjon med delay nr1");
-                                }
-                                else if (Number == '4')
-                                {
-                                    zivid_test.Program.f.WriteTextSafe("4. Sluttposisjon med delay nr1");
-                                }
-                                else if (Number == '5')
-                                {
-                                    zivid_test.Program.f.WriteTextSafe("4. Startposisjon med delay nr2");
-                                }
-                                else if (Number == '6')
-                                {
-                                    zivid_test.Program.f.WriteTextSafe("4. Sluttposisjon med delay nr2");
+                                    // a picture will be taken when something is recieved from the PLC
+                                    CameraFunctions functions = new CameraFunctions();
+                                    functions.snapshotDistance();
+
+                                    // Translate data bytes from PLC to an ASCII string.
+                                    data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                                    // writes out the deviation number called distance to logg window
+                                    zivid_test.Program.f.WriteTextSafe("baseline: " + data + Environment.NewLine + CameraFunctions.distance);
+
+
+
+                                    char Number = data[2];
+
+
+                                    if (Number == '1')    //this could be where we logg whitch baseline is currently running
+                                    {
+                                        zivid_test.Program.f.WriteTextSafe("1. Startposisjon uten delay");
+                                    }
+                                    else if (Number == '2')
+                                    {
+                                        zivid_test.Program.f.WriteTextSafe("2. Sluttposisjon uten delay.");
+                                    }
+                                    else if (Number == '3')
+                                    {
+                                        zivid_test.Program.f.WriteTextSafe("3. Startposisjon med delay nr1");
+                                    }
+                                    else if (Number == '4')
+                                    {
+                                        zivid_test.Program.f.WriteTextSafe("4. Sluttposisjon med delay nr1");
+                                    }
+                                    else if (Number == '5')
+                                    {
+                                        zivid_test.Program.f.WriteTextSafe("4. Startposisjon med delay nr2");
+                                    }
+                                    else if (Number == '6')
+                                    {
+                                        zivid_test.Program.f.WriteTextSafe("4. Sluttposisjon med delay nr2");
+                                    }
                                 }
                             }
-
+                            catch { }
                             // Shutdown and end connection
                             client.Close();
                         }
@@ -171,14 +179,21 @@ namespace zivid_test
 
                     
                     Console.Read();
-                }, token1);
+                });
             }
             
-            /*if (cancel)
+            if (cancel)
             {
-                source1.Cancel();
-                zivid_test.Program.f.WriteTextSafe("Disconected PLC ");
-            }*/
+                try
+                {
+                    threshold.Wait(100);
+                }
+                catch (AggregateException)
+                {
+
+                }
+                
+            }
         }
 
     }

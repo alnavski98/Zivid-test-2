@@ -229,7 +229,7 @@ namespace zivid_test
             PLC.j = false;
             PLC.cancel = true;
             plc.plcListner();
-
+            
         }
     }
 }
