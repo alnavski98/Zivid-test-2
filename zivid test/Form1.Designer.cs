@@ -46,6 +46,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btn_apply_median_filter = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IrisTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCntTXT)).BeginInit();
@@ -54,7 +59,7 @@
             // btn_snapshot
             // 
             this.btn_snapshot.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.btn_snapshot.Location = new System.Drawing.Point(218, 15);
+            this.btn_snapshot.Location = new System.Drawing.Point(179, 443);
             this.btn_snapshot.Name = "btn_snapshot";
             this.btn_snapshot.Size = new System.Drawing.Size(184, 75);
             this.btn_snapshot.TabIndex = 0;
@@ -65,9 +70,9 @@
             // btn_connect
             // 
             this.btn_connect.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.btn_connect.Location = new System.Drawing.Point(12, 15);
+            this.btn_connect.Location = new System.Drawing.Point(30, 69);
             this.btn_connect.Name = "btn_connect";
-            this.btn_connect.Size = new System.Drawing.Size(184, 75);
+            this.btn_connect.Size = new System.Drawing.Size(184, 74);
             this.btn_connect.TabIndex = 1;
             this.btn_connect.Text = "Connect";
             this.btn_connect.UseVisualStyleBackColor = true;
@@ -76,7 +81,7 @@
             // btn_assist_mode
             // 
             this.btn_assist_mode.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.btn_assist_mode.Location = new System.Drawing.Point(441, 15);
+            this.btn_assist_mode.Location = new System.Drawing.Point(379, 443);
             this.btn_assist_mode.Name = "btn_assist_mode";
             this.btn_assist_mode.Size = new System.Drawing.Size(184, 75);
             this.btn_assist_mode.TabIndex = 2;
@@ -92,7 +97,7 @@
             0,
             0,
             0});
-            this.ExposureTXT.Location = new System.Drawing.Point(16, 162);
+            this.ExposureTXT.Location = new System.Drawing.Point(51, 247);
             this.ExposureTXT.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -115,7 +120,7 @@
             // IrisTXT
             // 
             this.IrisTXT.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.IrisTXT.Location = new System.Drawing.Point(218, 162);
+            this.IrisTXT.Location = new System.Drawing.Point(253, 247);
             this.IrisTXT.Maximum = new decimal(new int[] {
             72,
             0,
@@ -134,7 +139,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label1.Location = new System.Drawing.Point(12, 129);
+            this.label1.Location = new System.Drawing.Point(47, 214);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(173, 29);
             this.label1.TabIndex = 7;
@@ -144,18 +149,19 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label2.Location = new System.Drawing.Point(213, 129);
+            this.label2.Location = new System.Drawing.Point(248, 214);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 29);
             this.label2.TabIndex = 8;
             this.label2.Text = "Iris:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // btn_update
             // 
-            this.btn_update.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btn_update.Location = new System.Drawing.Point(12, 209);
+            this.btn_update.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.btn_update.Location = new System.Drawing.Point(52, 288);
             this.btn_update.Name = "btn_update";
-            this.btn_update.Size = new System.Drawing.Size(184, 72);
+            this.btn_update.Size = new System.Drawing.Size(385, 72);
             this.btn_update.TabIndex = 9;
             this.btn_update.Text = "Apply settings";
             this.btn_update.UseVisualStyleBackColor = true;
@@ -166,11 +172,11 @@
             this.LoggTXT.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LoggTXT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoggTXT.Location = new System.Drawing.Point(16, 348);
+            this.LoggTXT.Location = new System.Drawing.Point(16, 599);
             this.LoggTXT.Multiline = true;
             this.LoggTXT.Name = "LoggTXT";
             this.LoggTXT.ReadOnly = true;
-            this.LoggTXT.Size = new System.Drawing.Size(660, 235);
+            this.LoggTXT.Size = new System.Drawing.Size(947, 235);
             this.LoggTXT.TabIndex = 10;
             // 
             // label3
@@ -178,7 +184,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 315);
+            this.label3.Location = new System.Drawing.Point(12, 566);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 29);
             this.label3.TabIndex = 11;
@@ -186,9 +192,9 @@
             // 
             // btn_baseline
             // 
-            this.btn_baseline.Location = new System.Drawing.Point(494, 162);
+            this.btn_baseline.Location = new System.Drawing.Point(30, 443);
             this.btn_baseline.Name = "btn_baseline";
-            this.btn_baseline.Size = new System.Drawing.Size(123, 34);
+            this.btn_baseline.Size = new System.Drawing.Size(120, 34);
             this.btn_baseline.TabIndex = 12;
             this.btn_baseline.Text = "Baseline";
             this.btn_baseline.UseVisualStyleBackColor = true;
@@ -196,7 +202,7 @@
             // 
             // pictureCntTXT
             // 
-            this.pictureCntTXT.Location = new System.Drawing.Point(494, 192);
+            this.pictureCntTXT.Location = new System.Drawing.Point(30, 472);
             this.pictureCntTXT.Maximum = new decimal(new int[] {
             99,
             0,
@@ -219,9 +225,10 @@
             // 
             // btn_connect_PLS
             // 
-            this.btn_connect_PLS.Location = new System.Drawing.Point(494, 252);
+            this.btn_connect_PLS.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_connect_PLS.Location = new System.Drawing.Point(655, 69);
             this.btn_connect_PLS.Name = "btn_connect_PLS";
-            this.btn_connect_PLS.Size = new System.Drawing.Size(123, 37);
+            this.btn_connect_PLS.Size = new System.Drawing.Size(211, 74);
             this.btn_connect_PLS.TabIndex = 14;
             this.btn_connect_PLS.Text = "Connect PLS";
             this.btn_connect_PLS.UseVisualStyleBackColor = true;
@@ -230,7 +237,7 @@
             // btn_disconnect
             // 
             this.btn_disconnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_disconnect.Location = new System.Drawing.Point(229, 215);
+            this.btn_disconnect.Location = new System.Drawing.Point(236, 69);
             this.btn_disconnect.Name = "btn_disconnect";
             this.btn_disconnect.Size = new System.Drawing.Size(229, 74);
             this.btn_disconnect.TabIndex = 15;
@@ -240,7 +247,7 @@
             // 
             // btn_load_baselines
             // 
-            this.btn_load_baselines.Location = new System.Drawing.Point(471, 112);
+            this.btn_load_baselines.Location = new System.Drawing.Point(30, 528);
             this.btn_load_baselines.Name = "btn_load_baselines";
             this.btn_load_baselines.Size = new System.Drawing.Size(146, 35);
             this.btn_load_baselines.TabIndex = 16;
@@ -250,9 +257,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(242, 296);
+            this.button1.Location = new System.Drawing.Point(210, 528);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(163, 28);
+            this.button1.Size = new System.Drawing.Size(163, 35);
             this.button1.TabIndex = 17;
             this.button1.Text = "Test write image";
             this.button1.UseVisualStyleBackColor = true;
@@ -260,28 +267,84 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(0, 0);
+            this.button2.Location = new System.Drawing.Point(742, 431);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(93, 46);
             this.button2.TabIndex = 18;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // btn_apply_median_filter
             // 
-            this.btn_apply_median_filter.Location = new System.Drawing.Point(506, 303);
+            this.btn_apply_median_filter.Location = new System.Drawing.Point(406, 528);
             this.btn_apply_median_filter.Name = "btn_apply_median_filter";
-            this.btn_apply_median_filter.Size = new System.Drawing.Size(157, 39);
+            this.btn_apply_median_filter.Size = new System.Drawing.Size(157, 35);
             this.btn_apply_median_filter.TabIndex = 19;
             this.btn_apply_median_filter.Text = "Apply median filter";
             this.btn_apply_median_filter.UseVisualStyleBackColor = true;
             this.btn_apply_median_filter.Click += new System.EventHandler(this.btn_apply_median_filter_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.label4.Location = new System.Drawing.Point(159, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(143, 40);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Kamera";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.label5.Location = new System.Drawing.Point(144, 174);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(178, 40);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Instillinger";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.label6.Location = new System.Drawing.Point(142, 400);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(193, 40);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Bildetaking";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.label7.Location = new System.Drawing.Point(720, 9);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(85, 40);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "PLS";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
+            this.label8.Location = new System.Drawing.Point(720, 379);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(119, 40);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "Ukjent";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(694, 611);
+            this.ClientSize = new System.Drawing.Size(981, 862);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.btn_apply_median_filter);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -304,6 +367,7 @@
             this.MinimumSize = new System.Drawing.Size(708, 641);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTXT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IrisTXT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCntTXT)).EndInit();
@@ -332,6 +396,11 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btn_apply_median_filter;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }
 
