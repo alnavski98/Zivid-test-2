@@ -44,7 +44,7 @@
             this.btn_disconnect = new System.Windows.Forms.Button();
             this.btn_load_baselines = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.Disconnect_PLS = new System.Windows.Forms.Button();
             this.btn_apply_median_filter = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -224,7 +224,7 @@
             // btn_connect_PLS
             // 
             this.btn_connect_PLS.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_connect_PLS.Location = new System.Drawing.Point(462, 293);
+            this.btn_connect_PLS.Location = new System.Drawing.Point(462, 256);
             this.btn_connect_PLS.Name = "btn_connect_PLS";
             this.btn_connect_PLS.Size = new System.Drawing.Size(211, 74);
             this.btn_connect_PLS.TabIndex = 14;
@@ -263,14 +263,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // Disconnect_PLS
             // 
-            this.button2.Location = new System.Drawing.Point(820, 311);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(93, 46);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.Disconnect_PLS.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.Disconnect_PLS.Location = new System.Drawing.Point(462, 336);
+            this.Disconnect_PLS.Name = "Disconnect_PLS";
+            this.Disconnect_PLS.Size = new System.Drawing.Size(211, 74);
+            this.Disconnect_PLS.TabIndex = 18;
+            this.Disconnect_PLS.Text = "Disconnect PLS";
+            this.Disconnect_PLS.UseVisualStyleBackColor = true;
+            this.Disconnect_PLS.Click += new System.EventHandler(this.Disconnect_PLS_Click);
             // 
             // btn_apply_median_filter
             // 
@@ -316,7 +318,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label7.Location = new System.Drawing.Point(527, 238);
+            this.label7.Location = new System.Drawing.Point(523, 213);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 40);
             this.label7.TabIndex = 23;
@@ -326,7 +328,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label8.Location = new System.Drawing.Point(798, 259);
+            this.label8.Location = new System.Drawing.Point(805, 246);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(119, 40);
             this.label8.TabIndex = 24;
@@ -343,7 +345,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btn_apply_median_filter);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.Disconnect_PLS);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_load_baselines);
             this.Controls.Add(this.btn_disconnect);
@@ -390,7 +392,7 @@
         private System.Windows.Forms.Button btn_disconnect;
         private System.Windows.Forms.Button btn_load_baselines;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button Disconnect_PLS;
         private System.Windows.Forms.Button btn_apply_median_filter;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

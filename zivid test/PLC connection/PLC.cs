@@ -14,12 +14,15 @@ namespace zivid_test
         public static bool j;
         public static bool cancel = false;
         public PointCloud pc = new PointCloud();
+        public static CancellationTokenSource source1 = new CancellationTokenSource();
+        public CancellationToken token1 = source1.Token;
+
         public void plcListner()
         {
 
             //makes it posible to cancel the task
-            var source1 = new CancellationTokenSource();
-            var token1 = source1.Token;
+            CancellationTokenSource source1 = new CancellationTokenSource();
+            CancellationToken token1 = source1.Token;
 
             if (j)
             {
@@ -97,7 +100,7 @@ namespace zivid_test
                                             
                                         }
                                     }
-                                });
+                                },token1);
                             }
                             
                             // Loop to receive all the data sent by the client.
@@ -167,6 +170,7 @@ namespace zivid_test
             if (cancel)
             {
                 source1.Cancel();
+                zivid_test.Program.f.WriteTextSafe("Disconected PLC ");
             }
         }
 
