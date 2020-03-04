@@ -50,7 +50,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IrisTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCntTXT)).BeginInit();
@@ -224,11 +223,11 @@
             // btn_connect_PLS
             // 
             this.btn_connect_PLS.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_connect_PLS.Location = new System.Drawing.Point(462, 256);
+            this.btn_connect_PLS.Location = new System.Drawing.Point(486, 287);
             this.btn_connect_PLS.Name = "btn_connect_PLS";
             this.btn_connect_PLS.Size = new System.Drawing.Size(211, 74);
             this.btn_connect_PLS.TabIndex = 14;
-            this.btn_connect_PLS.Text = "Connect PLS";
+            this.btn_connect_PLS.Text = "Connect PLC";
             this.btn_connect_PLS.UseVisualStyleBackColor = true;
             this.btn_connect_PLS.Click += new System.EventHandler(this.btn_connect_PLS_Click);
             // 
@@ -266,11 +265,11 @@
             // Disconnect_PLS
             // 
             this.Disconnect_PLS.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.Disconnect_PLS.Location = new System.Drawing.Point(462, 336);
+            this.Disconnect_PLS.Location = new System.Drawing.Point(703, 287);
             this.Disconnect_PLS.Name = "Disconnect_PLS";
             this.Disconnect_PLS.Size = new System.Drawing.Size(211, 74);
             this.Disconnect_PLS.TabIndex = 18;
-            this.Disconnect_PLS.Text = "Disconnect PLS";
+            this.Disconnect_PLS.Text = "Disconnect PLC";
             this.Disconnect_PLS.UseVisualStyleBackColor = true;
             this.Disconnect_PLS.Click += new System.EventHandler(this.Disconnect_PLS_Click);
             // 
@@ -290,9 +289,9 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.label4.Location = new System.Drawing.Point(131, 11);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(143, 40);
+            this.label4.Size = new System.Drawing.Size(145, 40);
             this.label4.TabIndex = 20;
-            this.label4.Text = "Kamera";
+            this.label4.Text = "Camera";
             // 
             // label5
             // 
@@ -300,9 +299,9 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.label5.Location = new System.Drawing.Point(112, 173);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(178, 40);
+            this.label5.Size = new System.Drawing.Size(147, 40);
             this.label5.TabIndex = 21;
-            this.label5.Text = "Instillinger";
+            this.label5.Text = "Settings";
             // 
             // label6
             // 
@@ -310,36 +309,25 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.label6.Location = new System.Drawing.Point(556, 28);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(193, 40);
+            this.label6.Size = new System.Drawing.Size(265, 40);
             this.label6.TabIndex = 22;
-            this.label6.Text = "Bildetaking";
+            this.label6.Text = "Taking Pictures";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label7.Location = new System.Drawing.Point(523, 213);
+            this.label7.Location = new System.Drawing.Point(656, 244);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(85, 40);
+            this.label7.Size = new System.Drawing.Size(87, 40);
             this.label7.TabIndex = 23;
-            this.label7.Text = "PLS";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
-            this.label8.Location = new System.Drawing.Point(805, 246);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(119, 40);
-            this.label8.TabIndex = 24;
-            this.label8.Text = "Ukjent";
+            this.label7.Text = "PLC";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(981, 862);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -398,7 +386,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
     }
 }
 

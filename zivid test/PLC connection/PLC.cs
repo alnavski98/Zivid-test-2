@@ -122,7 +122,7 @@ namespace zivid_test
                                  
                                 if (Number == '1')    //this could be where we logg whitch baseline is currently running
                                 {
-                                    zivid_test.Program.f.WriteTextSafe("1. startposisjon uten delay");
+                                    zivid_test.Program.f.WriteTextSafe("1. Startposisjon uten delay");
                                 }
                                 else if (Number == '2')
                                 {
