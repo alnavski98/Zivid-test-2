@@ -360,7 +360,7 @@
             this.Controls.Add(this.btn_assist_mode);
             this.Controls.Add(this.btn_connect);
             this.Controls.Add(this.btn_snapshot);
-            this.MaximumSize = new System.Drawing.Size(1860, 1071);
+            this.MaximumSize = new System.Drawing.Size(1980, 1000);
             this.MinimumSize = new System.Drawing.Size(1003, 918);
             this.Name = "Form1";
             this.Text = "Form1";
