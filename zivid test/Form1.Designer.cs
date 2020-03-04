@@ -154,7 +154,6 @@
             this.label2.Size = new System.Drawing.Size(51, 29);
             this.label2.TabIndex = 8;
             this.label2.Text = "Iris:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // btn_update
             // 
@@ -303,7 +302,6 @@
             this.label5.Size = new System.Drawing.Size(178, 40);
             this.label5.TabIndex = 21;
             this.label5.Text = "Instillinger";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
@@ -367,7 +365,6 @@
             this.MinimumSize = new System.Drawing.Size(708, 641);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTXT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IrisTXT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCntTXT)).EndInit();
