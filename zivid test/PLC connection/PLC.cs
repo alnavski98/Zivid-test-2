@@ -102,6 +102,9 @@ namespace zivid_test
                                         if (cancel)
                                         {
                                             client.Close();
+                                            zivid_test.Program.f.WriteTextSafe("Disconected PLC ");
+                                            source1.Cancel();
+                                            token1.ThrowIfCancellationRequested();
                                         }
                                     }
                                 },token1);
