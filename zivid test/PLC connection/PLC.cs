@@ -117,22 +117,29 @@ namespace zivid_test
                                 char Number = data[2];
                                 
                                  
-                                if (Number=='1')    //this could be where we logg whitch baseline is currently running
+                                if (Number == '1')    //this could be where we logg whitch baseline is currently running
                                 {
-                                    zivid_test.Program.f.WriteTextSafe("1. er dette synlig?");
-                                   
+                                    zivid_test.Program.f.WriteTextSafe("1. startposisjon uten delay");
                                 }
                                 else if (Number == '2')
                                 {
-                                    zivid_test.Program.f.WriteTextSafe("2. start posisjon.");
+                                    zivid_test.Program.f.WriteTextSafe("2. Sluttposisjon uten delay.");
                                 }
                                 else if (Number == '3')
                                 {
-                                    zivid_test.Program.f.WriteTextSafe("3. Slutt posisjon");
+                                    zivid_test.Program.f.WriteTextSafe("3. Startposisjon med delay nr1");
                                 }
                                 else if (Number == '4')
                                 {
-                                    zivid_test.Program.f.WriteTextSafe("4. håp at du ikke ser dette");
+                                    zivid_test.Program.f.WriteTextSafe("4. Sluttposisjon med delay nr1");
+                                }
+                                else if (Number == '5')
+                                {
+                                    zivid_test.Program.f.WriteTextSafe("4. Startposisjon med delay nr2");
+                                }
+                                else if (Number == '6')
+                                {
+                                    zivid_test.Program.f.WriteTextSafe("4. Sluttposisjon med delay nr2");
                                 }
                             }
 

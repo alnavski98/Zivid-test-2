@@ -33,7 +33,7 @@ namespace zivid_test
         public float distance;
 
 
-        int a=46;
+        int a=47;
 
         public Form1()
         {     
@@ -222,6 +222,6 @@ namespace zivid_test
         private void btn_apply_median_filter_Click(object sender, EventArgs e)
         {
             //PointCloudHelpers.MedianFiltering();
-        }
+        }      
     }
 }
