@@ -333,18 +333,18 @@ namespace zivid_test
 
         public static List<Point3> orderToChaos(List<List<Point3>> points)
         {
-            var nonnan2 = new List<Point3>();
+            var noNaNPoints = new List<Point3>();
             Parallel.For(
-                   0, points.Count, i => {
+                   0, points.Count(), i => {
                                // If point is not NaN, add to unordered list
                                var nn = points[i].Where(t => point3IsNaN(t));
-                       lock (nonnan2)
+                       lock (noNaNPoints)
                        {
-                           nonnan2.AddRange(nn);
+                           noNaNPoints.AddRange(nn);
                        }
                    }
             );
-            return nonnan2;
+            return noNaNPoints;
         }
 
         public static bool point3IsNaN(Point3 v)
