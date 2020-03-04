@@ -39,5 +39,22 @@ namespace zivid_test
             
         }
 
+        public List<float> distance(List<Point3> unorderedPC, List<Point3> unorderedBaseline)
+        {
+            List<float> distances = new List<float>();
+            for (int i = 0; i < unorderedPC.Count(); i++)
+            {
+                if (unorderedPC[i].Z - unorderedBaseline[i].Z >= 500)
+                {
+                    distances.Add(unorderedPC[i].Z - unorderedBaseline[i].Z);
+                }
+                else
+                {
+                    distances.Add(0.0f);
+                }
+            }
+
+            return distances;
+        }
     }
 }

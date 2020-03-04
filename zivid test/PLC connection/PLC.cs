@@ -163,7 +163,7 @@ namespace zivid_test
                     Console.Read();
                 }, token1);
             }
-
+            
             if (cancel)
             {
                 source1.Cancel();

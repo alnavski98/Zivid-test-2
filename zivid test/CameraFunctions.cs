@@ -42,6 +42,15 @@ namespace zivid_test
             var pointCloud = PointCloudHelpers.floatToPointCloud(snap);
             snaps.Add(pointCloud);
             pc = PointCloudHelpers.calcAvg(snaps);
+            var unorderedListPC = PointCloudHelpers.orderToChaos(pc.coordinate3d);
+            var unorderedListAvgPC = PointCloudHelpers.orderToChaos(avgPc.coordinate3d);
+
+            var errorPoint = new Point3();
+
+            for (int i = 0; i < unorderedListPC.Count(); i++)
+            {
+                errorPoint.distance(unorderedListPC, unorderedListAvgPC);
+            }
 
             //if baseline is taken, calculate distance. else dont
             if (zivid_test.Program.f.runBaseline)
