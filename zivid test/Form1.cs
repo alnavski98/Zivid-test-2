@@ -78,7 +78,8 @@ namespace zivid_test
             }
 
             PointCloudHelpers.PointCloudToPicture(pc);
-            //Form2 f2 = new Form2();
+            Form2 f2 = new Form2();
+            f2.Show();
         }
 
         private void btn_connect_Click(object sender, EventArgs e)
@@ -92,7 +93,6 @@ namespace zivid_test
             {
                 LoggTXT.Text = "Warning: No cameras found";
             }
-
         }
 
         private void btn_assist_mode_Click_1(object sender, EventArgs e)

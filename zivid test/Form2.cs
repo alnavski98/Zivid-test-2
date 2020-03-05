@@ -16,5 +16,10 @@ namespace zivid_test
         {
             InitializeComponent();
         }
+
+        private void show_error_picture_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
