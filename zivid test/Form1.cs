@@ -26,6 +26,8 @@ namespace zivid_test
         public PointCloud pc = new PointCloud();
         public PointCloud blCylinderOut = new PointCloud();
         public PointCloud blCylinderIn = new PointCloud();
+        public PointCloud blCylinderOutSnap = new PointCloud();
+        public PointCloud blCylinderInSnap = new PointCloud();
         public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
         public bool runBaseline = false;
         //private int baseLineCount = 0;
@@ -56,10 +58,29 @@ namespace zivid_test
        
         private void btn_snapshot_Click(object sender, EventArgs e)
         {
-            CameraFunctions functions = new CameraFunctions();
-            functions.snapshotDistance();
+            //CameraFunctions functions = new CameraFunctions();
+            //functions.snapshotDistance();
+            var snaps = new List<PointCloud>();
+            var snap = ZividCAM.snapshot();  //Takes snapshot from camera and stores in snap
+            var pointCloud = PointCloudHelpers.floatToPointCloud(snap);
+            snaps.Add(pointCloud);
+            pc = PointCloudHelpers.calcAvg(snaps);
 
+            //if baseline is taken, calculate distance. else dont
+            if (runBaseline)
+            {
+                distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, avgPc.coordinate3d);
+                //FileTransfer.writeCSV(fileName, distance);
+                Console.WriteLine(distance);
+            }
+            else
+            {
+                Console.WriteLine("Have not taken baseline yet");
+            }
 
+            PointCloudHelpers.PointCloudToPicture(pc);
+            Form2 f2 = new Form2();
+            f2.Show();
         }
 
         private void btn_connect_Click(object sender, EventArgs e)
@@ -127,13 +148,13 @@ namespace zivid_test
             runBaseline = true;
 
 
-            /*if(baseLineCount == 0)  //If baseline count is 0 store pointcloud in cylinderIn.txt
-            {
+            //if(baseLineCount == 0)  //If baseline count is 0 store pointcloud in cylinderIn.txt
+            //{
                 var baseline = new FileTransfer();
                 baseline.writeToFile(avgPc, blFileNames[0]);
-                baseLineCount++;
-            }
-            else if(baseLineCount == 1)  //If baseline count is 1 store pointcloud in cylinderOut.txt
+                //baseLineCount++;
+            //}
+            /*else if(baseLineCount == 1)  //If baseline count is 1 store pointcloud in cylinderOut.txt
             {
                 var baseline = new FileTransfer();
                 baseline.writeToFile(avgPc, blFileNames[1]);
@@ -145,42 +166,6 @@ namespace zivid_test
             //Consider making if or switch statements here that stores baselines in different txt file names
             //depending on which baseline situation we are in
 
-            //Converts 3D-points from average/baseline into string
-            //string json = JsonConvert.SerializeObject(avg.coordinate3d, Formatting.Indented);
-
-            //Console.WriteLine(json);
-            //Console.ReadKey();
-
-            //Add functionality so that depending on which position the piston is in
-            //the baseline is stored in different text files
-            int a = 0;
-            /*string fullDataPath = Path.Combine("C:\\Users\\alnav\\Desktop\\", "Baseline3.txt"); //Denotes the path and filename
-            using (Stream stream = new FileStream(fullDataPath,  //Destination and filename
-                                  FileMode.Create,  //Create file
-                                  FileAccess.Write,  //Write to file
-                                  FileShare.Write))  //Give access writing to file
-            {
-                IFormatter formatter = new BinaryFormatter(); 
-                formatter.Serialize(stream, json);  //Serializes objects
-                stream.Close();  //Closes stream
-            }*/
-            int b = 1;
-            /*IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream("C:\\Users\\alnav\\Desktop\\Baseline.txt", FileMode.Create, FileAccess.Write);
-
-            formatter.Serialize(stream, avg);
-            stream.Close();*/
-
-
-            /*IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream("C:\\Users\\alnav\\Desktop\\Baseline.txt", FileMode.Create, FileAccess.Write);
-
-            formatter.Serialize(stream, avg);
-            stream.Close();*/
-            //var test = new PointCloudHelpers
-            //Baseline.storeBaseline(avg);
-
-            //int a = 1;
 
         }
 
@@ -203,7 +188,7 @@ namespace zivid_test
             {
                 var fileTransferer = new FileTransfer();
                 blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
-                blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
+                //blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
             } catch (Exception ex)
             {
                 int j = 0;
@@ -214,9 +199,9 @@ namespace zivid_test
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var fileTransferer = new FileTransfer();
-            var myPointcloud = fileTransferer.readFromFile(blFileNames[1]);
-            PointCloudHelpers.PointCloudToPicture(myPointcloud);
+            //var fileTransferer = new FileTransfer();
+            //var myPointcloud = fileTransferer.readFromFile(blFileNames[0]);
+            //PointCloudHelpers.PointCloudToPicture(myPointcloud);
         }
 
         private void btn_apply_median_filter_Click(object sender, EventArgs e)
