@@ -362,7 +362,7 @@
             this.Controls.Add(this.btn_connect);
             this.Controls.Add(this.btn_snapshot);
             this.MaximumSize = new System.Drawing.Size(1916, 1071);
-            this.MinimumSize = new System.Drawing.Size(708, 641);
+            this.MinimumSize = new System.Drawing.Size(1003, 918);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTXT)).EndInit();

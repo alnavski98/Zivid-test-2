@@ -7,7 +7,7 @@ using Duration = Zivid.NET.Duration;
 namespace zivid_test
 {
 
-    public class ZividCAM
+    public static class ZividCAM
     {
         private static Zivid.NET.Camera CAM;
         private static Zivid.NET.Application zivid = new Zivid.NET.Application();

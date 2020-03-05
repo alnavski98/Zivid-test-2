@@ -26,7 +26,7 @@ namespace zivid_test
             // create fullDataPath file, if not exists
             try
             {
-                var fullDataPath = Path.Combine("C:\\Users\\alnav\\Desktop\\", fileName);
+                var fullDataPath = Path.Combine("C:C:\\Users\\alnav\\Desktop", fileName);
                 if (!File.Exists(fullDataPath))  //If fullDataPath doesn't exist write pointcloud to file 
                 {
                    
@@ -40,21 +40,6 @@ namespace zivid_test
             catch
             {
             }
-
-
-            //Converts 3D-points from average/baseline into string
-            //string json = JsonConvert.SerializeObject(pc, Formatting.Indented);
-
-            //string fullDataPath = Path.Combine("C:\\Users\\alnav\\Desktop\\", fileName);
-            /*using (Stream stream = new FileStream(fullDataPath,  //Destination and filename
-                                 FileMode.Create,  //Create file
-                                 FileAccess.Write,  //Write to file
-                                 FileShare.Write))  //Give access writing to file
-            {
-                IFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, json);  //Serializes objects
-                stream.Close();  //Closes stream
-            }*/
         }
 
         /// <summary>
@@ -68,7 +53,7 @@ namespace zivid_test
                 try
                 {
                     String line = "";
-                string settpath = Path.Combine("C:\\Users\\alnav\\Desktop\\", fileName);
+                string settpath = Path.Combine("C:\\Users\\alnav\\Desktop", fileName);
                 using (StreamReader sr = new StreamReader(settpath))
                     {
                         // Read the stream to a string, and write the string to the console.
@@ -80,21 +65,16 @@ namespace zivid_test
             {
                 int a = 1;
             }
-
-
-
-
             return sett;
-            
         }
 
-        public static void writeCSV(string fileName, float body)
+        /*public static void writeCSV(string fileName, float body)
         {
             string h = "Error; ";
             // check if file exists
             try
             {
-                var dataPath = Path.Combine("C:\\Users\\Trym\\OneDrive - NTNU\\Zivid Folder", fileName);
+                var dataPath = Path.Combine("C:\\Users\\alnav\\source\\repos\\ZividPLCconnection\\zivid test\\bin\\debug", fileName);
                 if (!File.Exists(dataPath))
                 {
                     using (StreamWriter sw = File.CreateText(dataPath))
@@ -116,7 +96,7 @@ namespace zivid_test
             {
                 throw new Exception("CSV-write error (file open?).");
             }
-        }
+        }*/
 
     }
 }

@@ -34,8 +34,8 @@ namespace zivid_test
     /// </summary>
     public static class PointCloudHelpers
     {
-        
-
+        public static float variance = 0.0f;
+        public static float stDev = 0.0f;
         
         /// <summary>
         /// Converting 3D float array to point cloud
@@ -197,19 +197,23 @@ namespace zivid_test
                         0, pc[0].Count(), j =>
                         {
                             length[j] = p2pLengthSquared(pc[i][j], baseline[i][j]);
-                            if(length[j] > threshold)
+                            pc[i][j].errorDistanceSq = length[j];
+                            //var error = new Point3(length[j]);
+                            /*if(length[j] > threshold)
                             {
                                 lock (point3)
                                 {
                                     point3.Add(pc[i][j]);
                                 }
-                            }
+                            }*/
                         }
                         
                 );
                                                    
                 var nn = length.Where(t => !float.IsNaN(t));
                 totDist += nn.Sum(); // + nn2.Sum() + nn3.Sum();
+                variance = (float)(totDist / (length.Length));
+                stDev = (float)Math.Sqrt(variance);
             }
                 
             return (float)Math.Sqrt(totDist); 
@@ -257,8 +261,8 @@ namespace zivid_test
             // interquartile Range 
 
             var q2 = zValues.Median();
-            var q3 = zValues.Where(t => t > q2).Median() * 2.5f;
-            var q1 = zValues.Where(t => t < q2).Median() * 2.5f;
+            var q3 = zValues.Where(t => t > q2).Median() * 1.5f;
+            var q1 = zValues.Where(t => t < q2).Median() * 1.5f;
             //interquartile Range
 
             var scale = 255.0f / (q3 - q1);
@@ -266,16 +270,6 @@ namespace zivid_test
 
             zValues = zValues.Where(t => !float.IsNaN(t)).ToList();
             
-
-
-
-
-                //zValues.Where(t => isOutOfRange(zValues[i], zLowerQuartile, zUpperQuartile)).ToList();
-
-
-
-            //Ask about this, want to reduce the list to only include z values within a range of the lower quartile to
-            //the upper quartile and only assign black/white "coloring" accordingly.
 
             try
             {
@@ -290,30 +284,40 @@ namespace zivid_test
 
                     for (int j = 0; j < xDim; j++)
                     {
-
-                        var matte = (int)Math.Round(pc.coordinate3d[i][j].Z * (scale) + translation, 0);
-                        if(matte == float.NaN)
+                        var p = pc.coordinate3d[i][j];
+                        var rgbMap = (int)Math.Round(p.Z * (scale) + translation, 0);
+                        if(rgbMap == float.NaN)
                         {
-                            matte = 0;
+                            rgbMap = 0;
                         }
-                        if (matte > 255)
+                        else if (rgbMap > 255)
                         {
-                            matte = 255;
+                            rgbMap = 255;
                         }
-                        else if (matte < 0)
+                        else if (rgbMap < 0)
                         {
-                            matte = 0;
+                            rgbMap = 0;
                         }
-
                         Color c = new Color();
-                        c = Color.FromArgb(255, matte, matte, matte);
-                        //byte gray = (byte)(.333 * c.R + .333 * c.G + .333 * c.B);
+                        if (p.errorDistanceSq > (1.2 * stDev))
+                        {
+                            c = Color.FromArgb(255, 255, 0, 0);
+                        }
+                        /*if (error > 0.05f)
+                        {
+                            c = Color.FromArgb(255, 255, 0, 0);
+                        }*/
+                         else
+                        {
+                            c = Color.FromArgb(255, rgbMap, rgbMap, rgbMap);
+                        }
+                        
                         bmp.SetPixel(i, j, c);
                     }
 
                 } // end for
 
-                bmp.Save("minfil4.png", ImageFormat.Png);
+                bmp.Save("minfil7.png", ImageFormat.Png);
             }
             catch(Exception ex)
             {

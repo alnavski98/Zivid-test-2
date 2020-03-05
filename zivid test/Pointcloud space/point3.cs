@@ -15,7 +15,14 @@ namespace zivid_test
         /// </summary>
         public float X = float.NaN;
         public float Y = float.NaN;
-        public float Z = float.NaN;    
+        public float Z = float.NaN;
+
+        public float errorDistanceSq = 0.0f;
+
+        /*public Point3(float error)
+        {
+            this.errorDistanceSq = error;
+        }*/
 
         /// <summary>
         /// Constructor that assings x, y and z coordinates 
@@ -39,22 +46,6 @@ namespace zivid_test
             
         }
 
-        public List<float> distance(List<Point3> unorderedPC, List<Point3> unorderedBaseline)
-        {
-            List<float> distances = new List<float>();
-            for (int i = 0; i < unorderedPC.Count(); i++)
-            {
-                if (unorderedPC[i].Z - unorderedBaseline[i].Z >= 500)
-                {
-                    distances.Add(unorderedPC[i].Z - unorderedBaseline[i].Z);
-                }
-                else
-                {
-                    distances.Add(0.0f);
-                }
-            }
 
-            return distances;
-        }
     }
 }
