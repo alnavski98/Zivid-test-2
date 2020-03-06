@@ -175,8 +175,8 @@ namespace zivid_test
         {
 
             PLC.j = true;
-            PLC.cancel = false;
-            plc.plcListner();
+            //PLC.cancel = false;
+            plc.RunServerAsync();
         }
 
         private void btn_disconnect_Click(object sender, EventArgs e)
@@ -214,8 +214,8 @@ namespace zivid_test
         private void Disconnect_PLS_Click(object sender, EventArgs e)
         {
             PLC.j = false;
-            PLC.cancel = true;
-            plc.plcListner();
+            //PLC.cancel = true;
+            //plc.plcListner();
             
         }
     }

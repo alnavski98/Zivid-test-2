@@ -11,6 +11,124 @@ namespace zivid_test
 {
     public class PLC
     {
+
+        public bool J = true;
+        public bool L = true;
+        public bool M = true;
+        bool K = true;
+
+        // asyncronous task is started
+        public async void RunServerAsync()
+        {
+            //(if K): makes it so this code can run just one at the time
+            if (K)
+            {
+                K = false;
+                Int32 port = 2000; //Representing port as a 32bit number range -2,147,483,648 to 2,147,483,647
+                IPAddress localAddr = IPAddress.Parse("128.39.141.190");
+                var listner = new TcpListener(localAddr, port);
+                listner.Start();
+                Program.f.WriteTextSafe("started listening...");
+                try
+                {
+                    while (J)
+                    {
+                        //accepts a pending connection request as an asyncronous operation
+                        await Accept(await listner.AcceptTcpClientAsync());
+                        M = false;
+                    }
+
+
+                }
+                finally
+                {
+                    listner.Stop();
+                    K = true;
+                    M = true;
+                }
+            }
+
+        }
+
+
+        const int packet_length = 32;  // user defined packet length
+
+        async Task Accept(TcpClient client)
+        {
+            // (if M) only writes "connected" ones
+            if (M)
+            {
+                Program.f.WriteTextSafe("connected");
+            }
+            // Creates an awaitable task that asynchronously yields back to the current context when awaited.
+            await Task.Yield();
+            try
+            {
+                using (client)
+                using (NetworkStream n = client.GetStream())
+                {
+                    byte[] data = new byte[packet_length];
+                    int bytesRead = 0;
+                    int chunkSize = 1;
+
+                    while (bytesRead < data.Length && chunkSize > 0)
+                        bytesRead += chunkSize =
+                            await n.ReadAsync(data, bytesRead, data.Length - bytesRead);
+
+                    // get data
+                    string str = Encoding.Default.GetString(data);
+                    Program.f.WriteTextSafe("[server] received :" + str[2]);
+                    char str1 = str[2];
+                    if (str1 == '1')    //this could be where we logg whitch baseline is currently running
+                    {
+                        zivid_test.Program.f.WriteTextSafe("1. Startposisjon uten delay");
+                    }
+                    else if (str1 == '2')
+                    {
+                        zivid_test.Program.f.WriteTextSafe("2. Sluttposisjon uten delay.");
+                    }
+                    else if (str1 == '3')
+                    {
+                        zivid_test.Program.f.WriteTextSafe("3. Startposisjon med delay nr1");
+                    }
+                    else if (str1 == '4')
+                    {
+                        zivid_test.Program.f.WriteTextSafe("4. Sluttposisjon med delay nr1");
+                    }
+                    else if (str1 == '5')
+                    {
+                        zivid_test.Program.f.WriteTextSafe("4. Startposisjon med delay nr2");
+                    }
+                    else if (str1 == '6')
+                    {
+                        zivid_test.Program.f.WriteTextSafe("4. Sluttposisjon med delay nr2");
+                    }
+
+                    // To do
+                    // ...
+
+                    // if snapshot deviates from baseline, then send a stop signal to PLC
+                    if (CameraFunctions.distance > 30000)
+                    {
+                        string send_str = "feil";
+                        byte[] send_data = Encoding.ASCII.GetBytes(send_str);
+                        await n.WriteAsync(send_data, 0, send_data.Length);
+                        Program.f.WriteTextSafe("feil");
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Program.f.WriteTextSafe(ex.Message);
+            }
+        }
+
+
+
+        //____________________________________________________________________________________________________________________________________________
+        //---------------------------------------------------------------------------------------------------------------------------------------------
         public static bool j;
         public static bool cancel = false;
         public PointCloud pc = new PointCloud();
@@ -59,7 +177,7 @@ namespace zivid_test
                         while (true)
                         {
 
-                            if (server.)
+                            if (L)
                             {
                                 zivid_test.Program.f.WriteTextSafe("Waiting for a Connection");
                             }
