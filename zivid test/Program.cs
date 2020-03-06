@@ -8,6 +8,7 @@ namespace zivid_test
     public static class Program
     {
         public static Form1 f;
+
         //public static List<List<Point3>> avg = new List<List<Point3>>();
         /// <summary>
         /// The main entry point for the application.

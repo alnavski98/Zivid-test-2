@@ -33,7 +33,7 @@ namespace zivid_test
         //private int baseLineCount = 0;
         public string fileName = "Threshold data 3.csv";
         public float distance;
-
+        Form2 f2 = new Form2();
 
         int a=47;
 
@@ -77,9 +77,10 @@ namespace zivid_test
                 Console.WriteLine("Have not taken baseline yet");
             }
 
-            PointCloudHelpers.PointCloudToPicture(pc);
-            Form2 f2 = new Form2();
+            var errorPicture = PointCloudHelpers.PointCloudToPicture(pc);
+       
             f2.Show();
+            f2.displayPicture(errorPicture);
         }
 
         private void btn_connect_Click(object sender, EventArgs e)
