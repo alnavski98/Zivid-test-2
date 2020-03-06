@@ -193,7 +193,7 @@ namespace zivid_test
                 //blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
             } catch (Exception ex)
             {
-                int j = 0;
+
                 // could not load file
             }
 

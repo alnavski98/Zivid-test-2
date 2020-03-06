@@ -63,7 +63,7 @@ namespace zivid_test
                 }
                 catch(Exception ex) 
             {
-                int a = 1;
+
             }
             return sett;
         }
