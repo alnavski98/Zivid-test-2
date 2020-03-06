@@ -61,7 +61,7 @@ namespace zivid_test
         /// <returns></returns>
         public int getColumnSize()
         {
-            if (coordinate3d.Count() == 0)
+            if (coordinate3d[0].Count() == 0)
             {
                 return 0;
             }
