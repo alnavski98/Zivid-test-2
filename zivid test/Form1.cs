@@ -33,6 +33,7 @@ namespace zivid_test
         //private int baseLineCount = 0;
         public string fileName = "Threshold data 3.csv";
         public float distance;
+        PLC plc = new PLC();
 
         Form2 f2 = new Form2();
 
@@ -175,7 +176,6 @@ namespace zivid_test
 
             PLC.j = true;
             PLC.cancel = false;
-            PLC plc = new PLC();
             plc.plcListner();
         }
 
@@ -209,6 +209,14 @@ namespace zivid_test
         private void btn_apply_median_filter_Click(object sender, EventArgs e)
         {
             //PointCloudHelpers.MedianFiltering();
-        }      
+        }
+
+        private void Disconnect_PLS_Click(object sender, EventArgs e)
+        {
+            PLC.j = false;
+            PLC.cancel = true;
+            plc.plcListner();
+            
+        }
     }
 }
