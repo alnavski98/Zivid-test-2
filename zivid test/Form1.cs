@@ -33,6 +33,7 @@ namespace zivid_test
         //private int baseLineCount = 0;
         public string fileName = "Threshold data 3.csv";
         public float distance;
+
         Form2 f2 = new Form2();
 
         int a=47;
