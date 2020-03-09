@@ -71,7 +71,7 @@ namespace zivid_test
                     int bytesRead = 0;
                     int chunkSize = 1;
 
-                    while (bytesRead < data.Length && chunkSize > 0)
+                    while (bytesRead < data.Length && chunkSize > 0)  // så lenge data.length og chunksize er imellom 0 og bytesRead
                         bytesRead += chunkSize =
                             await n.ReadAsync(data, bytesRead, data.Length - bytesRead);
 
