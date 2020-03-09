@@ -15,6 +15,8 @@ using System.IO;
 using System.Web.UI;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
+using System.Windows.Forms.DataVisualization.Charting;
+
 
 namespace zivid_test
 {
@@ -36,7 +38,7 @@ namespace zivid_test
         PLC plc = new PLC();
 
         Form2 f2 = new Form2();
-
+        int inc = 0;    //increment for adding new points in error chart. 
         int a=47;
 
         public Form1()
@@ -73,6 +75,7 @@ namespace zivid_test
                 distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, avgPc.coordinate3d);
                 //FileTransfer.writeCSV(fileName, distance);
                 Console.WriteLine(distance);
+                errorChart();   // making a graph of errornumbers
             }
             else
             {
@@ -217,6 +220,31 @@ namespace zivid_test
             //PLC.cancel = true;
             //plc.plcListner();
             
+        }
+
+        private void errorChart()   //making a graph of errornumbers
+        {   
+            inc++;
+            var chart = chart2.ChartAreas[0];
+            chart.AxisX.IntervalType = DateTimeIntervalType.Number;
+
+            chart.AxisX.LabelStyle.Format = "Antall feiltall";              //Naming axes
+            chart.AxisY.LabelStyle.Format = "Størrelsen på feiltallene";
+            chart.AxisY.LabelStyle.IsEndLabelVisible = true;
+
+            chart.AxisX.Minimum = 1;        //determining where the axes start from and end at
+            chart.AxisX.Maximum = 100;
+            chart.AxisY.Minimum = 0;
+            chart.AxisY.Maximum = 150000;
+            chart.AxisX.Interval = 1;       // determining  the amount to step one unit on the axis.
+            chart.AxisY.Interval = 15000;
+
+            chart2.Series.Add("Feiltall");
+            chart2.Series["Feiltall"].ChartType = SeriesChartType.Line; //type of chart, lines between points
+            chart2.Series["Feiltall"].Color = Color.Red;
+            chart2.Series[0].IsValueShownAsLabel = false;
+
+            chart2.Series["Feiltall"].Points.AddXY(inc, CameraFunctions.distance);  //adding new points in chart
         }
     }
 }
