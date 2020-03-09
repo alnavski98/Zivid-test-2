@@ -36,7 +36,8 @@ namespace zivid_test
     {
         public static float variance = 0.0f;
         //public static float stDev = 0.0f;
-        
+        public static float[,] pointCloudMap;
+
         /// <summary>
         /// Converting 3D float array to point cloud
         /// </summary>
@@ -90,7 +91,7 @@ namespace zivid_test
             }
             if (pc.Count() > 1)  //Run if more than 1 picture is taken
             {
-                float[,] pointCloudMap = new float[pc.First().getColumnSize(),pc.First().getRowSize()];
+                pointCloudMap = new float[pc.First().getColumnSize(),pc.First().getRowSize()];
                 for (int i = 0; i < pc[0].coordinate3d.Count(); i++)  //Loops through the outer list of coordinate3d
                 {
                     var innerCloudAvg = new List<Point3>();
@@ -101,7 +102,7 @@ namespace zivid_test
                         var zList = new List<float>();
                         var pointList = new List<Point3>();
                         var distanceList = new List<float>();
-                        int a = 0;
+
                         Parallel.For(
                                 0, pc.Count(), k =>
                                 {
@@ -124,7 +125,7 @@ namespace zivid_test
                                 }
                         );  //Loops through all point cloud instances
 
-                        int b = 1;
+
 
                         xList = xList.Where(t => !float.IsNaN(t)).ToList();  //Removes all invalid points from xList
                         yList = yList.Where(t => !float.IsNaN(t)).ToList();  //Same for yList
@@ -150,7 +151,7 @@ namespace zivid_test
                         }
                         else
                         {
-                            pointCloudMap[i,j] = 0.0f;
+                            pointCloudMap[i, j] = 0.0f;
                         }
                     }
                     pointCloudAvg.Add(innerCloudAvg);  //Put list of 3D points in another list
@@ -198,7 +199,7 @@ namespace zivid_test
         /// <returns></returns>
         public static float calculateDistance(List<List<Point3>> pc, List<List<Point3>> baseline)
         {
-            int a = 0;
+
             var totDist = 0.0f;
             //var threshold = 1.0f;
             List<Point3> point3 = new List<Point3>();
@@ -300,7 +301,7 @@ namespace zivid_test
                             rgbMap = 0;
                         }
                         Color c = new Color();
-                        if (p.errorDistanceSq > 1.5f)
+                        if (p.errorDistanceSq > pointCloudMap[i, j])
                         {
                             c = Color.FromArgb(255, 255, 0, 0);
                         }
@@ -318,7 +319,7 @@ namespace zivid_test
             }
             catch(Exception ex)
             {
-                int a = 1;
+
             }
             return bmp;
         }
@@ -354,7 +355,7 @@ namespace zivid_test
             return (float.IsNaN(v.X) || float.IsNaN(v.Y) || float.IsNaN(v.Z));
         }
 
-       /* public static List<List<float>> stDevBaseline(List<PointCloud> baselinePointClouds)
+        /*public static List<List<float>> stDevBaseline(List<PointCloud> baselinePointClouds)
         {
             List<List<float>> stDevBaselineMap = new List<List<float>>();
 
