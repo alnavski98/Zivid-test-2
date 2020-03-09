@@ -75,6 +75,9 @@ namespace zivid_test
                         bytesRead += chunkSize =
                             await n.ReadAsync(data, bytesRead, data.Length - bytesRead);
 
+                    // a picture will be taken when something is recieved from the PLC
+                    CameraFunctions functions = new CameraFunctions();
+                    functions.snapshotDistance();
                     // get data
                     string str = Encoding.Default.GetString(data);
                     Program.f.WriteTextSafe("[server] received :" + str[2]);

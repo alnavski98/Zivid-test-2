@@ -354,7 +354,7 @@ namespace zivid_test
             return (float.IsNaN(v.X) || float.IsNaN(v.Y) || float.IsNaN(v.Z));
         }
 
-        public static List<List<float>> stDevBaseline(List<PointCloud> baselinePointClouds)
+       /* public static List<List<float>> stDevBaseline(List<PointCloud> baselinePointClouds)
         {
             List<List<float>> stDevBaselineMap = new List<List<float>>();
 
@@ -388,7 +388,7 @@ namespace zivid_test
                     stDevPartial.Add();
                 }
             }
-        }
+        }*/
     }
 }
 

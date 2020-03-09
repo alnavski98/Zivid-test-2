@@ -213,7 +213,7 @@ namespace zivid_test
 
         private void Disconnect_PLS_Click(object sender, EventArgs e)
         {
-            PLC.j = false;
+            plc.J = false;
             //PLC.cancel = true;
             //plc.plcListner();
             
