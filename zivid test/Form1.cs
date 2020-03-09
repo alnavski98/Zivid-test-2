@@ -177,7 +177,7 @@ namespace zivid_test
         private void btn_connect_PLS_Click(object sender, EventArgs e)
         {
 
-            PLC.j = true;
+            plc.J = true;
             //PLC.cancel = false;
             plc.RunServerAsync();
         }
