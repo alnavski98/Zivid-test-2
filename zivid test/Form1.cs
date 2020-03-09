@@ -36,9 +36,10 @@ namespace zivid_test
         public string fileName = "Threshold data 3.csv";
         public float distance;
         PLC plc = new PLC();
+        CameraFunctions functions = new CameraFunctions();
 
         Form2 f2 = new Form2();
-        int inc = 0;    //increment for adding new points in error chart. 
+      
         int a=47;
 
         public Form1()
@@ -60,8 +61,7 @@ namespace zivid_test
         }
        
         private void btn_snapshot_Click(object sender, EventArgs e)
-        {
-            //CameraFunctions functions = new CameraFunctions();
+        {          
             //functions.snapshotDistance();
             var snaps = new List<PointCloud>();
             var snap = ZividCAM.snapshot();  //Takes snapshot from camera and stores in snap
@@ -75,7 +75,7 @@ namespace zivid_test
                 distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, avgPc.coordinate3d);
                 //FileTransfer.writeCSV(fileName, distance);
                 Console.WriteLine(distance);
-                errorChart();   // making a graph of errornumbers
+                
             }
             else
             {
@@ -177,7 +177,7 @@ namespace zivid_test
         private void btn_connect_PLS_Click(object sender, EventArgs e)
         {
 
-            PLC.j = true;
+            plc.J = true;
             //PLC.cancel = false;
             plc.RunServerAsync();
         }
@@ -222,29 +222,29 @@ namespace zivid_test
             
         }
 
-        private void errorChart()   //making a graph of errornumbers
+        public void errorChart()   //making a graph of errornumbers
         {   
-            inc++;
+           
             var chart = chart2.ChartAreas[0];
             chart.AxisX.IntervalType = DateTimeIntervalType.Number;
 
-            chart.AxisX.LabelStyle.Format = "Antall feiltall";              //Naming axes
-            chart.AxisY.LabelStyle.Format = "Størrelsen på feiltallene";
+            chart.AxisX.LabelStyle.Format = "";              //Naming axes
+            chart.AxisY.LabelStyle.Format = "";
             chart.AxisY.LabelStyle.IsEndLabelVisible = true;
 
             chart.AxisX.Minimum = 1;        //determining where the axes start from and end at
-            chart.AxisX.Maximum = 100;
+            chart.AxisX.Maximum = 10;
             chart.AxisY.Minimum = 0;
-            chart.AxisY.Maximum = 150000;
+            chart.AxisY.Maximum = 10000;
             chart.AxisX.Interval = 1;       // determining  the amount to step one unit on the axis.
-            chart.AxisY.Interval = 15000;
+            chart.AxisY.Interval = 1000;
 
             chart2.Series.Add("Feiltall");
             chart2.Series["Feiltall"].ChartType = SeriesChartType.Line; //type of chart, lines between points
             chart2.Series["Feiltall"].Color = Color.Red;
             chart2.Series[0].IsValueShownAsLabel = false;
 
-            chart2.Series["Feiltall"].Points.AddXY(inc, CameraFunctions.distance);  //adding new points in chart
+            chart2.Series["Feiltall"].Points.AddXY(functions.inc, CameraFunctions.distance);  //adding new points in chart
         }
     }
 }
