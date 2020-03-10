@@ -338,6 +338,7 @@
             this.chart2.Location = new System.Drawing.Point(491, 269);
             this.chart2.Name = "chart2";
             series1.ChartArea = "ChartArea1";
+            series1.IsVisibleInLegend = false;
             series1.Legend = "Legend1";
             series1.LegendText = " ";
             series1.LegendToolTip = "white";
