@@ -54,6 +54,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IrisTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCntTXT)).BeginInit();
@@ -336,17 +337,31 @@
             this.chart2.Name = "chart2";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
+            series1.LegendText = " ";
+            series1.LegendToolTip = "white";
+            series1.MarkerBorderColor = System.Drawing.Color.Transparent;
             series1.Name = "Series1";
             this.chart2.Series.Add(series1);
             this.chart2.Size = new System.Drawing.Size(757, 364);
             this.chart2.TabIndex = 25;
             this.chart2.Text = "chart2";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label8.Location = new System.Drawing.Point(486, 237);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(315, 29);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "Live chart of \"errornumbers\":";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1412, 862);
+            this.ClientSize = new System.Drawing.Size(1265, 664);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -371,7 +386,7 @@
             this.Controls.Add(this.btn_connect);
             this.Controls.Add(this.btn_snapshot);
             this.MaximumSize = new System.Drawing.Size(1980, 1000);
-            this.MinimumSize = new System.Drawing.Size(1003, 918);
+            this.MinimumSize = new System.Drawing.Size(1003, 720);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTXT)).EndInit();
@@ -408,6 +423,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private System.Windows.Forms.Label label8;
     }
 }
 
