@@ -440,10 +440,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox baselineId;
         private System.Windows.Forms.TextBox baselineIdSim;
+        public System.Windows.Forms.DataVisualization.Charting.Chart chart2;
     }
 }
 

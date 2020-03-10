@@ -16,7 +16,7 @@ using System.Web.UI;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using System.Windows.Forms.DataVisualization.Charting;
-
+using zivid_test.PLC_connection;
 
 namespace zivid_test
 {
@@ -37,8 +37,9 @@ namespace zivid_test
         //private int baseLineCount = 0;
         public string fileName = "Threshold data 3.csv";
         public float distance;
-        PLC plc = new PLC();
-        //CameraFunctions functions = new CameraFunctions();
+        public PLC plc = new PLC();
+        CameraFunctions functions = new CameraFunctions();
+        public Graph graph = new Graph();
 
         Form2 f2 = new Form2();
       
@@ -73,7 +74,7 @@ namespace zivid_test
             //if baseline is taken, calculate distance. else dont
             if (baselines.Count() > 0)
             {
-                var activeBaseline = baselines.Where(t => t.baseLineId.Equals(baselineIdSim)).ToList();
+                var activeBaseline = baselines.Where(t => t./*baseLineId.Equals(baselineIdSim)*/).ToList();
                 if (activeBaseline.Count() == 1)
                 {
                     //distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, activeBaseline.First().pc.coordinate3d);
@@ -109,6 +110,7 @@ namespace zivid_test
             {
                 LoggTXT.Text = "Warning: No cameras found";
             }
+            graph.errorChart();
         }
 
         private void btn_assist_mode_Click_1(object sender, EventArgs e)
@@ -158,7 +160,7 @@ namespace zivid_test
             }
 
             baselinePc = PointCloudHelpers.calcBaseline(snaps);  //Stores one baseline in avgPc
-            baselinePc.baseLineId = baselineId.Text.ToString();
+            baselinePc.baseLineId = baselineID.Text.ToString();
             baselines.Add(baselinePc);
             //avgPc.pointcloudId = "Baseline nr. " + baseLineCount;  //String.Format("BaseLineNr{0}", baseLineCount); // = "BaseLineNr" + baseLineCoubt.ToString();, gives ID to a baseline
             //baselines.Add(avgPc);  //Stores baselines in a list
@@ -207,7 +209,7 @@ namespace zivid_test
             try
             {
                 var fileTransferer = new FileTransfer();
-                //blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
+                blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
                 //blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
             } catch (Exception ex)
             {
@@ -237,29 +239,6 @@ namespace zivid_test
             
         }
 
-        public void errorChart()   //making a graph of errornumbers
-        {   
-           
-            var chart = chart2.ChartAreas[0];
-            chart.AxisX.IntervalType = DateTimeIntervalType.Number;
 
-            chart.AxisX.LabelStyle.Format = "";              //Naming axes
-            chart.AxisY.LabelStyle.Format = "";
-            chart.AxisY.LabelStyle.IsEndLabelVisible = true;
-
-            chart.AxisX.Minimum = 1;        //determining where the axes start from and end at
-            chart.AxisX.Maximum = 10;
-            chart.AxisY.Minimum = 0;
-            chart.AxisY.Maximum = 10000;
-            chart.AxisX.Interval = 1;       // determining  the amount to step one unit on the axis.
-            chart.AxisY.Interval = 1000;
-
-            chart2.Series.Add("Feiltall");
-            chart2.Series["Feiltall"].ChartType = SeriesChartType.Line; //type of chart, lines between points
-            chart2.Series["Feiltall"].Color = Color.Red;
-            chart2.Series[0].IsValueShownAsLabel = false;
-
-            chart2.Series["Feiltall"].Points.AddXY(functions.inc, CameraFunctions.distance);  //adding new points in chart
-        }
     }
 }

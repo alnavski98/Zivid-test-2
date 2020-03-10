@@ -13,7 +13,7 @@ namespace zivid_test
     {
 
         public bool J = true;
-               bool K = true;
+        public bool K = true;
         public bool L = true;
         public bool M = true;
         public char str1 = '0';
