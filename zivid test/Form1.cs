@@ -238,7 +238,7 @@ namespace zivid_test
             chart.AxisX.Maximum = 10;
             chart.AxisY.Minimum = 0;
             chart.AxisY.Maximum = 10000;
-            chart.AxisX.Interval = 1;       // determining  the amount to step one unit on the axis.
+            chart.AxisX.Interval = 1;       // determining the distance between vertical/horisontal lines in the chart.
             chart.AxisY.Interval = 1000;
 
             chart2.Series.Add("Feiltall");

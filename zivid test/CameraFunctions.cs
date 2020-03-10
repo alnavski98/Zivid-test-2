@@ -47,6 +47,9 @@ namespace zivid_test
             //if baseline is taken, calculate distance. else dont
             if (zivid_test.Program.f.runBaseline)
             {
+                //if(plc.str1 == '0') skriv ut: "No picture taken, sensor did not trig";
+                //else if(plc.str1 == '1') sammenlign snap med baseline inne
+                //else if(plc.str1 == '2') sammenlign snap med baseline ute
                 distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, avgPc.coordinate3d);
                 //FileTransfer.writeCSV(fileName, distance);
                 Console.WriteLine(distance);
