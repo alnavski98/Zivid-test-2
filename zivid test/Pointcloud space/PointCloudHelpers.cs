@@ -81,27 +81,28 @@ namespace zivid_test
         /// </summary>
         /// <param name="pc">List of PointCloud</param>
         /// <returns>List of PointCloud instances</returns>
-        public static PointCloud calcAvg(List<PointCloud> pc)
+        public static Baseline calcBaseline(List<PointCloud> pc)
         {
 
-            var pointCloudAvg = new List<List<Point3>>();  
+            var pointCloudAvg = new List<List<Point3>>();
+            var returnBaseline = new Baseline();
             if (pc.Count() == 0)  //Run if no pictures are detected
             {
                 throw new Exception("Zero point clouds detected in calcAvg"); //Error due to no point clouds
             }
             if (pc.Count() > 1)  //Run if more than 1 picture is taken
             {
-                pointCloudMap = new float[pc.First().getColumnSize(),pc.First().getRowSize()];
-                for (int i = 0; i < pc[0].coordinate3d.Count(); i++)  //Loops through the outer list of coordinate3d
+                pointCloudMap = new float[pc.First().getRowSize(), pc.First().getColumnSize()];
+                for (int i = 0; i < pc.First().getRowSize(); i++)  //Loops through the outer list of coordinate3d
                 {
                     var innerCloudAvg = new List<Point3>();
-                    for (int j = 0; j < pc[0].coordinate3d[0].Count(); j++)  //Loops through the inner list of the same
+                    for (int j = 0; j < pc.First().getColumnSize(); j++)  //Loops through the inner list of the same
                     {
                         var xList = new List<float>();  //Initializes xList, yList and zList
                         var yList = new List<float>();  //as a list of floats
                         var zList = new List<float>();
-                        var pointList = new List<Point3>();
-                        var distanceList = new List<float>();
+                        var pointList = new List<Point3>();  //Initializes pointList as a list of Point3 objects 
+                        var distanceList = new List<float>();  //Initializes distanceList as a list of floats
 
                         Parallel.For(
                                 0, pc.Count(), k =>
@@ -120,7 +121,7 @@ namespace zivid_test
                                     }
                                     lock (pointList)
                                     {
-                                        pointList.Add(pc[k].coordinate3d[i][j]);
+                                        pointList.Add(pc[k].coordinate3d[i][j]);  //Stores all 3D-coordinates in pointList
                                     }
                                 }
                         );  //Loops through all point cloud instances
@@ -140,16 +141,16 @@ namespace zivid_test
                         {
                             innerCloudAvg.Add(new Point3(float.NaN, float.NaN, float.NaN));
                         }
-                        for (int l = 0; l < pointList.Count(); l++)
-                        {
+                        for (int l = 0; l < pointList.Count(); l++)  //Stores all distances squared between average points in
+                        {                                            //pointcloud and equivalent points from pointList
                             distanceList.Add(p2pLengthSquared(innerCloudAvg.Last(), pointList[l]));
                         }
-                        distanceList = distanceList.Where(t => !float.IsNaN(t)).ToList();
-                        if (distanceList.Count() > 0)
+                        distanceList = distanceList.Where(t => !float.IsNaN(t)).ToList();  //Removes NaN points from distanceList
+                        if (distanceList.Count() > 1)  //If amount of points in distanceList > 0 calculate standard deviation to put in pointCloudMap
                         {
-                            pointCloudMap[i, j] = stDev(distanceList);
+                            pointCloudMap[i, j] = distanceList.StandardDeviation();
                         }
-                        else
+                        else  //Else put 0.0f in pointCloudMap
                         {
                             pointCloudMap[i, j] = 0.0f;
                         }
@@ -158,17 +159,23 @@ namespace zivid_test
                 }                                      //which will be returned as a point cloud
 
                 var returnCloud = new PointCloud(pointCloudAvg);
+                
+                returnBaseline.pc = returnCloud;
+                returnBaseline.thresholdMap = pointCloudMap;
                 /*IFormatter formatter = new BinaryFormatter();
                 Stream stream = new FileStream("C:\\Users\\alnav\\Desktop\\Baseline.txt", FileMode.Create, FileAccess.Write);
 
                 formatter.Serialize(stream, returnCloud);
                 stream.Close();*/
-                return returnCloud;  //Returns average of point clouds as an
+                 //Returns average of point clouds as an
             }                        //instance of the PointCloud class
             else
             {
-                return pc.First(); //Returns one point cloud (the only one present)
-            }     
+                
+                returnBaseline.pc = pc.First();
+                
+            }
+            return returnBaseline;
         }
 
         public static float p2pLengthSquared(Point3 coordinate1, Point3 coordinate2)
@@ -181,14 +188,14 @@ namespace zivid_test
             return (float)Math.Sqrt(p2pLengthSquared(coordinate1, coordinate2));
         }
 
-        public static float stDev(List<float> distance)
+        /*public static float stDev(List<float> distance)
         {
             var stDevDistance = 0.0f;
 
             stDevDistance = (float)Math.Sqrt((distance.Sum() / (distance.Count() - 1)));
             
             return stDevDistance;
-        }
+        }*/
 
         /// <summary>
         /// Calculates distance between snapshot pointcloud
@@ -197,20 +204,20 @@ namespace zivid_test
         /// <param name="pc"></param>
         /// <param name="baseline"></param>
         /// <returns></returns>
-        public static float calculateDistance(List<List<Point3>> pc, List<List<Point3>> baseline)
+        public static float calculateDistance(PointCloud pc, Baseline baseline)
         {
 
             var totDist = 0.0f;
             //var threshold = 1.0f;
             List<Point3> point3 = new List<Point3>();
-            for (int i = 0; i < pc.Count(); i++)
+            for (int i = 0; i < pc.coordinate3d.Count(); i++)
             {
-                float[] length = new float[pc[0].Count()];
+                float[] length = new float[pc.coordinate3d[0].Count()];
                 Parallel.For(
-                        0, pc[0].Count(), j =>
+                        0, pc.coordinate3d[0].Count(), j =>
                         {
-                            length[j] = p2pLengthSquared(pc[i][j], baseline[i][j]);
-                            pc[i][j].errorDistanceSq = length[j];
+                            length[j] = p2pLengthSquared(pc.coordinate3d[i][j], baseline.pc.coordinate3d[i][j]);
+                            pc.coordinate3d[i][j].errorDistanceSq = length[j];
                             //var error = new Point3(length[j]);
                             /*if(length[j] > threshold)
                             {

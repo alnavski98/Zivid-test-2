@@ -43,6 +43,32 @@ namespace zivid_test
         }
 
         /// <summary>
+        /// Writes pointcloud object to txt file by converting to string
+        /// </summary>
+        /// <param name="pc"></param>
+        /// <param name="fileName"></param>
+        public void writeToFile(Baseline pc, string fileName)
+        {
+            // create fullDataPath file, if not exists
+            try
+            {
+                var fullDataPath = Path.Combine("C:C:\\Users\\alnav\\Desktop", fileName);
+                if (!File.Exists(fullDataPath))  //If fullDataPath doesn't exist write pointcloud to file 
+                {
+
+                    string json = JsonConvert.SerializeObject(pc, Formatting.Indented);  //Serialize pointcloud to file
+                    using (StreamWriter sw = File.CreateText(fullDataPath))
+                    {
+                        sw.WriteLine(json);
+                    }
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        /// <summary>
         /// Reads string from txt file and "translate" it to a pointcloud object
         /// </summary>
         /// <param name="fileName"></param>

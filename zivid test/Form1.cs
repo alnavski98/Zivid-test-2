@@ -21,13 +21,15 @@ namespace zivid_test
     public partial class Form1 : Form
     {
         private delegate void SafeCallDelegate(string text);
-        public PointCloud avgPc = new PointCloud();
-        public List<PointCloud> baselines = new List<PointCloud>();
+        public Baseline baselinePc = new Baseline();
+        public List<Baseline> baselines = new List<Baseline>();
         public PointCloud pc = new PointCloud();
+        /*
         public PointCloud blCylinderOut = new PointCloud();
         public PointCloud blCylinderIn = new PointCloud();
         public PointCloud blCylinderOutSnap = new PointCloud();
         public PointCloud blCylinderInSnap = new PointCloud();
+        */
         public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
         public bool runBaseline = false;
         //private int baseLineCount = 0;
@@ -64,13 +66,22 @@ namespace zivid_test
             var snaps = new List<PointCloud>();
             var snap = ZividCAM.snapshot();  //Takes snapshot from camera and stores in snap
             var pointCloud = PointCloudHelpers.floatToPointCloud(snap);
-            snaps.Add(pointCloud);
-            pc = PointCloudHelpers.calcAvg(snaps);
+            pc = pointCloud; // PointCloudHelpers.calcBaseline(snaps);
 
             //if baseline is taken, calculate distance. else dont
-            if (runBaseline)
+            if (baselines.Count() > 0)
             {
-                distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, avgPc.coordinate3d);
+                var activeBaseline = baselines.Where(t => t.baseLineId.Equals(baseLineIdSim)).ToList();
+                if (activeBaseline.Count() == 1)
+                {
+                    //distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, activeBaseline.First().pc.coordinate3d);
+                    distance = PointCloudHelpers.calculateDistance(pc, activeBaseline.First());
+
+                }
+                else
+                {
+                    // id-trøbbel, skriv ut feilmelding
+                }
                 //FileTransfer.writeCSV(fileName, distance);
                 Console.WriteLine(distance);
             }
@@ -144,16 +155,18 @@ namespace zivid_test
                 Thread.Sleep(100);  //Pauses for 100ms
             }
 
-            avgPc = PointCloudHelpers.calcAvg(snaps);  //Stores one baseline in avgPc
+            baselinePc = PointCloudHelpers.calcBaseline(snaps);  //Stores one baseline in avgPc
+            baselinePc.baseLineId = baselineID.Text.ToString();
+            baselines.Add(baselinePc);
             //avgPc.pointcloudId = "Baseline nr. " + baseLineCount;  //String.Format("BaseLineNr{0}", baseLineCount); // = "BaseLineNr" + baseLineCoubt.ToString();, gives ID to a baseline
             //baselines.Add(avgPc);  //Stores baselines in a list
-            runBaseline = true;
+            //runBaseline = true;
 
 
             //if(baseLineCount == 0)  //If baseline count is 0 store pointcloud in cylinderIn.txt
             //{
-                var baseline = new FileTransfer();
-                baseline.writeToFile(avgPc, blFileNames[0]);
+                //var baseline = new FileTransfer();
+               // baseline.writeToFile(avgPc, blFileNames[0]);
                 //baseLineCount++;
             //}
             /*else if(baseLineCount == 1)  //If baseline count is 1 store pointcloud in cylinderOut.txt

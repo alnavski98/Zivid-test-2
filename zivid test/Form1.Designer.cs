@@ -50,6 +50,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.baselineID = new System.Windows.Forms.TextBox();
+            this.baseLineIdSim = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IrisTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCntTXT)).BeginInit();
@@ -323,11 +325,27 @@
             this.label7.TabIndex = 23;
             this.label7.Text = "PLC";
             // 
+            // baselineID
+            // 
+            this.baselineID.Location = new System.Drawing.Point(462, 217);
+            this.baselineID.Name = "baselineID";
+            this.baselineID.Size = new System.Drawing.Size(100, 26);
+            this.baselineID.TabIndex = 24;
+            // 
+            // baseLineIdSim
+            // 
+            this.baseLineIdSim.Location = new System.Drawing.Point(643, 217);
+            this.baseLineIdSim.Name = "baseLineIdSim";
+            this.baseLineIdSim.Size = new System.Drawing.Size(100, 26);
+            this.baseLineIdSim.TabIndex = 25;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(981, 862);
+            this.Controls.Add(this.baseLineIdSim);
+            this.Controls.Add(this.baselineID);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -386,6 +404,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox baselineID;
+        private System.Windows.Forms.TextBox baseLineIdSim;
     }
 }
 
