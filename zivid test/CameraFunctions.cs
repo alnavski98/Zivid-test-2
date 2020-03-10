@@ -31,6 +31,7 @@ namespace zivid_test
         //private int baseLineCount = 0;
         public static float distance;
         public string fileName = "Threshold data 4.csv";
+        public int inc = 0; // for counting the number og error numbers
 
         // takes snapshot, compares it whit baseline and gives distance as deviation
         public void snapshotDistance()
@@ -49,6 +50,8 @@ namespace zivid_test
                 distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, avgPc.coordinate3d);
                 //FileTransfer.writeCSV(fileName, distance);
                 Console.WriteLine(distance);
+                inc++;
+                Program.f.errorChart();   // making a graph of errornumbers
             }
             else
             {
