@@ -16,6 +16,7 @@ namespace zivid_test
                bool K = true;
         public bool L = true;
         public bool M = true;
+        public char str1 = '0';
 
         // asyncronous task is started
         public async void RunServerAsync()

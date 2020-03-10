@@ -74,8 +74,7 @@ namespace zivid_test
             {
                 distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, avgPc.coordinate3d);
                 //FileTransfer.writeCSV(fileName, distance);
-                Console.WriteLine(distance);
-                
+                Console.WriteLine(distance);               
             }
             else
             {
@@ -152,6 +151,9 @@ namespace zivid_test
             //baselines.Add(avgPc);  //Stores baselines in a list
             runBaseline = true;
 
+             //if(plc.str1 == '0') skriv ut: "No picture taken, sensor did not trig";
+             //else if(plc.str1 == '1') sammenlign snap med baseline inne
+             //else if(plc.str1 == '2') sammenlign snap med baseline ute
 
             //if(baseLineCount == 0)  //If baseline count is 0 store pointcloud in cylinderIn.txt
             //{
