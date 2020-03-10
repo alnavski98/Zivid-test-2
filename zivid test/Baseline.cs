@@ -23,6 +23,6 @@ namespace zivid_test
         /// Declares a string to store ID for baselines
         /// and initializes it to a blank string
         /// </summary>
-        public string baseLineId = "";
+        public char baseLineId = ' ';
     }
 }

@@ -159,15 +159,24 @@ namespace zivid_test
             }
 
             baselinePc = PointCloudHelpers.calcBaseline(snaps);  //Stores one baseline in avgPc
-            baselinePc.baseLineId = baselineId.Text.ToString();
+            //baselinePc.baseLineId = baselineId.Text.ToString();
             baselines.Add(baselinePc);
             //avgPc.pointcloudId = "Baseline nr. " + baseLineCount;  //String.Format("BaseLineNr{0}", baseLineCount); // = "BaseLineNr" + baseLineCoubt.ToString();, gives ID to a baseline
             //baselines.Add(avgPc);  //Stores baselines in a list
             //runBaseline = true;
 
-             //if(plc.str1 == '0') skriv ut: "No picture taken, sensor did not trig";
-             //else if(plc.str1 == '1') sammenlign snap med baseline inne
-             //else if(plc.str1 == '2') sammenlign snap med baseline ute
+            if (plc.str1 == '0')
+            {
+                LoggTXT.Text = "No picture taken, sensor did not trigger";
+            }
+            else if (plc.str1 == '1')
+            {
+                baselines[0].baseLineId = plc.str1; //Compare with baseline while cylinder is in
+            }
+            else if (plc.str1 == '2') 
+            {
+                baselines[1].baseLineId = plc.str1; //Compare with baseline while cylinder is out
+            }
 
             //if(baseLineCount == 0)  //If baseline count is 0 store pointcloud in cylinderIn.txt
             //{
