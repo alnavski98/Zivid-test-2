@@ -79,7 +79,6 @@ namespace zivid_test
                 {
                     //distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, activeBaseline.First().pc.coordinate3d);
                     distance = PointCloudHelpers.calculateDistance(pc, activeBaseline.First());
-
                 }
                 else
                 {
@@ -90,7 +89,7 @@ namespace zivid_test
             }
             else
             {
-                Console.WriteLine("Have not taken baseline yet");
+                WriteTextSafe("Have not taken baseline yet");
             }
 
             var errorPicture = PointCloudHelpers.PointCloudToPicture(pc);
@@ -104,11 +103,11 @@ namespace zivid_test
            var connected = ZividCAM.connect();  //Connects to camera
             if (connected)
             {
-                LoggTXT.Text = "Successfully connected to camera";
+                WriteTextSafe( "Successfully connected to camera");
             }
             else
             {
-                LoggTXT.Text = "Warning: No cameras found";
+                WriteTextSafe( "Warning: No cameras found");
             }
             graph.errorChart();
         }
@@ -118,11 +117,11 @@ namespace zivid_test
             ZividCAM.assistMode();  //Takes picture in assisted mode
             if (ZividCAM.assistMode())
             {
-                LoggTXT.Text = "Picture taken in assist mode";
+                WriteTextSafe( "Picture taken in assist mode");
             }
             else
             {
-                LoggTXT.Text = "Warning: Must connect to camera before using assist mode";
+                WriteTextSafe( "Warning: Must connect to camera before using assist mode");
             }
         }
 
@@ -132,12 +131,12 @@ namespace zivid_test
             ZividCAM.setIris(ulong.Parse(IrisTXT.Text)); //Sets iris manually from textbox for iris  
             if (ZividCAM.setExposure(int.Parse(ExposureTXT.Text)) || ZividCAM.setIris(ulong.Parse(IrisTXT.Text)))
             {
-                LoggTXT.Text = "Successfully applied exposure time and/or iris";
+                WriteTextSafe( "Successfully applied exposure time and/or iris");
 
             }
             else
             {
-                LoggTXT.Text = "Warning: Must connect to camera before applying settings";
+                WriteTextSafe( "Warning: Must connect to camera before applying settings");
             }
         }
        
@@ -159,16 +158,25 @@ namespace zivid_test
                 Thread.Sleep(100);  //Pauses for 100ms
             }
 
-            baselinePc = PointCloudHelpers.calcBaseline(snaps);  //Stores one baseline in baselinePc
-            baselinePc.baseLineId = baselineId.Text.ToString();
+            baselinePc = PointCloudHelpers.calcBaseline(snaps);  //Stores one baseline in avgPc
+            //baselinePc.baseLineId = baselineId.Text.ToString();
             baselines.Add(baselinePc);
             //avgPc.pointcloudId = "Baseline nr. " + baseLineCount;  //String.Format("BaseLineNr{0}", baseLineCount); // = "BaseLineNr" + baseLineCoubt.ToString();, gives ID to a baseline
             //baselines.Add(avgPc);  //Stores baselines in a list
             //runBaseline = true;
 
-             //if(plc.str1 == '0') skriv ut: "No picture taken, sensor did not trig";
-             //else if(plc.str1 == '1') sammenlign snap med baseline inne
-             //else if(plc.str1 == '2') sammenlign snap med baseline ute
+            if (plc.str1 == '0')
+            {
+                LoggTXT.Text = "No picture taken, sensor did not trigger";
+            }
+            else if (plc.str1 == '1')
+            {
+                baselines[0].baseLineId = plc.str1; //Compare with baseline while cylinder is in
+            }
+            else if (plc.str1 == '2') 
+            {
+                baselines[1].baseLineId = plc.str1; //Compare with baseline while cylinder is out
+            }
 
             //if(baseLineCount == 0)  //If baseline count is 0 store pointcloud in cylinderIn.txt
             //{
