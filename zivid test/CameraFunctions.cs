@@ -21,8 +21,8 @@ namespace zivid_test
     public class CameraFunctions
     {
         private delegate void SafeCallDelegate(string text);
-        public PointCloud avgPc = zivid_test.Program.f.avgPc;
-        public List<PointCloud> baselines = zivid_test.Program.f.baselines;
+        public Baseline baselinePc = zivid_test.Program.f.baselinePc;
+        public List<Baseline> baselines = new List<Baseline>();
         public PointCloud pc = new PointCloud();
         public PointCloud blCylinderOut = new PointCloud();
         public PointCloud blCylinderIn = new PointCloud();
@@ -41,16 +41,13 @@ namespace zivid_test
             var snaps = new List<PointCloud>();
             var snap = ZividCAM.snapshot();  //Takes snapshot from camera and stores in snap
             var pointCloud = PointCloudHelpers.floatToPointCloud(snap);
-            snaps.Add(pointCloud);
-            pc = PointCloudHelpers.calcAvg(snaps);
+            pc = pointCloud;
 
             //if baseline is taken, calculate distance. else dont
             if (zivid_test.Program.f.runBaseline)
             {
-                //if(plc.str1 == '0') skriv ut: "No picture taken, sensor did not trig";
-                //else if(plc.str1 == '1') sammenlign snap med baseline inne
-                //else if(plc.str1 == '2') sammenlign snap med baseline ute
-                distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, avgPc.coordinate3d);
+                var activeBaseline = baselines.Where(t => t./*baseLineId.Equals(baseLine)*/).ToList();
+                distance = PointCloudHelpers.calculateDistance(pc, activeBaseline.First());
                 //FileTransfer.writeCSV(fileName, distance);
                 Console.WriteLine(distance);
                 inc++;

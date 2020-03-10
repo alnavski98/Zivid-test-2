@@ -55,6 +55,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label8 = new System.Windows.Forms.Label();
+            this.baselineId = new System.Windows.Forms.TextBox();
+            this.baselineIdSim = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IrisTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCntTXT)).BeginInit();
@@ -356,11 +358,27 @@
             this.label8.TabIndex = 26;
             this.label8.Text = "Live chart of \"errornumbers\":";
             // 
+            // baselineId
+            // 
+            this.baselineId.Location = new System.Drawing.Point(43, 239);
+            this.baselineId.Name = "baselineId";
+            this.baselineId.Size = new System.Drawing.Size(100, 26);
+            this.baselineId.TabIndex = 27;
+            // 
+            // baselineIdSim
+            // 
+            this.baselineIdSim.Location = new System.Drawing.Point(43, 283);
+            this.baselineIdSim.Name = "baselineIdSim";
+            this.baselineIdSim.Size = new System.Drawing.Size(100, 26);
+            this.baselineIdSim.TabIndex = 28;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 664);
+            this.Controls.Add(this.baselineIdSim);
+            this.Controls.Add(this.baselineId);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.label7);
@@ -424,6 +442,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox baselineId;
+        private System.Windows.Forms.TextBox baselineIdSim;
     }
 }
 
