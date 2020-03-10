@@ -79,7 +79,6 @@ namespace zivid_test
                 {
                     //distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, activeBaseline.First().pc.coordinate3d);
                     distance = PointCloudHelpers.calculateDistance(pc, activeBaseline.First());
-
                 }
                 else
                 {
