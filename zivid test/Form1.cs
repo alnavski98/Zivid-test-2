@@ -89,7 +89,7 @@ namespace zivid_test
             }
             else
             {
-                Console.WriteLine("Have not taken baseline yet");
+                WriteTextSafe("Have not taken baseline yet");
             }
 
             var errorPicture = PointCloudHelpers.PointCloudToPicture(pc);
@@ -103,11 +103,11 @@ namespace zivid_test
            var connected = ZividCAM.connect();  //Connects to camera
             if (connected)
             {
-                LoggTXT.Text = "Successfully connected to camera";
+                WriteTextSafe( "Successfully connected to camera");
             }
             else
             {
-                LoggTXT.Text = "Warning: No cameras found";
+                WriteTextSafe( "Warning: No cameras found");
             }
             graph.errorChart();
         }
@@ -117,11 +117,11 @@ namespace zivid_test
             ZividCAM.assistMode();  //Takes picture in assisted mode
             if (ZividCAM.assistMode())
             {
-                LoggTXT.Text = "Picture taken in assist mode";
+                WriteTextSafe( "Picture taken in assist mode");
             }
             else
             {
-                LoggTXT.Text = "Warning: Must connect to camera before using assist mode";
+                WriteTextSafe( "Warning: Must connect to camera before using assist mode");
             }
         }
 
@@ -131,12 +131,12 @@ namespace zivid_test
             ZividCAM.setIris(ulong.Parse(IrisTXT.Text)); //Sets iris manually from textbox for iris  
             if (ZividCAM.setExposure(int.Parse(ExposureTXT.Text)) || ZividCAM.setIris(ulong.Parse(IrisTXT.Text)))
             {
-                LoggTXT.Text = "Successfully applied exposure time and/or iris";
+                WriteTextSafe( "Successfully applied exposure time and/or iris");
 
             }
             else
             {
-                LoggTXT.Text = "Warning: Must connect to camera before applying settings";
+                WriteTextSafe( "Warning: Must connect to camera before applying settings");
             }
         }
        
