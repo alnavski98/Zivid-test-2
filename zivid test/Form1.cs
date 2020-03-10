@@ -73,7 +73,7 @@ namespace zivid_test
             //if baseline is taken, calculate distance. else dont
             if (baselines.Count() > 0)
             {
-                var activeBaseline = baselines.Where(t => t.baseLineId.Equals(baseLineIdSim)).ToList();
+                var activeBaseline = baselines.Where(t => t./*baseLineId.Equals(baselineIdSim)*/).ToList();
                 if (activeBaseline.Count() == 1)
                 {
                     //distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, activeBaseline.First().pc.coordinate3d);
