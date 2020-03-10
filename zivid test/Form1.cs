@@ -39,7 +39,7 @@ namespace zivid_test
         public float distance;
         public PLC plc = new PLC();
         CameraFunctions functions = new CameraFunctions();
-        Graph graph = new Graph();
+        public Graph graph = new Graph();
 
         Form2 f2 = new Form2();
       

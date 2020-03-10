@@ -51,7 +51,7 @@ namespace zivid_test
                 //FileTransfer.writeCSV(fileName, distance);
                 Console.WriteLine(distance);
                 inc++;
-                Program.f.errorChart();   // making a graph of errornumbers
+                Program.f.graph.errorChart();   // making a graph of errornumbers
             }
             else
             {

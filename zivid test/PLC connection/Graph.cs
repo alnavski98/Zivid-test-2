@@ -9,7 +9,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace zivid_test.PLC_connection
 {
-    class Graph
+    public class Graph
     {
 
         public int[] distance = { 100, 200, 500, 1000, 5000, 10000 };
