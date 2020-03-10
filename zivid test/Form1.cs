@@ -16,7 +16,7 @@ using System.Web.UI;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using System.Windows.Forms.DataVisualization.Charting;
-
+using zivid_test.PLC_connection;
 
 namespace zivid_test
 {
@@ -39,6 +39,7 @@ namespace zivid_test
         public float distance;
         public PLC plc = new PLC();
         CameraFunctions functions = new CameraFunctions();
+        Graph graph = new Graph();
 
         Form2 f2 = new Form2();
       
@@ -109,7 +110,7 @@ namespace zivid_test
             {
                 LoggTXT.Text = "Warning: No cameras found";
             }
-            errorChart();
+            graph.errorChart();
         }
 
         private void btn_assist_mode_Click_1(object sender, EventArgs e)
