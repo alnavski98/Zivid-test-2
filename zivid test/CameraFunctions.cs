@@ -42,7 +42,7 @@ namespace zivid_test
             var snap = ZividCAM.snapshot();  //Takes snapshot from camera and stores in snap
             var pointCloud = PointCloudHelpers.floatToPointCloud(snap);
             pc = pointCloud;
-
+            Program.f.Update();
             //if baseline is taken, calculate distance. else dont
             if (zivid_test.Program.f.runBaseline)
             {
