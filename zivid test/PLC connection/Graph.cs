@@ -59,8 +59,6 @@ namespace zivid_test.PLC_connection
 
                 Program.f.chart2.Series["Errornumber"].Points.AddXY(inc, 0);  //adding new points in chart
             }
-
-
         }
     }
 }

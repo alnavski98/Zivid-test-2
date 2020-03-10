@@ -66,8 +66,6 @@ namespace zivid_test
             //
             //Thread.Sleep(600);
             // }
-
         }
-
     }
 }
