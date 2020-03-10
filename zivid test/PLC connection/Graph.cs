@@ -23,7 +23,7 @@ namespace zivid_test.PLC_connection
             int rInt = y.Next(500, 10000);
             chart.AxisX.Minimum = (inc - 50);        //determining where the axes start from and end at
             chart.AxisX.Maximum = (inc);
-            Program.f.chart2.Series["Feiltall"].Points.AddXY(inc, rInt);  //adding new points in chart
+            Program.f.chart2.Series["Errornumber"].Points.AddXY(inc, rInt);  //adding new points in chart
             inc++;
         }
 
@@ -52,12 +52,12 @@ namespace zivid_test.PLC_connection
                 chart.AxisX.Interval = 10;       // determining  the amount to step one unit on the axis.
                 chart.AxisY.Interval = 1000;
 
-                Program.f.chart2.Series.Add("Feiltall");
-                Program.f.chart2.Series["Feiltall"].ChartType = SeriesChartType.Line; //type of chart, lines between points
-                Program.f.chart2.Series["Feiltall"].Color = Color.Red;
+                Program.f.chart2.Series.Add("Errornumber");
+                Program.f.chart2.Series["Errornumber"].ChartType = SeriesChartType.Line; //type of chart, lines between points
+                Program.f.chart2.Series["Errornumber"].Color = Color.Red;
                 Program.f.chart2.Series[0].IsValueShownAsLabel = false;
 
-                Program.f.chart2.Series["Feiltall"].Points.AddXY(inc, 0);  //adding new points in chart
+                Program.f.chart2.Series["Errornumber"].Points.AddXY(inc, 0);  //adding new points in chart
             }
 
 
