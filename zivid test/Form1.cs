@@ -38,7 +38,7 @@ namespace zivid_test
         public string fileName = "Threshold data 3.csv";
         public float distance;
         public PLC plc = new PLC();
-        CameraFunctions functions = new CameraFunctions();
+        //CameraFunctions functions = new CameraFunctions();
         public Graph graph = new Graph();
 
         Form2 f2 = new Form2();
@@ -74,7 +74,7 @@ namespace zivid_test
             //if baseline is taken, calculate distance. else dont
             if (baselines.Count() > 0)
             {
-                var activeBaseline = baselines.Where(t => t./*baseLineId.Equals(baselineIdSim)*/).ToList();
+                var activeBaseline = baselines.Where(t => t.baseLineId.Equals(baselineIdSim)).ToList();
                 if (activeBaseline.Count() == 1)
                 {
                     //distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, activeBaseline.First().pc.coordinate3d);
@@ -160,7 +160,7 @@ namespace zivid_test
             }
 
             baselinePc = PointCloudHelpers.calcBaseline(snaps);  //Stores one baseline in avgPc
-            baselinePc.baseLineId = baselineID.Text.ToString();
+            baselinePc.baseLineId = baselineId.Text.ToString();
             baselines.Add(baselinePc);
             //avgPc.pointcloudId = "Baseline nr. " + baseLineCount;  //String.Format("BaseLineNr{0}", baseLineCount); // = "BaseLineNr" + baseLineCoubt.ToString();, gives ID to a baseline
             //baselines.Add(avgPc);  //Stores baselines in a list
@@ -209,7 +209,7 @@ namespace zivid_test
             try
             {
                 var fileTransferer = new FileTransfer();
-                blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
+                //blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
                 //blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
             } catch (Exception ex)
             {

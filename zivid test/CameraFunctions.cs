@@ -18,7 +18,7 @@ using Newtonsoft.Json;
 
 namespace zivid_test
 {
-    /*public class CameraFunctions
+    public class CameraFunctions
     {
         private delegate void SafeCallDelegate(string text);
         public Baseline baselinePc = zivid_test.Program.f.baselinePc;
@@ -46,8 +46,8 @@ namespace zivid_test
             //if baseline is taken, calculate distance. else dont
             if (zivid_test.Program.f.runBaseline)
             {
-                var activeBaseline = baselines.Where(t => t.baseLineId.Equals(baselineIdSim)).ToList();
-                distance = PointCloudHelpers.calculateDistance(pc, activeBaseline.First());
+                //var activeBaseline = baselines.Where(t => t.baseLineId.Equals(baselineIdSim)).ToList();
+                //stance = PointCloudHelpers.calculateDistance(pc, activeBaseline.First());
                 //FileTransfer.writeCSV(fileName, distance);
                 Console.WriteLine(distance);
                 inc++;
@@ -69,5 +69,5 @@ namespace zivid_test
 
         }
 
-    }*/
+    }
 }
