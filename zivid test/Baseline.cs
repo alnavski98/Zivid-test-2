@@ -11,6 +11,5 @@ namespace zivid_test
         public PointCloud pc = new PointCloud();
         public float[,] thresholdMap;
         public string baseLineId = "";
-
     }
 }
