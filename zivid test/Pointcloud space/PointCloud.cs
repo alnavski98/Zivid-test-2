@@ -12,6 +12,7 @@ namespace zivid_test
     [Serializable]
     public class PointCloud
     {
+
         public bool IsEmpty
         { 
             get 

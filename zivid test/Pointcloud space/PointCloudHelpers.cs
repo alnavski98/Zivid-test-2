@@ -14,19 +14,6 @@ using LinqStatistics;
 
 namespace zivid_test
 {
-    /* public class Baseline
-     {
-         public List<List<Point3>> baseline = new List<List<Point3>>();
-         public Baseline(List<List<Point3>> avgPc)
-         {
-             baseline = avgPc;
-         }
-
-         public Baseline()
-         {
-
-         }
-     }*/
 
     //PointCloud avg = new PointCloud;
     /// <summary>

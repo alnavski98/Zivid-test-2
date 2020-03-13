@@ -74,14 +74,23 @@ namespace zivid_test
             //if baseline is taken, calculate distance. else dont
             if (baselines.Count() > 0)
             {
-                var activeBaseline = baselines.Where(t => t.baseLineId.Equals(baselineIdSim)).ToList();
-                if (activeBaseline.Count() == 1)
+                //var activeBaseline = baselines.Where(t => t.baseLineId.Equals(baselineIdSim)).ToList();
+                /*if (activeBaseline.Count() == 1)
                 {
                     //distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, activeBaseline.First().pc.coordinate3d);
                     distance = PointCloudHelpers.calculateDistance(pc, activeBaseline.First());
+                }*/
+                if (plc.str1 == '1')
+                {
+                    distance = PointCloudHelpers.calculateDistance(pc, baselines[0]);
+                }
+                else if (plc.str1 == '2')
+                {
+                    distance = PointCloudHelpers.calculateDistance(pc, baselines[1]);
                 }
                 else
                 {
+                    WriteTextSafe("Invalid ID, cannot calculate distance");
                     // id-trøbbel, skriv ut feilmelding
                 }
                 //FileTransfer.writeCSV(fileName, distance);
@@ -158,23 +167,25 @@ namespace zivid_test
                 Thread.Sleep(100);  //Pauses for 100ms
             }
 
-            baselinePc = PointCloudHelpers.calcBaseline(snaps);  //Stores one baseline in avgPc
+            //baselinePc = PointCloudHelpers.calcBaseline(snaps);  //Stores one baseline in baselinePc
             //baselinePc.baseLineId = baselineId.Text.ToString();
-            baselines.Add(baselinePc);
+            //baselines.Add(baselinePc);
             //avgPc.pointcloudId = "Baseline nr. " + baseLineCount;  //String.Format("BaseLineNr{0}", baseLineCount); // = "BaseLineNr" + baseLineCoubt.ToString();, gives ID to a baseline
             //baselines.Add(avgPc);  //Stores baselines in a list
             //runBaseline = true;
 
             if (plc.str1 == '0')
             {
-                LoggTXT.Text = "No picture taken, sensor did not trigger";
+                LoggTXT.Text = "No baseline taken, sensor did not trigger";
             }
             else if (plc.str1 == '1')
             {
+                baselines[0] = PointCloudHelpers.calcBaseline(snaps);
                 baselines[0].baseLineId = plc.str1; //Compare with baseline while cylinder is in
             }
             else if (plc.str1 == '2') 
             {
+                baselines[1] = PointCloudHelpers.calcBaseline(snaps);
                 baselines[1].baseLineId = plc.str1; //Compare with baseline while cylinder is out
             }
 
