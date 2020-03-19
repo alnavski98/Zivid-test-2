@@ -39,10 +39,10 @@
       <HintPath>packages\LinqStatistics.2.3.0\lib\net40\LinqStatistics.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="S7.Net, Version=0.4.0.0, Culture=neutral, PublicKeyToken=d5812d469e84c693, processorArchitecture=MSIL">
-      <HintPath>..\packages\S7netplus.0.4.0\lib\net452\S7.Net.dll</HintPath>
+      <HintPath>packages\S7netplus.0.4.0\lib\net452\S7.Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,11 +57,17 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="ZividNET">
-      <HintPath>..\..\..\..\..\..\Program Files\Zivid\bin\ZividNET.dll</HintPath>
+    <Reference Include="ZividCoreNET, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ZividCoreNET.dll</HintPath>
     </Reference>
-    <Reference Include="ZividVis3DNET">
-      <HintPath>..\..\..\..\..\..\Program Files\Zivid\bin\ZividVis3DNET.dll</HintPath>
+    <Reference Include="ZividNET, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ZividNET.dll</HintPath>
+    </Reference>
+    <Reference Include="ZividVis3DNET, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ZividVis3DNET.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
