@@ -16,14 +16,14 @@ namespace zivid_test.PLC_connection
         public int inc;
 
 
-        public void update()
+        public void update(float errorNumber)
         {
             var chart = Program.f.chart2.ChartAreas[0];
-            Random y = new Random();
-            int rInt = y.Next(500, 10000);
+            //Random y = new Random();
+            //int rInt = y.Next(500, 10000);
             chart.AxisX.Minimum = (inc - 50);        //determining where the axes start from and end at
             chart.AxisX.Maximum = (inc);
-            Program.f.chart2.Series["Errornumber"].Points.AddXY(inc, rInt);  //adding new points in chart
+            Program.f.chart2.Series["Errornumber"].Points.AddXY(inc, errorNumber);  //adding new points in chart
             inc++;
         }
 

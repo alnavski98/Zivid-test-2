@@ -295,16 +295,16 @@ namespace zivid_test
                             rgbMap = 0;
                         }
                         Color c = new Color();
-                        if (p.errorDistanceSq > pointCloudMap[i, j])
+                        if ((float)Math.Sqrt(p.errorDistanceSq) > pointCloudMap[i, j])
                         {
-                            c = Color.FromArgb(255, 255, 0, 0);
+                            c = Color.FromArgb(255, 255, 0, 0);  //Color red
                         }
                         else
                         {
-                            c = Color.FromArgb(255, rgbMap, rgbMap, rgbMap);
+                            c = Color.FromArgb(255, rgbMap, rgbMap, rgbMap);  //Color in scale of black and white
                         }
                         
-                        bmp.SetPixel(j, i, c);
+                        bmp.SetPixel(j, i, c);  //Color each pixel with scale of black and white, or red
                     }
 
                 } // end for
@@ -315,6 +315,7 @@ namespace zivid_test
             {
 
             }
+            int a = 0;
             return bmp;
         }
         
