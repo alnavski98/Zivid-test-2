@@ -67,9 +67,11 @@ namespace zivid_test
         }
        
         private void btn_snapshot_Click(object sender, EventArgs e)
-        {          
-            //functions.snapshotDistance();
-            var snaps = new List<PointCloud>();
+        {
+            for (int i = 0; i < 6; i++)
+            { 
+                //functions.snapshotDistance();
+                var snaps = new List<PointCloud>();
             var snap = ZividCAM.snapshot();  //Takes snapshot from camera and stores in snap
             var pointCloud = PointCloudHelpers.floatToPointCloud(snap);
             pc = pointCloud; // PointCloudHelpers.calcBaseline(snaps);
@@ -106,8 +108,9 @@ namespace zivid_test
                 WriteTextSafe("Have not taken baseline yet");
             }*/
             graph.update(distance);
+            }
             //var errorPicture = PointCloudHelpers.PointCloudToPicture(pc);
-       
+
             //f2.Show();
             //f2.displayPicture(errorPicture);
         }

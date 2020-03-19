@@ -100,7 +100,7 @@ namespace zivid_test
             // check if file exists
             try
             {
-                var dataPath = Path.Combine("C:\\Brukere\\Joel PersonalCompuer", fileName);
+                var dataPath = Path.Combine("C:\\Users\\Public\\Public Documents", fileName);
                 if (!File.Exists(dataPath))
                 {
                     using (StreamWriter sw = File.CreateText(dataPath))
