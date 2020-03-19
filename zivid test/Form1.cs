@@ -68,7 +68,7 @@ namespace zivid_test
        
         private void btn_snapshot_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 10; i++)
             { 
                 //functions.snapshotDistance();
                 var snaps = new List<PointCloud>();
