@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btn_snapshot = new System.Windows.Forms.Button();
             this.btn_connect = new System.Windows.Forms.Button();
             this.btn_assist_mode = new System.Windows.Forms.Button();
@@ -331,20 +331,20 @@
             // 
             // chart2
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart2.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart2.Legends.Add(legend1);
             this.chart2.Location = new System.Drawing.Point(491, 269);
             this.chart2.Name = "chart2";
-            series2.ChartArea = "ChartArea1";
-            series2.IsVisibleInLegend = false;
-            series2.Legend = "Legend1";
-            series2.LegendText = " ";
-            series2.LegendToolTip = "white";
-            series2.MarkerBorderColor = System.Drawing.Color.Transparent;
-            series2.Name = "Series1";
-            this.chart2.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.LegendText = " ";
+            series1.LegendToolTip = "white";
+            series1.MarkerBorderColor = System.Drawing.Color.Transparent;
+            series1.Name = "Series1";
+            this.chart2.Series.Add(series1);
             this.chart2.Size = new System.Drawing.Size(757, 364);
             this.chart2.TabIndex = 25;
             this.chart2.Text = "chart2";
@@ -369,12 +369,11 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(25, 245);
+            this.label9.Location = new System.Drawing.Point(25, 246);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(123, 20);
             this.label9.TabIndex = 28;
             this.label9.Text = "Bitmap filename";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // Form1
             // 
@@ -448,6 +447,7 @@
         public System.Windows.Forms.DataVisualization.Charting.Chart chart2;
         private System.Windows.Forms.TextBox BitmapTXT;
         private System.Windows.Forms.Label label9;
+        //private System.Windows.Forms.Label label9;
     }
 }
 

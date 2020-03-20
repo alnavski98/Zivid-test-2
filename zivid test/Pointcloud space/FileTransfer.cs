@@ -17,32 +17,6 @@ namespace zivid_test
         public PointCloud coordinates;
 
         /// <summary>
-        /// Writes pointcloud object to txt file by converting to string
-        /// </summary>
-        /// <param name="pc"></param>
-        /// <param name="fileName"></param>
-        /*public void writeToFile(PointCloud pc, string fileName)
-        {
-            // create fullDataPath file, if not exists
-            try
-            {
-                var fullDataPath = Path.Combine("C:C:\\Users\\alnav\\Desktop", fileName);
-                if (!File.Exists(fullDataPath))  //If fullDataPath doesn't exist write pointcloud to file 
-                {
-                   
-                    string json = JsonConvert.SerializeObject(pc, Formatting.Indented);  //Serialize pointcloud to file
-                    using (StreamWriter sw = File.CreateText(fullDataPath))  
-                    {
-                        sw.WriteLine(json);
-                    }
-                }
-            }
-            catch
-            {
-            }
-        }*/
-
-        /// <summary>
         /// Writes baseline object to txt file by converting to string
         /// </summary>
         /// <param name="pc"></param>
@@ -75,29 +49,28 @@ namespace zivid_test
         /// <returns></returns>
         public Baseline readFromFile(string fileName)
         {
-                var sett = new Baseline();
-                try
-                {
-                    String line = "";
+            var sett = new Baseline();
+
+            try
+            {
+                String line = "";
                 string settpath = Path.Combine("C:\\Users\\alnav\\Desktop", fileName);
                 using (StreamReader sr = new StreamReader(settpath))
-                    {
-                        // Read the stream to a string, and write the string to the console.
-                        line = sr.ReadToEnd();
-                    }
-                    sett = JsonConvert.DeserializeObject<Baseline>(line);
+                {
+                    line = sr.ReadToEnd();  // Read the stream to a string, and write the string to the console.
                 }
-                catch(Exception ex) 
+                sett = JsonConvert.DeserializeObject<Baseline>(line);
+            }
+            catch(Exception ex) 
             {
-
             }
             return sett;
         }
 
         public static void writeCSV(string fileName, float body)
         {
-            string h = "Error; ";
-            // check if file exists
+            string h = "Error; ";  // check if file exists
+
             try
             {
                 var dataPath = Path.Combine("C:\\Users\\Joel PersonalCompuer", fileName);
@@ -110,8 +83,7 @@ namespace zivid_test
                         );
                     }
                 }
-                // append to end of file
-               // string time = DateTime.Now.ToString("dd-MM-yy") + ";" + DateTime.Now.ToShortTimeString() + ";";
+
                 using (StreamWriter sw = File.AppendText(dataPath))
                 {
                     sw.WriteLine(body);
@@ -123,6 +95,5 @@ namespace zivid_test
                 throw new Exception("CSV-write error (file open?).");
             }
         }
-
     }
 }

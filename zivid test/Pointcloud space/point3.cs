@@ -24,11 +24,6 @@ namespace zivid_test
         /// </summary>
         public float errorDistanceSq = 0.0f;
 
-        /*public Point3(float error)
-        {
-            this.errorDistanceSq = error;
-        }*/
-
         /// <summary>
         /// Constructor that assings x, y and z coordinates 
         /// to their respective variables
@@ -50,7 +45,5 @@ namespace zivid_test
         {
             
         }
-
-
     }
 }

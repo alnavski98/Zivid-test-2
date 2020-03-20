@@ -11,7 +11,6 @@ namespace zivid_test
 {
     public class PLC
     {
-
         public bool J = true;
         public bool K = true;
         public bool L = true;
@@ -38,8 +37,6 @@ namespace zivid_test
                         await Accept(await listner.AcceptTcpClientAsync());
                         M = false;
                     }
-
-
                 }
                 finally // sets the variables back to original before closing listner-task
                 {
@@ -50,7 +47,6 @@ namespace zivid_test
             }
 
         }
-
 
         const int packet_length = 32;  // user defined packet length
 
@@ -119,8 +115,6 @@ namespace zivid_test
                         await n.WriteAsync(send_data, 0, send_data.Length);
                         Program.f.WriteTextSafe("feil");
                     }
-
-
                 }
             }
             catch (Exception ex)

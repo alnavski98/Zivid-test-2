@@ -45,14 +45,12 @@ namespace zivid_test
         public Graph graph = new Graph();
 
         Form2 f2 = new Form2();
-      
-        int a=47;
         
         public Form1()
         {     
             InitializeComponent(); //Initializes form
         }
-        //noe +1
+
         public void WriteTextSafe(string text)
         {
             if (LoggTXT.InvokeRequired)
@@ -71,7 +69,7 @@ namespace zivid_test
             //for (int i = 0; i < 10; i++)
             //{ 
                 //functions.snapshotDistance();
-                var snaps = new List<PointCloud>();
+            var snaps = new List<PointCloud>();
             var snap = ZividCAM.snapshot();  //Takes snapshot from camera and stores in snap
             var pointCloud = PointCloudHelpers.floatToPointCloud(snap);
             pc = pointCloud; // PointCloudHelpers.calcBaseline(snaps);
@@ -109,14 +107,14 @@ namespace zivid_test
             }*/
             graph.update(distance);
             //}
-            if(!String.IsNullOrEmpty(BitmapTXT.Text))
-            { 
+            if(!String.IsNullOrEmpty(BitmapTXT.Text))  //If Bitmap filename is NOT empty write to
+            {                                          //png file and show "heatmap"
             var errorPicture = PointCloudHelpers.PointCloudToPicture(pc, BitmapTXT.Text);
 
             f2.Show();
             f2.displayPicture(errorPicture);
             }
-            else
+            else  //Else say that bitmap filename has not been given
             {
                 WriteTextSafe("Filename for bitmap has not been given yet, please try again.");
             }
@@ -276,9 +274,6 @@ namespace zivid_test
             
         }
 
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

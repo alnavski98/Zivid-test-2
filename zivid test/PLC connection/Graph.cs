@@ -11,10 +11,8 @@ namespace zivid_test.PLC_connection
 {
     public class Graph
     {
-
         public int[] distance = { 100, 200, 500, 1000, 5000, 10000 };
         public int inc;
-
 
         public void update(float errorNumber)
         {
@@ -27,14 +25,8 @@ namespace zivid_test.PLC_connection
             inc++;
         }
 
-
-
         public void errorChart()   //making a graph of errornumbers
         {
-
-
-
-
             if (Program.f.plc.K)
             {
                 var chart = Program.f.chart2.ChartAreas[0];

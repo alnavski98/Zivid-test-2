@@ -14,15 +14,12 @@ using LinqStatistics;
 
 namespace zivid_test
 {
-
-    //PointCloud avg = new PointCloud;
     /// <summary>
     /// Helping class for point cloud
     /// </summary>
     public static class PointCloudHelpers
     {
         public static float variance = 0.0f;
-        //public static float stDev = 0.0f;
         public static float[,] pointCloudMap;
 
         /// <summary>
@@ -47,8 +44,7 @@ namespace zivid_test
                     var y = zividPointCloud[i, j, 1]; //Same for y-component
                     var z = zividPointCloud[i, j, 2]; //Same for z-component
                     var p = new Point3(x,y,z);
-                    //innerPointCloud.Add(p); //Stores 3D-points in a list
-                    innerPointCloud[j] = p; //Stores 3D-points
+                    innerPointCloud[j] = p; //Stores 3D-points in array
                 }
                 newPointCloud.Add(innerPointCloud.ToList()); //Adds innerPointCloud to the "outer" list
             }                                                //by first converting array to list
@@ -56,11 +52,6 @@ namespace zivid_test
             ret.coordinate3d = newPointCloud; //Stores newPointCloud 3D-list in ret's coordinate3d      
             return ret; 
         }
-       
-        /*public static float[,,] pointCloudToFloat(PointCloud zividFloat)
-        {
-
-        }*/
 
         /// <summary>
         /// Calculates baseline from the pictures taken, assumes equal sizes 
@@ -70,7 +61,6 @@ namespace zivid_test
         /// <returns>List of PointCloud instances</returns>
         public static Baseline calcBaseline(List<PointCloud> pc)
         {
-
             var pointCloudAvg = new List<List<Point3>>();
             var returnBaseline = new Baseline();
             if (pc.Count() == 0)  //Run if no pictures are detected
@@ -114,7 +104,6 @@ namespace zivid_test
                         );  //Loops through all point cloud instances
 
 
-
                         xList = xList.Where(t => !float.IsNaN(t)).ToList();  //Removes all invalid points from xList
                         yList = yList.Where(t => !float.IsNaN(t)).ToList();  //Same for yList
                         zList = zList.Where(t => !float.IsNaN(t)).ToList();  //Same for zList
@@ -132,8 +121,7 @@ namespace zivid_test
                         {                                            //pointcloud and equivalent points from pointList
                             distanceList.Add(p2pLengthSquared(innerCloudAvg.Last(), pointList[l]));
                         }
-                        distanceList = distanceList.Where(t => !float.IsNaN(t)).ToList(); 
-                        //Removes NaN points from distanceList
+                        distanceList = distanceList.Where(t => !float.IsNaN(t)).ToList(); //Removes NaN points from distanceList
                         if (distanceList.Count() > 1)  //If amount of points in distanceList > 0 calculate standard deviation to put in pointCloudMap
                         {
                             pointCloudMap[i, j] = distanceList.Average() + 2 * distanceList.StandardDeviation();
@@ -142,7 +130,6 @@ namespace zivid_test
                         {
                             pointCloudMap[i, j] = 0.0f;
                         }
-                        //Console.WriteLine(pointCloudMap[i, j]);
                     }
                     pointCloudAvg.Add(innerCloudAvg);  //Put list of 3D points in another list
                 }                                      //which will be returned as a point cloud
@@ -151,11 +138,6 @@ namespace zivid_test
                 
                 returnBaseline.pc = returnCloud;
                 returnBaseline.thresholdMap = pointCloudMap;
-                /*IFormatter formatter = new BinaryFormatter();
-                Stream stream = new FileStream("C:\\Users\\alnav\\Desktop\\Baseline.txt", FileMode.Create, FileAccess.Write);
-
-                formatter.Serialize(stream, returnCloud);
-                stream.Close();*/
                  //Returns average of point clouds as an
             }                        //instance of the PointCloud class
             else
@@ -177,15 +159,6 @@ namespace zivid_test
             return (float)Math.Sqrt(p2pLengthSquared(coordinate1, coordinate2));
         }
 
-        /*public static float stDev(List<float> distance)
-        {
-            var stDevDistance = 0.0f;
-
-            stDevDistance = (float)Math.Sqrt((distance.Sum() / (distance.Count() - 1)));
-            
-            return stDevDistance;
-        }*/
-
         /// <summary>
         /// Calculates distance between snapshot pointcloud
         /// and baseline pointcloud
@@ -195,9 +168,7 @@ namespace zivid_test
         /// <returns></returns>
         public static float calculateDistance(PointCloud pc, Baseline baseline)
         {
-
             var totDist = 0.0f;
-            //var threshold = 1.0f;
             List<Point3> point3 = new List<Point3>();
             for (int i = 0; i < pc.coordinate3d.Count(); i++)
             {
@@ -207,14 +178,6 @@ namespace zivid_test
                         {
                             length[j] = p2pLengthSquared(pc.coordinate3d[i][j], baseline.pc.coordinate3d[i][j]);
                             pc.coordinate3d[i][j].errorDistanceSq = length[j];
-                            //var error = new Point3(length[j]);
-                            /*if(length[j] > threshold)
-                            {
-                                lock (point3)
-                                {
-                                    point3.Add(pc[i][j]);
-                                }
-                            }*/
                         }
                         
                 );
@@ -222,17 +185,10 @@ namespace zivid_test
                 var nn = length.Where(t => !float.IsNaN(t));
                 totDist += nn.Sum(); // + nn2.Sum() + nn3.Sum();
                 variance = (float)(totDist / (length.Length));
-                //stDev = (float)Math.Sqrt(variance);
             }
                 
-            return (float)Math.Sqrt(totDist); 
-            //Return square root of totDist (for now returns
-        }             //a non zero number even with baseline being the same as the picture)
-
-        /*public static float calcOutliers(List<List<Point3>> pc)
-        {
-            var threshold = 3.0f; //Change value for threshold depending on testresult 
-        }*/
+            return (float)Math.Sqrt(totDist); //Return square root of totDist (for now returns
+        }                 //a non zero number even with baseline being the same as the picture)
 
         /// <summary>
         /// Converts a pointcloud object to a 2D "heatmap" 
@@ -245,17 +201,10 @@ namespace zivid_test
             var yDim = pc.getRowSize();
             Bitmap bmp = new Bitmap(xDim, yDim);
 
-            //var scale = 255.0f / (pc.getMaxZ() - pc.getMinZ());
-            //var translationMin = (0 - pc.getMinZ());
-
             var zValues = new List<float>();
 
             for (int i = 0; i < pc.coordinate3d.Count(); i++)
             {
-                /*for (int j = 0; j < pc.coordinate3d[0].Count(); j++)
-                {
-                    zValues.Add(pc.coordinate3d[i][j].Z);
-                }*/
                 Parallel.For(
                         0, pc.coordinate3d[0].Count(), j =>
                         {
@@ -305,19 +254,14 @@ namespace zivid_test
                         {
                             c = Color.FromArgb(255, rgbMap, rgbMap, rgbMap);  //Color in scale of black and white
                         }
-                        
                         bmp.SetPixel(j, i, c);  //Color each pixel with scale of black and white, or red
                     }
-
                 } // end for
-
                 bmp.Save(Path.Combine("C:\\Users\\Joel PersonalCompuer", filename) + ".png", ImageFormat.Png);
             }
             catch(Exception ex)
             {
-
             }
-            int a = 0;
             return bmp;
         }
         
@@ -326,18 +270,12 @@ namespace zivid_test
             return new Point3(points.Select(t => t.X).Average(), points.Select(t => t.Y).Average(), points.Select(t => t.Z).Average());
         }
 
-        /*public static List<Point3> orderedToUnordered(PointCloud pc)
-        {
-
-        }*/
-
         public static List<Point3> orderToChaos(List<List<Point3>> points)
         {
             var noNaNPoints = new List<Point3>();
             Parallel.For(
                    0, points.Count(), i => {
-                               // If point is not NaN, add to unordered list
-                               var nn = points[i].Where(t => point3IsNaN(t));
+                       var nn = points[i].Where(t => point3IsNaN(t));  // If point is not NaN, add to unordered list
                        lock (noNaNPoints)
                        {
                            noNaNPoints.AddRange(nn);
@@ -351,42 +289,5 @@ namespace zivid_test
         {
             return (float.IsNaN(v.X) || float.IsNaN(v.Y) || float.IsNaN(v.Z));
         }
-
-        /*public static List<List<float>> stDevBaseline(List<PointCloud> baselinePointClouds)
-        {
-            List<List<float>> stDevBaselineMap = new List<List<float>>();
-
-            for (int i = 0; i < baselinePointClouds[0].coordinate3d.Count(); i++)
-            {
-                List<float> stDevPartial = new List<float>();
-                for (int j = 0; j < baselinePointClouds[0].coordinate3d[0].Count(); j++)
-                {
-                    var xList = new List<float>();
-                    var yList = new List<float>();
-                    var zList = new List<float>();
-
-                    var xListAvg = new List<float>();
-                    var yListAvg = new List<float>();
-                    var zListAvg = new List<float>();
-
-                    for (int k = 0; k < baselinePointClouds.Count(); k++)
-                    {
-                        xList.Add(baselinePointClouds[k].coordinate3d[i][j].X);
-                        yList.Add(baselinePointClouds[k].coordinate3d[i][j].Y);
-                        zList.Add(baselinePointClouds[k].coordinate3d[i][j].Z);
-                    }
-                    xListAvg.Add(xList.StandardDeviation());
-                    yListAvg.Add(yList.StandardDeviation());
-                    zListAvg.Add(zList.StandardDeviation());
-
-                    xList.Clear();
-                    yList.Clear();
-                    zList.Clear();
-
-                    stDevPartial.Add();
-                }
-            }
-        }*/
     }
 }
-
