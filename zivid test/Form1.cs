@@ -43,6 +43,8 @@ namespace zivid_test
         public PLC plc = new PLC();
         //CameraFunctions functions = new CameraFunctions();
         public Graph graph = new Graph();
+        public bool camConnected = false;
+        public bool camDisconnected; //= false;
 
         Form2 f2 = new Form2();
         
@@ -123,16 +125,25 @@ namespace zivid_test
 
         private void btn_connect_Click(object sender, EventArgs e)
         {
-           var connected = ZividCAM.connect();  //Connects to camera
-            if (connected)
+            if (!camConnected)  //If camera is not already connected, connect camera
             {
-                WriteTextSafe( "Successfully connected to camera");
+                var connected = ZividCAM.connect();  //Connects to camera
+                camConnected = true;
+                camDisconnected = false;
+                if (connected)
+                {
+                    WriteTextSafe("Successfully connected to camera");
+                }
+                else
+                {
+                    WriteTextSafe("Warning: No cameras found");
+                }
+                graph.errorChart();
             }
-            else
+            else  
             {
-                WriteTextSafe( "Warning: No cameras found");
+                WriteTextSafe("Camera is already connected");
             }
-            graph.errorChart();
         }
 
         private void btn_assist_mode_Click_1(object sender, EventArgs e)
@@ -237,7 +248,16 @@ namespace zivid_test
 
         private void btn_disconnect_Click(object sender, EventArgs e)
         {
-            ZividCAM.dispose();
+            if (!camDisconnected)  //If camera is not disconnected, disconnect camera
+            {
+                camDisconnected = true;
+                camConnected = false;
+                ZividCAM.dispose();
+            }
+            else
+            {
+                WriteTextSafe("Camera is already disconnected");
+            }
         }
 
         private void btn_load_baselines_Click(object sender, EventArgs e)
@@ -249,10 +269,8 @@ namespace zivid_test
                 //blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
             } catch (Exception ex)
             {
-
                 // could not load file
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -271,10 +289,7 @@ namespace zivid_test
         {
             plc.J = false;
             //PLC.cancel = true;
-            //plc.plcListner();
-            
-        }
-
-        
+            //plc.plcListner(); 
+        }   
     }
 }

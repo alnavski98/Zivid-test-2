@@ -138,16 +138,13 @@ namespace zivid_test
                 
                 returnBaseline.pc = returnCloud;
                 returnBaseline.thresholdMap = pointCloudMap;
-                 //Returns average of point clouds as an
-            }                        //instance of the PointCloud class
+            }                        
             else
             {
-                
                 returnBaseline.pc = pc.First();
-                
             }
-            return returnBaseline;
-        }
+            return returnBaseline;  //Returns average of point clouds as an
+        }                           //instance of the PointCloud class
 
         public static float p2pLengthSquared(Point3 coordinate1, Point3 coordinate2)
         {
