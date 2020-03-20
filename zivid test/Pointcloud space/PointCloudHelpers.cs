@@ -132,15 +132,17 @@ namespace zivid_test
                         {                                            //pointcloud and equivalent points from pointList
                             distanceList.Add(p2pLengthSquared(innerCloudAvg.Last(), pointList[l]));
                         }
-                        distanceList = distanceList.Where(t => !float.IsNaN(t)).ToList();  //Removes NaN points from distanceList
+                        distanceList = distanceList.Where(t => !float.IsNaN(t)).ToList(); 
+                        //Removes NaN points from distanceList
                         if (distanceList.Count() > 1)  //If amount of points in distanceList > 0 calculate standard deviation to put in pointCloudMap
                         {
-                            pointCloudMap[i, j] = distanceList.StandardDeviation();
+                            pointCloudMap[i, j] = distanceList.Average() + 2 * distanceList.StandardDeviation();
                         }
                         else  //Else put 0.0f in pointCloudMap
                         {
                             pointCloudMap[i, j] = 0.0f;
                         }
+                        //Console.WriteLine(pointCloudMap[i, j]);
                     }
                     pointCloudAvg.Add(innerCloudAvg);  //Put list of 3D points in another list
                 }                                      //which will be returned as a point cloud
@@ -295,7 +297,7 @@ namespace zivid_test
                             rgbMap = 0;
                         }
                         Color c = new Color();
-                        if ((float)Math.Sqrt(p.errorDistanceSq) > pointCloudMap[i, j])
+                        if (p.errorDistanceSq > pointCloudMap[i, j])
                         {
                             c = Color.FromArgb(255, 255, 0, 0);  //Color red
                         }

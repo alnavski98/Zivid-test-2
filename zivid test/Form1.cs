@@ -68,8 +68,8 @@ namespace zivid_test
        
         private void btn_snapshot_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 10; i++)
-            { 
+            //for (int i = 0; i < 10; i++)
+            //{ 
                 //functions.snapshotDistance();
                 var snaps = new List<PointCloud>();
             var snap = ZividCAM.snapshot();  //Takes snapshot from camera and stores in snap
@@ -100,7 +100,7 @@ namespace zivid_test
                     WriteTextSafe("Invalid baseline ID, cannot calculate distance." + Environment.NewLine
                                    + Environment.NewLine + "Use value of 1 or 2.");
                 }*/
-                FileTransfer.writeCSV(fileName, distance);
+                //FileTransfer.writeCSV(fileName, distance);
                 Console.WriteLine(distance);
             //}
             /*else
@@ -108,11 +108,11 @@ namespace zivid_test
                 WriteTextSafe("Have not taken baseline yet");
             }*/
             graph.update(distance);
-            }
-            //var errorPicture = PointCloudHelpers.PointCloudToPicture(pc);
+            //}
+            var errorPicture = PointCloudHelpers.PointCloudToPicture(pc);
 
-            //f2.Show();
-            //f2.displayPicture(errorPicture);
+            f2.Show();
+            f2.displayPicture(errorPicture);
         }
 
         private void btn_connect_Click(object sender, EventArgs e)
