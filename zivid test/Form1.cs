@@ -88,18 +88,19 @@ namespace zivid_test
             /*var fileTransferer = new FileTransfer();
             blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);*/
             distance = PointCloudHelpers.calculateDistance(pc, baselinePc);
-                //}
-                /*else if (plc.str1 == '2')  //Same but with "second" baseline pointcloud
-                {
-                    distance = PointCloudHelpers.calculateDistance(pc, baselines[1]);
-                }
-                else  //Else give message for invalid baseline ID
-                {
-                    WriteTextSafe("Invalid baseline ID, cannot calculate distance." + Environment.NewLine
-                                   + Environment.NewLine + "Use value of 1 or 2.");
-                }*/
-                //FileTransfer.writeCSV(fileName, distance);
-                Console.WriteLine(distance);
+            //}
+            /*else if (plc.str1 == '2')  //Same but with "second" baseline pointcloud
+            {
+                distance = PointCloudHelpers.calculateDistance(pc, baselines[1]);
+            }
+            else  //Else give message for invalid baseline ID
+            {
+                WriteTextSafe("Invalid baseline ID, cannot calculate distance." + Environment.NewLine
+                               + Environment.NewLine + "Use value of 1 or 2.");
+            }*/
+            //FileTransfer.writeCSV(fileName, distance);
+            //Console.WriteLine(distance);
+            WriteTextSafe("Errornumber: " + distance);
             //}
             /*else
             {
