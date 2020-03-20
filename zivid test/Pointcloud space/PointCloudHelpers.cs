@@ -239,7 +239,7 @@ namespace zivid_test
         /// in black and white
         /// </summary>
         /// <param name="pc"></param>
-        public static Bitmap PointCloudToPicture(PointCloud pc)
+        public static Bitmap PointCloudToPicture(PointCloud pc, string filename)
         {
             var xDim = pc.getColumnSize();
             var yDim = pc.getRowSize();
@@ -311,7 +311,7 @@ namespace zivid_test
 
                 } // end for
 
-                //bmp.Save("minfil7.png", ImageFormat.Png);
+                bmp.Save(filename + ".png", ImageFormat.Png);
             }
             catch(Exception ex)
             {

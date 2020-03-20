@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btn_snapshot = new System.Windows.Forms.Button();
             this.btn_connect = new System.Windows.Forms.Button();
             this.btn_assist_mode = new System.Windows.Forms.Button();
@@ -55,8 +55,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label8 = new System.Windows.Forms.Label();
-            this.baselineId = new System.Windows.Forms.TextBox();
-            this.baselineIdSim = new System.Windows.Forms.TextBox();
+            this.BitmapTXT = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IrisTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCntTXT)).BeginInit();
@@ -331,20 +331,20 @@
             // 
             // chart2
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart2.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
             this.chart2.Location = new System.Drawing.Point(491, 269);
             this.chart2.Name = "chart2";
-            series1.ChartArea = "ChartArea1";
-            series1.IsVisibleInLegend = false;
-            series1.Legend = "Legend1";
-            series1.LegendText = " ";
-            series1.LegendToolTip = "white";
-            series1.MarkerBorderColor = System.Drawing.Color.Transparent;
-            series1.Name = "Series1";
-            this.chart2.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.LegendText = " ";
+            series2.LegendToolTip = "white";
+            series2.MarkerBorderColor = System.Drawing.Color.Transparent;
+            series2.Name = "Series1";
+            this.chart2.Series.Add(series2);
             this.chart2.Size = new System.Drawing.Size(757, 364);
             this.chart2.TabIndex = 25;
             this.chart2.Text = "chart2";
@@ -359,27 +359,30 @@
             this.label8.TabIndex = 26;
             this.label8.Text = "Live chart of \"errornumbers\":";
             // 
-            // baselineId
+            // BitmapTXT
             // 
-            this.baselineId.Location = new System.Drawing.Point(43, 239);
-            this.baselineId.Name = "baselineId";
-            this.baselineId.Size = new System.Drawing.Size(100, 26);
-            this.baselineId.TabIndex = 27;
+            this.BitmapTXT.Location = new System.Drawing.Point(29, 268);
+            this.BitmapTXT.Name = "BitmapTXT";
+            this.BitmapTXT.Size = new System.Drawing.Size(123, 26);
+            this.BitmapTXT.TabIndex = 27;
             // 
-            // baselineIdSim
+            // label9
             // 
-            this.baselineIdSim.Location = new System.Drawing.Point(43, 283);
-            this.baselineIdSim.Name = "baselineIdSim";
-            this.baselineIdSim.Size = new System.Drawing.Size(100, 26);
-            this.baselineIdSim.TabIndex = 28;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(25, 245);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(123, 20);
+            this.label9.TabIndex = 28;
+            this.label9.Text = "Bitmap filename";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 664);
-            this.Controls.Add(this.baselineIdSim);
-            this.Controls.Add(this.baselineId);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.BitmapTXT);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.label7);
@@ -442,9 +445,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox baselineId;
-        private System.Windows.Forms.TextBox baselineIdSim;
         public System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private System.Windows.Forms.TextBox BitmapTXT;
+        private System.Windows.Forms.Label label9;
     }
 }
 

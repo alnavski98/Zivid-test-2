@@ -109,10 +109,17 @@ namespace zivid_test
             }*/
             graph.update(distance);
             //}
-            var errorPicture = PointCloudHelpers.PointCloudToPicture(pc);
+            if(!String.IsNullOrEmpty(BitmapTXT.Text))
+            { 
+            var errorPicture = PointCloudHelpers.PointCloudToPicture(pc, BitmapTXT.Text);
 
             f2.Show();
             f2.displayPicture(errorPicture);
+            }
+            else
+            {
+                WriteTextSafe("Filename for bitmap has not been given yet, please try again.");
+            }
         }
 
         private void btn_connect_Click(object sender, EventArgs e)
@@ -269,6 +276,9 @@ namespace zivid_test
             
         }
 
+        private void label9_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
