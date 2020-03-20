@@ -311,7 +311,7 @@ namespace zivid_test
 
                 } // end for
 
-                bmp.Save(filename + ".png", ImageFormat.Png);
+                bmp.Save(Path.Combine("C:\\Users\\Joel PersonalCompuer", filename) + ".png", ImageFormat.Png);
             }
             catch(Exception ex)
             {
