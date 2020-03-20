@@ -38,7 +38,7 @@ namespace zivid_test
         public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
         public bool runBaseline = false;
         //private int baseLineCount = 0;
-        public string fileName = "Threshold data 4.csv";
+        public string fileName = "Threshold data 5.csv";
         public float distance;
         public PLC plc = new PLC();
         //CameraFunctions functions = new CameraFunctions();
