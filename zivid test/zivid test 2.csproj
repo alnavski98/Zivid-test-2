@@ -80,7 +80,6 @@
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
     <Compile Include="PLC connection\Graph.cs" />
-    <Compile Include="Point2.cs" />
     <Compile Include="Pointcloud space\FileTransfer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

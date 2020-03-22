@@ -33,7 +33,7 @@ namespace zivid_test
         public string fileName = "Threshold data 4.csv";
         public int inc = 0; // for counting the number og error numbers
 
-        // takes snapshot, compares it whit baseline and gives distance as deviation
+        //Takes snapshot, compares it with baseline and gives distance from baseline point
         public void snapshotDistance()
         {
             // for (int i = 0; i < 25; i++)
@@ -43,7 +43,7 @@ namespace zivid_test
             var pointCloud = PointCloudHelpers.floatToPointCloud(snap);
             pc = pointCloud;
             Program.f.Update();
-            //if baseline is taken, calculate distance. else dont
+            //if baseline is taken, calculate distance. else don't
             if (zivid_test.Program.f.runBaseline)
             {
                 //var activeBaseline = baselines.Where(t => t.baseLineId.Equals(baselineIdSim)).ToList();
