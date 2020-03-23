@@ -23,12 +23,11 @@ namespace zivid_test
         /// <param name="fileName"></param>
         public void writeToFile(Baseline pc, string fileName)
         {
-            // create fullDataPath file, if not exists
-            try
+            try  //Create fullDataPath file, if not exists
             {
                 var fullDataPath = Path.Combine("C:\\Users\\alnav\\Desktop", fileName);
-                if (!File.Exists(fullDataPath))  //If fullDataPath doesn't exist write pointcloud to file 
-                {
+                if (!File.Exists(fullDataPath))  //If fullDataPath doesn't exist 
+                {                                //write pointcloud to file
 
                     string json = JsonConvert.SerializeObject(pc, Formatting.Indented);  //Serialize pointcloud to file
                     using (StreamWriter sw = File.CreateText(fullDataPath))
@@ -43,7 +42,7 @@ namespace zivid_test
         }
 
         /// <summary>
-        /// Reads string from txt file and "translate" it to a pointcloud object
+        /// Reads string from txt file and "translate" it to a baseline object
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
@@ -67,6 +66,11 @@ namespace zivid_test
             return sett;
         }
 
+        /// <summary>
+        /// Writes the body to a specified filename 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="body"></param>
         public static void writeCSV(string fileName, float body)
         {
             string h = "Error; ";  // check if file exists

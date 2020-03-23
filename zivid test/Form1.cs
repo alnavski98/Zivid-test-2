@@ -45,6 +45,7 @@ namespace zivid_test
         public Graph graph = new Graph();
         public bool camConnected = false;
         public bool camDisconnected; //= false;
+        public bool graphErrorChart = false;
 
         Form2 f2 = new Form2();
         
@@ -138,7 +139,11 @@ namespace zivid_test
                 {
                     WriteTextSafe("Warning: No cameras found");
                 }
-                graph.errorChart();
+                if(!graphErrorChart)
+                {
+                    graph.errorChart();
+                    graphErrorChart = true;
+                }
             }
             else  
             {

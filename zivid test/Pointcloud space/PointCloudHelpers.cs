@@ -19,7 +19,6 @@ namespace zivid_test
     /// </summary>
     public static class PointCloudHelpers
     {
-        public static float variance = 0.0f;
         public static float[,] pointCloudMap;
 
         /// <summary>
@@ -103,12 +102,10 @@ namespace zivid_test
                                 }
                         );  //Loops through all point cloud instances
 
-
                         xList = xList.Where(t => !float.IsNaN(t)).ToList();  //Removes all invalid points from xList
                         yList = yList.Where(t => !float.IsNaN(t)).ToList();  //Same for yList
                         zList = zList.Where(t => !float.IsNaN(t)).ToList();  //Same for zList
                        
-
                         if (xList.Count() > 0 && yList.Count() > 0 && zList.Count > 0)  //Run if more than zero x, y and z
                         {                                                               //points are not NaN 
                             innerCloudAvg.Add(new Point3(xList.Average(), yList.Average(), zList.Average()));  //Make new point cloud
@@ -122,7 +119,7 @@ namespace zivid_test
                             distanceList.Add(p2pLengthSquared(innerCloudAvg.Last(), pointList[l]));
                         }
                         distanceList = distanceList.Where(t => !float.IsNaN(t)).ToList(); //Removes NaN points from distanceList
-                        if (distanceList.Count() > 1)  //If amount of points in distanceList > 0 calculate standard deviation to put in pointCloudMap
+                        if (distanceList.Count() > 1)  //If amount of points in distanceList > 1 calculate average to put in pointCloudMap
                         {
                             pointCloudMap[i, j] = distanceList.Average() + 2 * distanceList.StandardDeviation();
                         }
@@ -133,10 +130,9 @@ namespace zivid_test
                     }
                     pointCloudAvg.Add(innerCloudAvg);  //Put list of 3D points in another list
                 }                                      //which will be returned as a point cloud
-
                 var returnCloud = new PointCloud(pointCloudAvg);
                 
-                returnBaseline.pc = returnCloud;
+                returnBaseline.pc = returnCloud;  
                 returnBaseline.thresholdMap = pointCloudMap;
             }                        
             else
@@ -175,15 +171,11 @@ namespace zivid_test
                         {
                             length[j] = p2pLengthSquared(pc.coordinate3d[i][j], baseline.pc.coordinate3d[i][j]);
                             pc.coordinate3d[i][j].errorDistanceSq = length[j];
-                        }
-                        
-                );
-                                                   
-                var nn = length.Where(t => !float.IsNaN(t));
-                totDist += nn.Sum(); // + nn2.Sum() + nn3.Sum();
-                variance = (float)(totDist / (length.Length));
-            }
-                
+                        }      
+                );                                              
+                var nn = length.Where(t => !float.IsNaN(t));  //Removes NaN points from nn
+                totDist += nn.Sum(); 
+            }    
             return (float)Math.Sqrt(totDist); //Return square root of totDist (for now returns
         }                 //a non zero number even with baseline being the same as the picture)
 
@@ -194,9 +186,9 @@ namespace zivid_test
         /// <param name="pc"></param>
         public static Bitmap PointCloudToPicture(PointCloud pc, string filename)
         {
-            var xDim = pc.getColumnSize();
-            var yDim = pc.getRowSize();
-            Bitmap bmp = new Bitmap(xDim, yDim);
+            var colDim = pc.getColumnSize();
+            var rowDim = pc.getRowSize();
+            Bitmap bmp = new Bitmap(colDim, rowDim);
 
             var zValues = new List<float>();
 
@@ -207,7 +199,7 @@ namespace zivid_test
                         {
                             lock (zValues)
                             {
-                                zValues.Add(pc.coordinate3d[i][j].Z);
+                                zValues.Add(pc.coordinate3d[i][j].Z);  //Makes list of z-values
                             }
                         }
                     );
@@ -217,20 +209,20 @@ namespace zivid_test
             var q3 = zValues.Where(t => t > q2).Median() * 1.5f;  //Interquartile Range
             var q1 = zValues.Where(t => t < q2).Median() * 1.5f;
 
-            var scale = 255.0f / (q3 - q1);
-            var translation = (0 - q1);
+            var scale = 255.0f / (q3 - q1);  //Scales upper and lower z-value to RGB color scale
+            var translation = (0 - q1);  
 
             zValues = zValues.Where(t => !float.IsNaN(t)).ToList();
             
             try
             {
-                for (int i = 0; i < yDim; i++)
+                for (int i = 0; i < rowDim; i++)
                 {
-                    for (int j = 0; j < xDim; j++)
+                    for (int j = 0; j < rowDim; j++)
                     {
                         var p = pc.coordinate3d[i][j];
                         var rgbMap = (int)Math.Round(p.Z * (scale) + translation, 0);
-                        if(rgbMap == float.NaN)
+                        if(rgbMap == float.NaN)  
                         {
                             rgbMap = 0;
                         }
@@ -242,7 +234,7 @@ namespace zivid_test
                         {
                             rgbMap = 0;
                         }
-                        Color c = new Color();
+                        Color c = new Color();  //Makes color object
                         if (p.errorDistanceSq > pointCloudMap[i, j])
                         {
                             c = Color.FromArgb(255, 255, 0, 0);  //Color red
@@ -251,8 +243,8 @@ namespace zivid_test
                         {
                             c = Color.FromArgb(255, rgbMap, rgbMap, rgbMap);  //Color in scale of black and white
                         }
-                        bmp.SetPixel(j, i, c);  //Color each pixel with scale of black and white, or red
-                    }
+                        bmp.SetPixel(j, i, c);  //Color each pixel with scale of black and white,
+                    }                           //or highlight errors with red
                 } // end for
                 bmp.Save(Path.Combine("C:\\Users\\Trym", filename) + ".png", ImageFormat.Png);
             }

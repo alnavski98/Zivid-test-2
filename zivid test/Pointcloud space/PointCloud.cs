@@ -12,7 +12,6 @@ namespace zivid_test
     [Serializable]
     public class PointCloud
     {
-
         public bool IsEmpty
         { 
             get 
@@ -95,7 +94,6 @@ namespace zivid_test
                     {
                         maxValue = pZ;
                     }
-
                 }
             }
             return maxValue;
@@ -114,7 +112,6 @@ namespace zivid_test
                     {
                         minValue = pZ;
                     }
-
                 }
             }
             return minValue;

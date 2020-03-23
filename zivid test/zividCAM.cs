@@ -98,21 +98,21 @@ namespace zivid_test
             try
             {
                 CAM.Disconnect();
-                CAM.Dispose();
-                zivid.Dispose();
+                //CAM.Dispose();
+                //zivid.Dispose();
             }
             catch (System.AccessViolationException)
             {
                 System.Environment.Exit(99);
             }
         }
+
         /// <summary>
         /// Takes pictures using manually adjusted settings
         /// </summary>
         public static float[,,] snapshot()
         {
             //bool snapshotSuccessfull = false;
-
             try 
             {
                 //var resultFile = "resultSnapshot.zdf";
