@@ -217,7 +217,7 @@ namespace zivid_test
 
             baselinePc = PointCloudHelpers.calcBaseline(snaps);  //Stores one baseline in baselinePc
             //baselinePc.baseLineId = baselineId.Text.ToString();
-            //baselines.Add(baselinePc);
+            baselines.Add(baselinePc);
             //avgPc.pointcloudId = "Baseline nr. " + baseLineCount;  //String.Format("BaseLineNr{0}", baseLineCount); // = "BaseLineNr" + baseLineCoubt.ToString();, gives ID to a baseline
             //baselines.Add(avgPc);  //Stores baselines in a list
             //runBaseline = true;

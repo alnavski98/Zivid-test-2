@@ -28,7 +28,6 @@ namespace zivid_test
                 var fullDataPath = Path.Combine("C:\\Users\\Joel PersonalCompuer", fileName);
                 if (!File.Exists(fullDataPath))  //If fullDataPath doesn't exist 
                 {                                //write pointcloud to file
-
                     string json = JsonConvert.SerializeObject(pc, Formatting.Indented);  //Serialize pointcloud to file
                     using (StreamWriter sw = File.CreateText(fullDataPath))
                     {
