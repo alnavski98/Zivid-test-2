@@ -34,6 +34,7 @@ namespace zivid_test
         */
         public Baseline blCylinderIn = new Baseline();
         public Baseline blCylinderOut = new Baseline();
+        public FileTransfer fileTransferer = new FileTransfer();
         //public Baseline blCylinderIn = new Baseline();
         public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
         public bool runBaseline = false;
@@ -77,6 +78,23 @@ namespace zivid_test
             var pointCloud = PointCloudHelpers.floatToPointCloud(snap);
             pc = pointCloud; // PointCloudHelpers.calcBaseline(snaps);
             int a = 1;
+            while(plc.str1 != 1 || plc.str1 != 2)
+            {
+                if(plc.str1 == 1)
+                {
+                    blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
+                    distance = PointCloudHelpers.calculateDistance(pc, blCylinderIn);
+                }
+                else if(plc.str1 == 2)
+                {
+                    blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
+                    distance = PointCloudHelpers.calculateDistance(pc, blCylinderOut);
+                }
+                else
+                {
+                    WriteTextSafe("Invalid baseline ID, try again");
+                }
+            }
             //if baseline is taken, calculate distance. else dont
             //if (baselines.Count() > 0)  //If amount of baselines in list > 0 run this
             //{
@@ -219,8 +237,8 @@ namespace zivid_test
                 baselines[1].baseLineId = plc.str1; //Compare with baseline while cylinder is out
             }*/
             int a = 1;
-            /*var baseline = new FileTransfer();
-            baseline.writeToFile(baselinePc, blFileNames[0]);*/
+            var baseline = new FileTransfer();
+            baseline.writeToFile(baselinePc, blFileNames[0]);
             int b = 2;
             //if(baseLineCount == 0)  //If baseline count is 0 store pointcloud in cylinderIn.txt
             //{

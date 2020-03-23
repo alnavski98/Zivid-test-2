@@ -9,6 +9,9 @@ using System.IO;
 
 namespace zivid_test
 {
+    /// <summary>
+    /// Class for pointcloud
+    /// </summary>
     [Serializable]
     public class PointCloud
     {

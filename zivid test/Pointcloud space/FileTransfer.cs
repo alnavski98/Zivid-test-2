@@ -48,22 +48,22 @@ namespace zivid_test
         /// <returns></returns>
         public Baseline readFromFile(string fileName)
         {
-            var sett = new Baseline();
+            var set = new Baseline();
 
             try
             {
                 String line = "";
-                string settpath = Path.Combine("C:\\Users\\alnav\\Desktop", fileName);
-                using (StreamReader sr = new StreamReader(settpath))
+                string setPath = Path.Combine("C:\\Users\\alnav\\Desktop", fileName);
+                using (StreamReader sr = new StreamReader(setPath))
                 {
                     line = sr.ReadToEnd();  // Read the stream to a string, and write the string to the console.
                 }
-                sett = JsonConvert.DeserializeObject<Baseline>(line);
+                set = JsonConvert.DeserializeObject<Baseline>(line);
             }
             catch(Exception ex) 
             {
             }
-            return sett;
+            return set;
         }
 
         /// <summary>

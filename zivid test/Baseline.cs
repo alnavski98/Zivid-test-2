@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace zivid_test
 {
+    /// <summary>
+    /// Class for baseline
+    /// </summary>
     public class Baseline
     {
         /// <summary>
