@@ -55,7 +55,7 @@ namespace zivid_test
             // (if M) only writes "connected" once
             if (M)
             {
-                Program.f.WriteTextSafe("connected");
+                Program.f.WriteTextSafe("Connected");
             }
             // Creates an awaitable task that asynchronously yields back to the current context when awaited.
             await Task.Yield();
@@ -81,27 +81,27 @@ namespace zivid_test
                     char str1 = str[2];
                     if (str1 == '1')    //this could be where we logg whitch baseline is currently running
                     {
-                        zivid_test.Program.f.WriteTextSafe("1. Startposisjon uten delay");
+                        zivid_test.Program.f.WriteTextSafe("1. Start position without delay");
                     }
                     else if (str1 == '2')
                     {
-                        zivid_test.Program.f.WriteTextSafe("2. Sluttposisjon uten delay.");
+                        zivid_test.Program.f.WriteTextSafe("2. End position without delay");
                     }
                     else if (str1 == '3')
                     {
-                        zivid_test.Program.f.WriteTextSafe("3. Startposisjon med delay nr1");
+                        zivid_test.Program.f.WriteTextSafe("3. Start position with delay #1");
                     }
                     else if (str1 == '4')
                     {
-                        zivid_test.Program.f.WriteTextSafe("4. Sluttposisjon med delay nr1");
+                        zivid_test.Program.f.WriteTextSafe("4. End position with delay #1");
                     }
                     else if (str1 == '5')
                     {
-                        zivid_test.Program.f.WriteTextSafe("4. Startposisjon med delay nr2");
+                        zivid_test.Program.f.WriteTextSafe("4. Start position with delay #2");
                     }
                     else if (str1 == '6')
                     {
-                        zivid_test.Program.f.WriteTextSafe("4. Sluttposisjon med delay nr2");
+                        zivid_test.Program.f.WriteTextSafe("4. End position with delay #2");
                     }
 
                     // To do
@@ -110,10 +110,10 @@ namespace zivid_test
                     // if snapshot deviates from baseline, then send a stop signal to PLC
                     if (CameraFunctions.distance > 30000)
                     {
-                        string send_str = "feil";
+                        string send_str = "Picture deviates too much from Baseline";
                         byte[] send_data = Encoding.ASCII.GetBytes(send_str);
                         await n.WriteAsync(send_data, 0, send_data.Length);
-                        Program.f.WriteTextSafe("feil");
+                        Program.f.WriteTextSafe("Picture deviates too much from Baseline");
                     }
                 }
             }
