@@ -90,10 +90,10 @@ namespace zivid_test
                     blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
                     distance = PointCloudHelpers.calculateDistance(pc, blCylinderOut);
                 }
-                else
-                {
-                    WriteTextSafe("Invalid baseline ID, try again");
-                }
+                //else
+                //{
+                //    WriteTextSafe("Invalid baseline ID, try again");
+                //}
             }
             //if baseline is taken, calculate distance. else dont
             //if (baselines.Count() > 0)  //If amount of baselines in list > 0 run this
@@ -238,7 +238,7 @@ namespace zivid_test
             }*/
             int a = 1;
             var baseline = new FileTransfer();
-            baseline.writeToFile(baselinePc, blFileNames[0]);
+            baseline.writeToFile(baselinePc, blFileNames[1]);
             int b = 2;
             //if(baseLineCount == 0)  //If baseline count is 0 store pointcloud in cylinderIn.txt
             //{
