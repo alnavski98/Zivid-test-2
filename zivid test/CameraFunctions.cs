@@ -15,6 +15,7 @@ using System.IO;
 using System.Web.UI;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
+using zivid_test.PLC_connection;
 
 namespace zivid_test
 {
@@ -24,14 +25,18 @@ namespace zivid_test
         public Baseline baselinePc = zivid_test.Program.f.baselinePc;
         public List<Baseline> baselines = new List<Baseline>();
         public PointCloud pc = new PointCloud();
-        public PointCloud blCylinderOut = new PointCloud();
-        public PointCloud blCylinderIn = new PointCloud();
+        //public PointCloud blCylinderOut = new PointCloud();
+        //public PointCloud blCylinderIn = new PointCloud();
+        public Baseline blCylinderIn = new Baseline();
+        public Baseline blCylinderOut = new Baseline();
         public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
+        public FileTransfer fileTransferer = new FileTransfer();
         public bool runBaseline = false;
         //private int baseLineCount = 0;
         public static float distance;
         public string fileName = "Threshold data 4.csv";
         public int inc = 0; // for counting the number og error numbers
+        public PLC plc = new PLC();
 
         //Takes snapshot, compares it with baseline and gives distance from baseline point
         public void snapshotDistance()
@@ -47,7 +52,16 @@ namespace zivid_test
             if (zivid_test.Program.f.runBaseline)
             {
                 //var activeBaseline = baselines.Where(t => t.baseLineId.Equals(baselineIdSim)).ToList();
-                //distance = PointCloudHelpers.calculateDistance(pc, activeBaseline.First());
+                if(plc.str1 == 1)
+                {
+                    blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
+                    distance = PointCloudHelpers.calculateDistance(pc, blCylinderIn);
+                }
+                else if(plc.str1 == 2)
+                {
+                    blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
+                    distance = PointCloudHelpers.calculateDistance(pc, blCylinderOut);
+                }
                 //FileTransfer.writeCSV(fileName, distance);
                 Console.WriteLine(distance);
                 inc++;

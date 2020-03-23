@@ -78,7 +78,7 @@ namespace zivid_test
             var pointCloud = PointCloudHelpers.floatToPointCloud(snap);
             pc = pointCloud; // PointCloudHelpers.calcBaseline(snaps);
             int a = 1;
-            while(plc.str1 != 1 || plc.str1 != 2)
+            /*while(plc.str1 != 1 || plc.str1 != 2)
             {
                 if(plc.str1 == 1)
                 {
@@ -94,7 +94,7 @@ namespace zivid_test
                 //{
                 //    WriteTextSafe("Invalid baseline ID, try again");
                 //}
-            }
+            }*/
             //if baseline is taken, calculate distance. else dont
             //if (baselines.Count() > 0)  //If amount of baselines in list > 0 run this
             //{

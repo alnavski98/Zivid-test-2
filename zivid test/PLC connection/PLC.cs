@@ -11,6 +11,7 @@ namespace zivid_test
 {
     public class PLC
     {
+        public FileTransfer fileTransferer = new FileTransfer();
         public bool J = true;
         public bool K = true;
         public bool L = true;
