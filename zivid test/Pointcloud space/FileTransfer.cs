@@ -49,7 +49,6 @@ namespace zivid_test
         public Baseline readFromFile(string fileName)
         {
             var set = new Baseline();
-
             try
             {
                 String line = "";
@@ -74,7 +73,6 @@ namespace zivid_test
         public static void writeCSV(string fileName, float body)
         {
             string h = "Error; ";  // check if file exists
-
             try
             {
                 var dataPath = Path.Combine("C:\\Users\\Joel PersonalCompuer", fileName);
@@ -87,7 +85,6 @@ namespace zivid_test
                         );
                     }
                 }
-
                 using (StreamWriter sw = File.AppendText(dataPath))
                 {
                     sw.WriteLine(body);

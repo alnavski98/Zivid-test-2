@@ -17,7 +17,11 @@ namespace zivid_test
         public bool L = true;
         public bool M = true;
         public char str1 = '0';
-
+        public Baseline blCylinderIn = new Baseline();
+        public Baseline blCylinderOut = new Baseline();
+        public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
+        public static float distance;
+        //public CameraFunctions cameraFunctions = new CameraFunctions();
         // asyncronous task is started
         public async void RunServerAsync()
         {
@@ -83,10 +87,14 @@ namespace zivid_test
                     if (str1 == '1')    //this could be where we logg whitch baseline is currently running
                     {
                         zivid_test.Program.f.WriteTextSafe("1. Start position without delay");
+                        //blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
+                        //distance = PointCloudHelpers.calculateDistance(functions.pc, blCylinderIn);
                     }
                     else if (str1 == '2')
                     {
                         zivid_test.Program.f.WriteTextSafe("2. End position without delay");
+                        //blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
+                        //distance = PointCloudHelpers.calculateDistance(functions.pc, blCylinderOut);
                     }
                     else if (str1 == '3')
                     {
@@ -111,7 +119,7 @@ namespace zivid_test
                     // if snapshot deviates from baseline, then send a stop signal to PLC
                     if (CameraFunctions.distance > 30000)
                     {
-                        string send_str = "Picture deviates too much from Baseline";
+                        string send_str = "Feil";
                         byte[] send_data = Encoding.ASCII.GetBytes(send_str);
                         await n.WriteAsync(send_data, 0, send_data.Length);
                         Program.f.WriteTextSafe("Picture deviates too much from Baseline");

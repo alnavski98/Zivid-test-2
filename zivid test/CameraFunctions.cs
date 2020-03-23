@@ -49,11 +49,11 @@ namespace zivid_test
             pc = pointCloud;
             Program.f.Update();
             //if baseline is taken, calculate distance. else don't
-            if (zivid_test.Program.f.runBaseline)
-            {
-                while (plc.str1 != 1 || plc.str1 != 2)
-                {
-                    if (plc.str1 == 1)
+            //if (zivid_test.Program.f.runBaseline)
+            //{
+                //while (plc.str1 != 1 || plc.str1 != 2)
+                //{
+                    /*if (plc.str1 == 1)
                     {
                         blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
                         distance = PointCloudHelpers.calculateDistance(pc, blCylinderIn);
@@ -62,18 +62,19 @@ namespace zivid_test
                     {
                         blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
                         distance = PointCloudHelpers.calculateDistance(pc, blCylinderOut);
-                    }
-                }
+                    }*/
+                //}
                 //var activeBaseline = baselines.Where(t => t.baseLineId.Equals(baselineIdSim)).ToList();
                 //FileTransfer.writeCSV(fileName, distance);
                 Console.WriteLine(distance);
+                Program.f.WriteTextSafe("Errornumber: " + distance);
                 inc++;
                 Program.f.graph.errorChart();   // making a graph of errornumbers
-            }
-            else
-            {
-                Console.WriteLine("Have not taken baseline yet");
-            }
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Have not taken baseline yet");
+            //}
 
             //new code
             //var snapshot = new FileTransfer();
