@@ -49,8 +49,8 @@ namespace zivid_test
             pc = pointCloud;
             Program.f.Update();
             //if baseline is taken, calculate distance. else don't
-            //if (zivid_test.Program.f.runBaseline)
-            //{
+            if (zivid_test.Program.f.runBaseline)
+            {
                 while (plc.str1 != 1 || plc.str1 != 2)
                 {
                     if (plc.str1 == 1)
@@ -69,11 +69,11 @@ namespace zivid_test
                 Console.WriteLine(distance);
                 inc++;
                 Program.f.graph.errorChart();   // making a graph of errornumbers
-            //}
-            //else
-            //{
-              //  Console.WriteLine("Have not taken baseline yet");
-            //}
+            }
+            else
+            {
+                Console.WriteLine("Have not taken baseline yet");
+            }
 
             //new code
             //var snapshot = new FileTransfer();
