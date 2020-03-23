@@ -79,7 +79,7 @@ namespace zivid_test
 
                     // a picture will be taken when something is recieved from the PLC
                     CameraFunctions functions = new CameraFunctions();
-                    functions.snapshotDistance();
+                    var dist = functions.snapshotDistance();
                     // get data
                     string str = Encoding.Default.GetString(data);
                     Program.f.WriteTextSafe("[server] received :" + str[2]);
@@ -117,7 +117,7 @@ namespace zivid_test
                     // ...
 
                     // if snapshot deviates from baseline, then send a stop signal to PLC
-                    if (CameraFunctions.distance > 30000)
+                    if (/*CameraFunctions.distance*/ dist > 30000)
                     {
                         string send_str = "Feil";
                         byte[] send_data = Encoding.ASCII.GetBytes(send_str);
