@@ -115,7 +115,7 @@ namespace zivid_test
 
                     // To do
                     // ...
-
+                    int a = 1;
                     // if snapshot deviates from baseline, then send a stop signal to PLC
                     if (/*CameraFunctions.distance*/ dist > 30000)
                     {
