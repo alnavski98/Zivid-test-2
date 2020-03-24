@@ -9,10 +9,13 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace zivid_test.PLC_connection
 {
+    
     public class Graph
     {
         public int[] distance = { 100, 200, 500, 1000, 5000, 10000 };
         public int inc;
+        float maxDistance = 0;
+        float multiplicationFactor = 0.1f;
 
         public void update(float errorNumber)
         {
@@ -21,6 +24,14 @@ namespace zivid_test.PLC_connection
             chart.AxisX.Maximum = (inc);
             Program.f.chart2.Series["Errornumber"].Points.AddXY(inc, errorNumber);  //adding new points in chart
             inc++;
+
+            if(maxDistance < Program.f.distance)
+            {
+                maxDistance = Program.f.distance;
+                chart.AxisY.Maximum = maxDistance + maxDistance*multiplicationFactor;
+                chart.AxisY.Interval = Convert.ToInt32(maxDistance/10);
+            }
+
         }
 
         public void errorChart()   //making a graph of errornumbers
@@ -40,7 +51,7 @@ namespace zivid_test.PLC_connection
                 chart.AxisY.Minimum = 0;
                 chart.AxisY.Maximum = 10000;
                 chart.AxisX.Interval = 10;       // determining  the amount to step one unit on the axis.
-                chart.AxisY.Interval = 1000;
+                
 
                 Program.f.chart2.Series.Add("Errornumber");
                 Program.f.chart2.Series["Errornumber"].ChartType = SeriesChartType.Line; //type of chart, lines between points
