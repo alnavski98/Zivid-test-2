@@ -33,6 +33,7 @@ namespace zivid_test
         public PointCloud blCylinderInSnap = new PointCloud();
         */
         public Baseline blCylinderIn = new Baseline();
+        
         public Baseline blCylinderOut = new Baseline();
         public FileTransfer fileTransferer = new FileTransfer();
         //public Baseline blCylinderIn = new Baseline();
@@ -146,6 +147,8 @@ namespace zivid_test
         {
             if (!camConnected)  //If camera is not already connected, connect camera
             {
+                blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
+                blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
                 var connected = ZividCAM.connect();  //Connects to camera
                 camConnected = true;
                 camDisconnected = false;
@@ -222,36 +225,8 @@ namespace zivid_test
             //baselines.Add(avgPc);  //Stores baselines in a list
             //runBaseline = true;
 
-            /*if (plc.str1 == '0')
-            {
-                 WriteTextSafe("No baseline taken, sensor did not trigger");
-            }
-            else if (plc.str1 == '1')
-            {
-                baselines[0] = PointCloudHelpers.calcBaseline(snaps);
-                baselines[0].baseLineId = plc.str1; //Compare with baseline while cylinder is in
-            }
-            else if (plc.str1 == '2') 
-            {
-                baselines[1] = PointCloudHelpers.calcBaseline(snaps);
-                baselines[1].baseLineId = plc.str1; //Compare with baseline while cylinder is out
-            }*/
-            int a = 1;
-            var baseline = new FileTransfer();
-            baseline.writeToFile(baselinePc, blFileNames[1]);
-            int b = 2;
-            //if(baseLineCount == 0)  //If baseline count is 0 store pointcloud in cylinderIn.txt
-            //{
-                //var baseline = new FileTransfer();
-               // baseline.writeToFile(avgPc, blFileNames[0]);
-                //baseLineCount++;
-            //}
-            /*else if(baseLineCount == 1)  //If baseline count is 1 store pointcloud in cylinderOut.txt
-            {
-                var baseline = new FileTransfer();
-                baseline.writeToFile(avgPc, blFileNames[1]);
-                baseLineCount = 0;
-            }*/
+            //var baseline = new FileTransfer();
+            //baseline.writeToFile(baselinePc, blFileNames[1]);
 
             // var currentBaseLine = baselines.Where(t => t.pointCloudId = "BaseLineNr0").ToList();
          
