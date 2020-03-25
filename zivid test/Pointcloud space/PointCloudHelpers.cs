@@ -158,7 +158,7 @@ namespace zivid_test
         /// </summary>
         /// <param name="pc"></param>
         /// <param name="baseline"></param>
-        /// <returns></returns>
+        /// <returns>float value of total distance</returns>
         public static float calculateDistance(PointCloud pc, Baseline baseline)
         {
             var totDist = 0.0f;
@@ -210,15 +210,15 @@ namespace zivid_test
             var q1 = zValues.Where(t => t < q2).Median() * 1.5f;
 
             var scale = 255.0f / (q3 - q1);  //Scales upper and lower z-value to RGB color scale
-            var translation = (0 - q1);  
-
+            var translation = (0 - q1);  //Adjusts so that the lowest z-value is the lowest RGB-value
+                                         //and the highest z-value to be the highest RGB-value
             zValues = zValues.Where(t => !float.IsNaN(t)).ToList();
             
             try
             {
                 for (int i = 0; i < rowDim; i++)
                 {
-                    for (int j = 0; j < rowDim; j++)
+                    for (int j = 0; j < colDim; j++)
                     {
                         var p = pc.coordinate3d[i][j];
                         var rgbMap = (int)Math.Round(p.Z * (scale) + translation, 0);
@@ -237,7 +237,7 @@ namespace zivid_test
                         Color c = new Color();  //Makes color object
                         if (p.errorDistanceSq > pointCloudMap[i, j])  //For every point in the single snapshot pointcloud where distance from the
                         {                                             //single snapshot and baseline is greater than the "natural variation" in baseline
-                            c = Color.FromArgb(255, 255, 0, 0);  //Color red
+                            c = Color.FromArgb(255, 0, 0, 255);  //Color red
                         }
                         else  
                         {
@@ -246,7 +246,7 @@ namespace zivid_test
                         bmp.SetPixel(j, i, c);  //Color each pixel with scale of black and white,
                     }                           //or highlight errors with red
                 } // end for
-                bmp.Save(Path.Combine("C:\\Users\\Trym", filename) + ".png", ImageFormat.Png);
+                bmp.Save(Path.Combine("C:\\Users\\alnav", filename) + ".png", ImageFormat.Png);
             }
             catch(Exception ex)
             {
