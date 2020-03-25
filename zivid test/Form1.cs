@@ -217,8 +217,8 @@ namespace zivid_test
             //baselines.Add(avgPc);  //Stores baselines in a list
             //runBaseline = true;
 
-            var baseline = new FileTransfer();
-            baseline.writeToFile(baselinePc, blFileNames[0]);
+            //var baseline = new FileTransfer();
+            //baseline.writeToFile(baselinePc, blFileNames[0]);
 
             // var currentBaseLine = baselines.Where(t => t.pointCloudId = "BaseLineNr0").ToList();
          
