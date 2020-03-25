@@ -112,7 +112,7 @@ namespace zivid_test
                 WriteTextSafe("Invalid baseline ID, cannot calculate distance." + Environment.NewLine
                                + Environment.NewLine + "Use value of 1 or 2.");
             }*/
-            //FileTransfer.writeCSV(fileName, distance);
+            FileTransfer.writeCSV(fileName, distance);
             //Console.WriteLine(distance);
             WriteTextSafe("Errornumber: " + distance);
             //}

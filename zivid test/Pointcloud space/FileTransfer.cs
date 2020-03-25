@@ -25,7 +25,7 @@ namespace zivid_test
         {
             try  //Create fullDataPath file, if not exists
             {
-                var fullDataPath = Path.Combine("C:\\Users\\Joel PersonalCompuer", fileName);
+                var fullDataPath = Path.Combine("C:\\Users\\Trym", fileName);
                 if (!File.Exists(fullDataPath))  //If fullDataPath doesn't exist 
                 {                                //write pointcloud to file
                     string json = JsonConvert.SerializeObject(pc, Formatting.Indented);  //Serialize pointcloud to file
@@ -51,7 +51,7 @@ namespace zivid_test
             try
             {
                 String line = "";
-                string setPath = Path.Combine("C:\\Users\\Joel PersonalCompuer", fileName);
+                string setPath = Path.Combine("C:\\Users\\Trym", fileName);
                 using (StreamReader sr = new StreamReader(setPath))
                 {
                     line = sr.ReadToEnd();  // Read the stream to a string, and write the string to the console.
@@ -74,7 +74,7 @@ namespace zivid_test
             string h = "Error; ";  // check if file exists
             try
             {
-                var dataPath = Path.Combine("C:\\Users\\Joel PersonalCompuer", fileName);
+                var dataPath = Path.Combine("C:\\Users\\Trym", fileName);
                 if (!File.Exists(dataPath))
                 {
                     using (StreamWriter sw = File.CreateText(dataPath))
