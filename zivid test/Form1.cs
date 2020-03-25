@@ -26,17 +26,9 @@ namespace zivid_test
         public Baseline baselinePc = new Baseline();
         public List<Baseline> baselines = new List<Baseline>();
         public PointCloud pc = new PointCloud();
-        /*
-        public PointCloud blCylinderOut = new PointCloud();
-        public PointCloud blCylinderIn = new PointCloud();
-        public PointCloud blCylinderOutSnap = new PointCloud();
-        public PointCloud blCylinderInSnap = new PointCloud();
-        */
-        public Baseline blCylinderIn = new Baseline();
-        
+        public Baseline blCylinderIn = new Baseline(); 
         public Baseline blCylinderOut = new Baseline();
         public FileTransfer fileTransferer = new FileTransfer();
-        //public Baseline blCylinderIn = new Baseline();
         public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
         public bool runBaseline = false;
         //private int baseLineCount = 0;
@@ -46,7 +38,7 @@ namespace zivid_test
         //CameraFunctions functions = new CameraFunctions();
         public Graph graph = new Graph();
         public bool camConnected = false;
-        public bool camDisconnected; //= false;
+        public bool camDisconnected; 
         public bool graphErrorChart = false;
 
         Form2 f2 = new Form2();
@@ -147,8 +139,8 @@ namespace zivid_test
         {
             if (!camConnected)  //If camera is not already connected, connect camera
             {
-                blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
-                blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
+                //blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
+                //blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
                 var connected = ZividCAM.connect();  //Connects to camera
                 camConnected = true;
                 camDisconnected = false;
@@ -225,8 +217,8 @@ namespace zivid_test
             //baselines.Add(avgPc);  //Stores baselines in a list
             //runBaseline = true;
 
-            //var baseline = new FileTransfer();
-            //baseline.writeToFile(baselinePc, blFileNames[1]);
+            var baseline = new FileTransfer();
+            baseline.writeToFile(baselinePc, blFileNames[0]);
 
             // var currentBaseLine = baselines.Where(t => t.pointCloudId = "BaseLineNr0").ToList();
          
