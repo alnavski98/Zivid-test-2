@@ -34,7 +34,7 @@ namespace zivid_test
         public bool runBaseline = false;
         //private int baseLineCount = 0;
         public static float distance;
-        public string fileName = "Threshold data 4.csv";
+        public string fileName = "Threshold movement 1.csv";
         public int inc = 0; // for counting the number og error numbers
         public PLC plc = new PLC();
 
