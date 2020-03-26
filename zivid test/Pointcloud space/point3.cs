@@ -17,7 +17,6 @@ namespace zivid_test
         public float Y = float.NaN;
         public float Z = float.NaN;
 
-
         /// <summary>
         /// Variable to store the squared of the error distance of
         /// a certain point to its equivalent point in the baseline
