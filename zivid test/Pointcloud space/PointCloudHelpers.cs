@@ -174,8 +174,8 @@ namespace zivid_test
                         }      
                 );                                              
                 var nn = length.Where(t => !float.IsNaN(t));  //Removes NaN points from nn
-                totDist += nn.Sum(); 
-            }    
+                totDist += nn.Sum(); //Sums up distances between points in "image"
+            }                        //taken with equivalent points in baseline "image"
             return (float)Math.Sqrt(totDist); //Return square root of totDist (for now returns
         }                 //a non zero number even with baseline being the same as the picture)
 

@@ -20,6 +20,7 @@ namespace zivid_test
         public Baseline blCylinderOut = new Baseline();
         public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
         public static float distance;
+        public string fileName = "Threshold movement 1.csv";
         //public CameraFunctions cameraFunctions = new CameraFunctions();
 
         public async void RunServerAsync()  //Asyncronous task is started
@@ -111,6 +112,7 @@ namespace zivid_test
                         string send_str = "Feil";
                         byte[] send_data = Encoding.ASCII.GetBytes(send_str);
                         await n.WriteAsync(send_data, 0, send_data.Length);
+                        FileTransfer.writeCSV(fileName, distance);
                         Program.f.WriteTextSafe("Errornumber: " + dist);
                         Program.f.WriteTextSafe("Picture deviates too much from Baseline");
                     }
