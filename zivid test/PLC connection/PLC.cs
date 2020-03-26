@@ -112,7 +112,7 @@ namespace zivid_test
                         string send_str = "Feil";
                         byte[] send_data = Encoding.ASCII.GetBytes(send_str);
                         await n.WriteAsync(send_data, 0, send_data.Length);
-                        FileTransfer.writeCSV(fileName, distance);
+                        FileTransfer.writeCSV(fileName, dist);
                         Program.f.WriteTextSafe("Errornumber: " + dist);
                         Program.f.WriteTextSafe("Picture deviates too much from Baseline");
                     }
