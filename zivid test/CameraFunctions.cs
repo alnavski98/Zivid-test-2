@@ -68,6 +68,7 @@ namespace zivid_test
             //FileTransfer.writeCSV(fileName, distance);
             distance = PointCloudHelpers.calculateDistance(pc, Program.f.baselines[0]);
                 Console.WriteLine(distance);
+                FileTransfer.writeCSV(fileName, distance);
                 Program.f.WriteTextSafe("Errornumber: " + distance);
                 inc++;
                 Program.f.graph.errorChart();   // making a graph of errornumbers
