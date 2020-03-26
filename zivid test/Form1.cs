@@ -217,8 +217,8 @@ namespace zivid_test
             //baselines.Add(avgPc);  //Stores baselines in a list
             //runBaseline = true;
 
-            //var baseline = new FileTransfer();
-            //baseline.writeToFile(baselinePc, blFileNames[0]);
+            var baseline = new FileTransfer();
+            baseline.writeToFile(baselinePc, blFileNames[1]);
 
             // var currentBaseLine = baselines.Where(t => t.pointCloudId = "BaseLineNr0").ToList();
          
@@ -231,7 +231,7 @@ namespace zivid_test
         private void btn_connect_PLS_Click(object sender, EventArgs e)
         {
 
-            plc.J = true;
+            plc.connectToPLC = true;
             //PLC.cancel = false;
             plc.RunServerAsync();
         }
@@ -277,7 +277,7 @@ namespace zivid_test
 
         private void Disconnect_PLS_Click(object sender, EventArgs e)
         {
-            plc.J = false;
+            plc.connectToPLC = false;
             //PLC.cancel = true;
             //plc.plcListner(); 
         }   
