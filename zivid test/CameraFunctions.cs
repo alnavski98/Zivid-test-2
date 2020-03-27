@@ -67,7 +67,8 @@ namespace zivid_test
             //var activeBaseline = baselines.Where(t => t.baseLineId.Equals(baselineIdSim)).ToList();
             //FileTransfer.writeCSV(fileName, distance);
             distance = PointCloudHelpers.calculateDistance(pc, correctBaseline /*Program.f.baselines[0]*/);
-                Console.WriteLine(distance);
+                //noe
+            Console.WriteLine(distance);
                 FileTransfer.writeCSV(fileName, distance);
                 Program.f.WriteTextSafe("Errornumber: " + distance);
                 inc++;
