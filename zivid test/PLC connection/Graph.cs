@@ -28,15 +28,9 @@ namespace zivid_test.PLC_connection
             if(maxDistance < errorNumber)
             {
                 maxDistance = errorNumber;
-                chart.AxisY.Maximum = maxDistance + maxDistance*multiplicationFactor;
+                chart.AxisY.Maximum = maxDistance + maxDistance * multiplicationFactor;
                 chart.AxisY.Interval = Convert.ToInt32(maxDistance/10);
             }
-            /*else if(maxDistance < errorNumber)
-            {
-                maxDistance = PLC.dist;
-                chart.AxisY.Maximum = maxDistance + maxDistance * multiplicationFactor;
-                chart.AxisY.Interval = Convert.ToInt32(maxDistance / 10);
-            }*/
         }
 
         public void errorChart()   //making a graph of errornumbers
