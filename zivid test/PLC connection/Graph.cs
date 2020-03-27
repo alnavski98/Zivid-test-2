@@ -27,13 +27,13 @@ namespace zivid_test.PLC_connection
 
             if(maxDistance < Program.f.distance)
             {
-                maxDistance = Program.f.distance;
+                maxDistance = errorNumber;
                 chart.AxisY.Maximum = maxDistance + maxDistance*multiplicationFactor;
                 chart.AxisY.Interval = Convert.ToInt32(maxDistance/10);
             }
             else if(maxDistance < PLC.dist)
             {
-                maxDistance = PLC.dist;
+                maxDistance = errorNumber;
                 chart.AxisY.Maximum = maxDistance + maxDistance * multiplicationFactor;
                 chart.AxisY.Interval = Convert.ToInt32(maxDistance / 10);
             }
