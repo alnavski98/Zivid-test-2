@@ -83,6 +83,7 @@ namespace zivid_test
                     {
                         zivid_test.Program.f.WriteTextSafe("1. Start position without delay");
                         dist = functions.snapshotDistance(blCylinderIn);
+                        //noe
                        
                     }
                     else if (str1 == '2')
