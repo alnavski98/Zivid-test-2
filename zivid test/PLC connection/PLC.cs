@@ -73,7 +73,7 @@ namespace zivid_test
                             await n.ReadAsync(data, bytesRead, data.Length - bytesRead);
 
                     CameraFunctions functions = new CameraFunctions();
-                    var dist = functions.snapshotDistance();  //A picture will be taken when something is recieved from the PLC
+                    var dist = 0.0f;  //A picture will be taken when something is recieved from the PLC
                     
                     // get data
                     string str = Encoding.Default.GetString(data);
@@ -82,12 +82,13 @@ namespace zivid_test
                     if (str1 == '1')    //This could be where we logg which baseline is currently running
                     {
                         zivid_test.Program.f.WriteTextSafe("1. Start position without delay");
+                        dist = functions.snapshotDistance(blCylinderIn);
                        
                     }
                     else if (str1 == '2')
                     {
                         zivid_test.Program.f.WriteTextSafe("2. End position without delay");
-                       
+                        dist = functions.snapshotDistance(blCylinderOut);
                     }
                     else if (str1 == '3')
                     {

@@ -39,7 +39,7 @@ namespace zivid_test
         public PLC plc = new PLC();
 
         //Takes snapshot, compares it with baseline and gives distance from baseline point
-        public float snapshotDistance()
+        public float snapshotDistance(Baseline correctBaseline)
         {
             // for (int i = 0; i < 25; i++)
             // {
@@ -66,7 +66,7 @@ namespace zivid_test
             }*/
             //var activeBaseline = baselines.Where(t => t.baseLineId.Equals(baselineIdSim)).ToList();
             //FileTransfer.writeCSV(fileName, distance);
-            distance = PointCloudHelpers.calculateDistance(pc, Program.f.baselines[0]);
+            distance = PointCloudHelpers.calculateDistance(pc, correctBaseline /*Program.f.baselines[0]*/);
                 Console.WriteLine(distance);
                 FileTransfer.writeCSV(fileName, distance);
                 Program.f.WriteTextSafe("Errornumber: " + distance);
