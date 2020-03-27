@@ -20,6 +20,7 @@ namespace zivid_test
         public Baseline blCylinderOut = new Baseline();
         public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
         public static float distance;
+        public static float dist;
         public string fileName = "Threshold movement 1.csv";
         //public CameraFunctions cameraFunctions = new CameraFunctions();
 
@@ -84,7 +85,6 @@ namespace zivid_test
                         zivid_test.Program.f.WriteTextSafe("1. Start position without delay");
                         dist = functions.snapshotDistance(blCylinderIn);
                         //noe
-                       
                     }
                     else if (str1 == '2')
                     {

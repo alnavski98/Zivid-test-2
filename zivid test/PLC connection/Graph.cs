@@ -25,7 +25,7 @@ namespace zivid_test.PLC_connection
             Program.f.chart2.Series["Errornumber"].Points.AddXY(inc, errorNumber);  //Adding new points in chart
             inc++;
 
-            if(maxDistance < Program.f.distance)
+            if(maxDistance < Program.f.distance || maxDistance < PLC.dist)
             {
                 maxDistance = Program.f.distance;
                 chart.AxisY.Maximum = maxDistance + maxDistance*multiplicationFactor;
