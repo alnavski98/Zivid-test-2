@@ -74,6 +74,7 @@ namespace zivid_test
 
                     CameraFunctions functions = new CameraFunctions();
                     var dist = functions.snapshotDistance();  //A picture will be taken when something is recieved from the PLC
+                    
                     // get data
                     string str = Encoding.Default.GetString(data);
                     Program.f.WriteTextSafe("[server] received :" + str[2]);
@@ -81,14 +82,12 @@ namespace zivid_test
                     if (str1 == '1')    //This could be where we logg which baseline is currently running
                     {
                         zivid_test.Program.f.WriteTextSafe("1. Start position without delay");
-                        //blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
-                        //distance = PointCloudHelpers.calculateDistance(functions.pc, blCylinderIn);
+                       
                     }
                     else if (str1 == '2')
                     {
                         zivid_test.Program.f.WriteTextSafe("2. End position without delay");
-                        //blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
-                        //distance = PointCloudHelpers.calculateDistance(functions.pc, blCylinderOut);
+                       
                     }
                     else if (str1 == '3')
                     {

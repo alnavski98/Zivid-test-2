@@ -20,12 +20,12 @@ namespace zivid_test.PLC_connection
         public void update(float errorNumber)
         {
             var chart = Program.f.chart2.ChartAreas[0];
-            chart.AxisX.Minimum = (inc - 50);        //determining where the axes start from and end at
+            chart.AxisX.Minimum = (inc - 50);        //Determining where the axes start from and end at
             chart.AxisX.Maximum = (inc);
-            Program.f.chart2.Series["Errornumber"].Points.AddXY(inc, errorNumber);  //adding new points in chart
+            Program.f.chart2.Series["Errornumber"].Points.AddXY(inc, errorNumber);  //Adding new points in chart
             inc++;
 
-            if(maxDistance < Program.f.distance)
+            if(maxDistance < Program.f.distance || maxDistance < )
             {
                 maxDistance = Program.f.distance;
                 chart.AxisY.Maximum = maxDistance + maxDistance*multiplicationFactor;

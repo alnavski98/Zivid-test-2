@@ -26,8 +26,8 @@ namespace zivid_test
         public Baseline baselinePc = new Baseline();
         public List<Baseline> baselines = new List<Baseline>();
         public PointCloud pc = new PointCloud();
-        public Baseline blCylinderIn = new Baseline(); 
-        public Baseline blCylinderOut = new Baseline();
+        //public Baseline blCylinderIn = new Baseline(); 
+        //public Baseline blCylinderOut = new Baseline();
         public FileTransfer fileTransferer = new FileTransfer();
         public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
         public bool runBaseline = false;
@@ -219,7 +219,7 @@ namespace zivid_test
             //runBaseline = true;
 
             var baseline = new FileTransfer();
-            baseline.writeToFile(baselinePc, blFileNames[1]);
+            baseline.writeToFile(baselinePc, blFileNames[0]);
 
             // var currentBaseLine = baselines.Where(t => t.pointCloudId = "BaseLineNr0").ToList();
          
@@ -233,6 +233,7 @@ namespace zivid_test
         {
 
             plc.connectToPLC = true;
+            
             //PLC.cancel = false;
             plc.RunServerAsync();
         }
@@ -255,9 +256,9 @@ namespace zivid_test
         {
             try
             {
-                //var fileTransferer = new FileTransfer();
-                //blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
-                //blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
+                var fileTransferer = new FileTransfer();
+                plc.blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
+                plc.blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
             } catch (Exception ex)
             {
                 // could not load file
