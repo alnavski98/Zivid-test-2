@@ -24,6 +24,7 @@ namespace zivid_test
     {
         private delegate void SafeCallDelegate(string text);
         public Baseline baselinePc = new Baseline();
+        //public Baseline baselinePc;
         public List<Baseline> baselines = new List<Baseline>();
         public PointCloud pc = new PointCloud();
         public FileTransfer fileTransferer = new FileTransfer();
