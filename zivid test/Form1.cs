@@ -219,7 +219,7 @@ namespace zivid_test
             //runBaseline = true;
 
             var baseline = new FileTransfer();
-            baseline.writeToFile(baselinePc, blFileNames[1]);
+            baseline.writeToFile(baselinePc, blFileNames[0]);
 
             // var currentBaseLine = baselines.Where(t => t.pointCloudId = "BaseLineNr0").ToList();
          
