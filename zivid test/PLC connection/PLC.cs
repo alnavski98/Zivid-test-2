@@ -19,7 +19,6 @@ namespace zivid_test
         public Baseline blCylinderIn = new Baseline();
         public Baseline blCylinderOut = new Baseline();
         public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
-        public static float distance;
         public static float dist;
         public string fileName = "Threshold movement 1.csv";
         //public CameraFunctions cameraFunctions = new CameraFunctions();
@@ -76,15 +75,13 @@ namespace zivid_test
                     CameraFunctions functions = new CameraFunctions();
                     var dist = 0.0f;  //A picture will be taken when something is recieved from the PLC
                     
-                    // get data
-                    string str = Encoding.Default.GetString(data);
+                    string str = Encoding.Default.GetString(data); //Get data
                     Program.f.WriteTextSafe("[server] received :" + str[2]);
                     char str1 = str[2];
                     if (str1 == '1')    //This could be where we logg which baseline is currently running
                     {
                         zivid_test.Program.f.WriteTextSafe("1. Start position without delay");
                         dist = functions.snapshotDistance(blCylinderIn);
-                        //noe
                     }
                     else if (str1 == '2')
                     {
@@ -108,7 +105,7 @@ namespace zivid_test
                         zivid_test.Program.f.WriteTextSafe("4. End position with delay #2");
                     }
 
-                    if (/*CameraFunctions.distance*/ dist > 30000)  //If snapshot deviates from baseline, 
+                    if (dist > 30000)  //If snapshot deviates from baseline, 
                     {                                               //then send a stop signal to PLC
                         string send_str = "Feil";
                         byte[] send_data = Encoding.ASCII.GetBytes(send_str);

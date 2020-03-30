@@ -25,14 +25,11 @@ namespace zivid_test
         public Baseline baselinePc = zivid_test.Program.f.baselinePc;
         public List<Baseline> baselines = new List<Baseline>();
         public PointCloud pc = new PointCloud();
-        //public PointCloud blCylinderOut = new PointCloud();
-        //public PointCloud blCylinderIn = new PointCloud();
         public Baseline blCylinderIn = new Baseline();
         public Baseline blCylinderOut = new Baseline();
         public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
         public FileTransfer fileTransferer = new FileTransfer();
         public bool runBaseline = false;
-        //private int baseLineCount = 0;
         public static float distance;
         public string fileName = "Threshold movement 1.csv";
         public int inc = 0; // for counting the number og error numbers
@@ -51,19 +48,6 @@ namespace zivid_test
             //if baseline is taken, calculate distance. else don't
             //if (zivid_test.Program.f.runBaseline)
             //{
-            /*while (plc.str1 != 1 || plc.str1 != 2)
-            {
-                if (plc.str1 == 1)
-                {
-                    blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
-                    distance = PointCloudHelpers.calculateDistance(pc, blCylinderIn);
-                }
-                else if (plc.str1 == 2)
-                {
-                    blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
-                    distance = PointCloudHelpers.calculateDistance(pc, blCylinderOut);
-                }
-            }*/
             //var activeBaseline = baselines.Where(t => t.baseLineId.Equals(baselineIdSim)).ToList();
             //FileTransfer.writeCSV(fileName, distance);
             distance = PointCloudHelpers.calculateDistance(pc, correctBaseline /*Program.f.baselines[0]*/);
@@ -79,7 +63,6 @@ namespace zivid_test
             //{
             //    Console.WriteLine("Have not taken baseline yet");
             //}
-
             //new code
             //var snapshot = new FileTransfer();
             //snapshot.writeToFile(pc, blFileNames[2]);

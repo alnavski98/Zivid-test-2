@@ -21,14 +21,11 @@ namespace zivid_test
         private void show_error_picture_Click(object sender, EventArgs e)
         {
             
-
-         
         }
 
         public void displayPicture(Bitmap picture)
         {
             show_error_picture.Image = picture;
-
         }
 
         private void Form2_Load(object sender, EventArgs e)
