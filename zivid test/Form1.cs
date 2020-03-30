@@ -62,10 +62,10 @@ namespace zivid_test
             //for (int i = 0; i < 10; i++)
             //{ 
 
-            /*var snaps = new List<PointCloud>();
+            var snaps = new List<PointCloud>();
             var snap = ZividCAM.snapshot();  //Takes snapshot from camera and stores in snap
             var pointCloud = PointCloudHelpers.floatToPointCloud(snap);
-            pc = pointCloud; // PointCloudHelpers.calcBaseline(snaps);*/
+            pc = pointCloud; // PointCloudHelpers.calcBaseline(snaps);
 
             //if baseline is taken, calculate distance. else dont
             //if (baselines.Count() > 0)  //If amount of baselines in list > 0 run this
@@ -78,8 +78,10 @@ namespace zivid_test
             }*/
             /*var fileTransferer = new FileTransfer();
             blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);*/
-            distance = functions.snapshotDistance(baselinePc);
-            //distance = PointCloudHelpers.calculateDistance(pc, baselinePc);
+
+            //distance = functions.snapshotDistance(baselinePc);
+            distance = PointCloudHelpers.calculateDistance(pc, baselinePc);
+
             //}
             //FileTransfer.writeCSV(fileName, distance);
             //Console.WriteLine(distance);
