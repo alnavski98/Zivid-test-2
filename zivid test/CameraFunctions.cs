@@ -22,7 +22,7 @@ namespace zivid_test
     public class CameraFunctions
     {
         private delegate void SafeCallDelegate(string text);
-        public Baseline baselinePc = zivid_test.Program.f.baselinePc;
+        //public Baseline baselinePc = zivid_test.Program.f.baselinePc;
         public List<Baseline> baselines = new List<Baseline>();
         public PointCloud pc = new PointCloud();
         public Baseline blCylinderIn = new Baseline();
@@ -52,7 +52,7 @@ namespace zivid_test
             //FileTransfer.writeCSV(fileName, distance);
             distance = PointCloudHelpers.calculateDistance(pc, correctBaseline /*Program.f.baselines[0]*/);
             Console.WriteLine(distance);
-                FileTransfer.writeCSV(fileName, distance);
+                //FileTransfer.writeCSV(fileName, distance);
                 Program.f.WriteTextSafe("Errornumber: " + distance);
                 inc++;
                 Program.f.graph.errorChart();   // making a graph of errornumbers
