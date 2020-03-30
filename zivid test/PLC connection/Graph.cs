@@ -6,10 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
 
-
 namespace zivid_test.PLC_connection
 {
-    
     public class Graph
     {
         public int[] distance = { 100, 200, 500, 1000, 5000, 10000 };
@@ -25,8 +23,8 @@ namespace zivid_test.PLC_connection
             Program.f.chart2.Series["Errornumber"].Points.AddXY(inc, errorNumber);  //Adding new points in chart
             inc++;
 
-            if(maxDistance < errorNumber)
-            {
+            if(maxDistance < errorNumber)  //Updates scale of graph whenever new
+            {                              //error number exceeds the previous
                 maxDistance = errorNumber;
                 chart.AxisY.Maximum = maxDistance + maxDistance * multiplicationFactor;
                 chart.AxisY.Interval = Convert.ToInt32(maxDistance/10);

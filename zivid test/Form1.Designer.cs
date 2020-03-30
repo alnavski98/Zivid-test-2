@@ -281,13 +281,10 @@
             // 
             // btn_apply_median_filter
             // 
-            this.btn_apply_median_filter.Location = new System.Drawing.Point(812, 155);
+            this.btn_apply_median_filter.Location = new System.Drawing.Point(0, 0);
             this.btn_apply_median_filter.Name = "btn_apply_median_filter";
-            this.btn_apply_median_filter.Size = new System.Drawing.Size(157, 35);
-            this.btn_apply_median_filter.TabIndex = 19;
-            this.btn_apply_median_filter.Text = "Apply median filter";
-            this.btn_apply_median_filter.UseVisualStyleBackColor = true;
-            this.btn_apply_median_filter.Click += new System.EventHandler(this.btn_apply_median_filter_Click);
+            this.btn_apply_median_filter.Size = new System.Drawing.Size(75, 23);
+            this.btn_apply_median_filter.TabIndex = 29;
             // 
             // label4
             // 
@@ -409,7 +406,7 @@
             this.MaximumSize = new System.Drawing.Size(1980, 1000);
             this.MinimumSize = new System.Drawing.Size(1003, 720);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Zivid One and PLC";
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTXT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IrisTXT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCntTXT)).EndInit();
