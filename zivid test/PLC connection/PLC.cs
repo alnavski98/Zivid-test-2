@@ -79,7 +79,8 @@ namespace zivid_test
                     Program.f.WriteTextSafe("[server] received :" + str[2]);
                     char str1 = str[2];
 
-                    float[,] map = new float[1920, 1200];      
+                    float[,] map = new float[1920, 1200];
+                    Array.Clear(map, 0, map.Length);
                     //PointCloud plcPc = new PointCloud();
                     if (str1 == '1')    //This could be where we logg which baseline is currently running
                     {
@@ -122,6 +123,7 @@ namespace zivid_test
                         Program.f.WriteTextSafe("Errornumber: " + dist);
                         Program.f.WriteTextSafe("Picture deviates too much from Baseline");
                         PointCloudHelpers.plcPointCloudToPicture(functions.pc, map, "movement_error");
+                        
                     }
                 }
             }
