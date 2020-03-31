@@ -84,7 +84,7 @@ namespace zivid_test
             distance = PointCloudHelpers.calculateDistance(pc, baselinePc);
 
             //}
-            FileTransfer.writeCSV(fileName, distance);
+            //FileTransfer.writeCSV(fileName, distance);
             //Console.WriteLine(distance);
             WriteTextSafe("Errornumber: " + distance);
             //}
