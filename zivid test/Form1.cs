@@ -30,7 +30,7 @@ namespace zivid_test
         public FileTransfer fileTransferer = new FileTransfer();
         public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
         public bool runBaseline = false;
-        public string fileName = "Threshold data 5.csv";
+        public string fileName = "Height_differences.csv";
         public float distance;
         public PLC plc = new PLC();
         public Graph graph = new Graph();
@@ -84,7 +84,7 @@ namespace zivid_test
             distance = PointCloudHelpers.calculateDistance(pc, baselinePc);
 
             //}
-            //FileTransfer.writeCSV(fileName, distance);
+            FileTransfer.writeCSV(fileName, distance);
             //Console.WriteLine(distance);
             WriteTextSafe("Errornumber: " + distance);
             //}

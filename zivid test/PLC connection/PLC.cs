@@ -112,6 +112,7 @@ namespace zivid_test
                         await n.WriteAsync(send_data, 0, send_data.Length);
                         Program.f.WriteTextSafe("Errornumber: " + dist);
                         Program.f.WriteTextSafe("Picture deviates too much from Baseline");
+                        PointCloudHelpers.PointCloudToPicture(functions.pc, "movement error");
                     }
                 }
             }

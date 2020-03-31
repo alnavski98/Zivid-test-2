@@ -74,7 +74,7 @@ namespace zivid_test
             string h = "Error; ";  // check if file exists
             try
             {
-                var dataPath = Path.Combine("C:\\Users\\Trym", fileName);
+                var dataPath = Path.Combine("C:\\Users\\alnav\\HeightDifferences", fileName);
                 if (!File.Exists(dataPath))
                 {
                     using (StreamWriter sw = File.CreateText(dataPath))
