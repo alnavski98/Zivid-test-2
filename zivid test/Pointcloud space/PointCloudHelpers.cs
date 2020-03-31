@@ -142,9 +142,10 @@ namespace zivid_test
             return returnBaseline;  //Returns average of point clouds as an
         }                           //instance of the PointCloud class
 
-        public static void thresholdMapPLC(Baseline baseline)
+        public static float[,] thresholdMapPLC(Baseline baseline)
         {
-            pointCloudMap = baseline.thresholdMap;
+            var plcThresholdMap = baseline.thresholdMap;
+            return plcThresholdMap;
         }
 
         public static float p2pLengthSquared(Point3 coordinate1, Point3 coordinate2)
@@ -258,7 +259,83 @@ namespace zivid_test
             }
             return bmp;
         }
-        
+
+        /// <summary>
+        /// Create bitmap file from PLC photo
+        /// </summary>
+        /// <param name="pc"></param>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public static Bitmap plcPointCloudToPicture(PointCloud pc, float[,] plcPointCloudMap, string filename)
+        {
+            var colDim = pc.getColumnSize();
+            var rowDim = pc.getRowSize();
+            Bitmap bmp = new Bitmap(colDim, rowDim);
+
+            var zValues = new List<float>();
+
+            for (int i = 0; i < pc.coordinate3d.Count(); i++)
+            {
+                Parallel.For(
+                        0, pc.coordinate3d[0].Count(), j =>
+                        {
+                            lock (zValues)
+                            {
+                                zValues.Add(pc.coordinate3d[i][j].Z);  //Makes list of z-values
+                            }
+                        }
+                    );
+            }
+
+            var q2 = zValues.Median();
+            var q3 = zValues.Where(t => t > q2).Median() * 1.5f;  //Interquartile Range
+            var q1 = zValues.Where(t => t < q2).Median() * 1.5f;
+
+            var scale = 255.0f / (q3 - q1);  //Scales upper and lower z-value to RGB color scale
+            var translation = (0 - q1);  //Adjusts so that the lowest z-value is the lowest RGB-value
+                                         //and the highest z-value to be the highest RGB-value
+            zValues = zValues.Where(t => !float.IsNaN(t)).ToList();
+
+            try
+            {
+                for (int i = 0; i < rowDim; i++)
+                {
+                    for (int j = 0; j < colDim; j++)
+                    {
+                        var p = pc.coordinate3d[i][j];
+                        var rgbMap = (int)Math.Round(p.Z * (scale) + translation, 0);
+                        if (rgbMap == float.NaN)
+                        {
+                            rgbMap = 0;
+                        }
+                        else if (rgbMap > 255)
+                        {
+                            rgbMap = 255;
+                        }
+                        else if (rgbMap < 0)
+                        {
+                            rgbMap = 0;
+                        }
+                        Color c = new Color();  //Makes color object
+                        if (p.errorDistanceSq > plcPointCloudMap[i, j])  //For every point in the single snapshot pointcloud where distance from the
+                        {                                             //single snapshot and baseline is greater than the "natural variation" in baseline
+                            c = Color.FromArgb(255, 255, 0, 0);  //Color red
+                        }
+                        else
+                        {
+                            c = Color.FromArgb(255, rgbMap, rgbMap, rgbMap);  //Color in scale of black and white
+                        }
+                        bmp.SetPixel(j, i, c);  //Color each pixel with scale of black and white,
+                    }                           //or highlight errors with red
+                } // end for
+                bmp.Save(Path.Combine("C:\\Users\\Trym", filename) + ".png", ImageFormat.Png);
+            }
+            catch (Exception ex)
+            {
+            }
+            return bmp;
+        }
+
         public static Point3 calcCoG(List<Point3> points)
         {
             return new Point3(points.Select(t => t.X).Average(), points.Select(t => t.Y).Average(), points.Select(t => t.Z).Average());
