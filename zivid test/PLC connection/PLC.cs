@@ -79,18 +79,20 @@ namespace zivid_test
                     Program.f.WriteTextSafe("[server] received :" + str[2]);
                     char str1 = str[2];
 
-                    PointCloud plcPc = new PointCloud();
+                    //PointCloud plcPc = new PointCloud();
                     if (str1 == '1')    //This could be where we logg which baseline is currently running
                     {
                         zivid_test.Program.f.WriteTextSafe("1. Start position without delay");
                         dist = functions.snapshotDistance(blCylinderIn);
-                        plcPc = functions.pc;
+                        PointCloudHelpers.thresholdMapPLC(blCylinderIn);
+                        //plcPc = functions.pc;
                     }
                     else if (str1 == '2')
                     {
                         zivid_test.Program.f.WriteTextSafe("2. End position without delay");
                         dist = functions.snapshotDistance(blCylinderOut);
-                        plcPc = functions.pc;
+                        PointCloudHelpers.thresholdMapPLC(blCylinderOut);
+                        //plcPc = functions.pc;
                     }
                     else if (str1 == '3')
                     {
@@ -118,7 +120,7 @@ namespace zivid_test
                         await n.WriteAsync(send_data, 0, send_data.Length);
                         Program.f.WriteTextSafe("Errornumber: " + dist);
                         Program.f.WriteTextSafe("Picture deviates too much from Baseline");
-                        PointCloudHelpers.PointCloudToPicture(plcPc, "movement_error");
+                        PointCloudHelpers.PointCloudToPicture(functions.pc, "movement_error");
                     }
                 }
             }

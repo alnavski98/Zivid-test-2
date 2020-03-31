@@ -142,6 +142,11 @@ namespace zivid_test
             return returnBaseline;  //Returns average of point clouds as an
         }                           //instance of the PointCloud class
 
+        public static void thresholdMapPLC(Baseline baseline)
+        {
+            pointCloudMap = baseline.thresholdMap;
+        }
+
         public static float p2pLengthSquared(Point3 coordinate1, Point3 coordinate2)
         {
             return ((coordinate2.X - coordinate1.X) * (coordinate2.X - coordinate1.X) + (coordinate2.Y - coordinate1.Y) * (coordinate2.Y - coordinate1.Y) + (coordinate2.Z - coordinate1.Z) * (coordinate2.Z - coordinate1.Z));
