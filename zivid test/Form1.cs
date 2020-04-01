@@ -38,6 +38,9 @@ namespace zivid_test
         public bool camDisconnected; 
         public bool graphErrorChart = false;
 
+        public int errorNumberIn;
+        public int errorNumberOut;
+           
         Form2 f2 = new Form2();
         CameraFunctions functions = new CameraFunctions();
 
@@ -249,6 +252,17 @@ namespace zivid_test
             plc.connectToPLC = false;
             //PLC.cancel = true;
             //plc.plcListner(); 
-        }   
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_set_errornumber_Click(object sender, EventArgs e)
+        {
+            errorNumberIn = int.Parse(errorNumberInTXT.Text);
+            errorNumberOut = int.Parse(errorNumberOutTXT.Text);
+        }
     }
 }

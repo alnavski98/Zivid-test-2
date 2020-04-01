@@ -81,12 +81,14 @@ namespace zivid_test
 
                     float[,] map = new float[1920, 1200];
                     Array.Clear(map, 0, map.Length);
+                    int a = 0;
                     //PointCloud plcPc = new PointCloud();
                     if (str1 == '1')    //This could be where we logg which baseline is currently running
                     {
                         zivid_test.Program.f.WriteTextSafe("1. Start position without delay");
                         dist = functions.snapshotDistance(blCylinderIn);
                         map = PointCloudHelpers.thresholdMapPLC(blCylinderIn);
+                        a = 1;
                         //plcPc = functions.pc;
                     }
                     else if (str1 == '2')
@@ -94,6 +96,7 @@ namespace zivid_test
                         zivid_test.Program.f.WriteTextSafe("2. End position without delay");
                         dist = functions.snapshotDistance(blCylinderOut);
                         map = PointCloudHelpers.thresholdMapPLC(blCylinderOut);
+                        a = 2;
                         //plcPc = functions.pc;
                     }
                     else if (str1 == '3')
@@ -114,14 +117,32 @@ namespace zivid_test
                     {
                         zivid_test.Program.f.WriteTextSafe("4. End position with delay #2");
                     }
-
-                    if (dist > 30000)  //If snapshot deviates from baseline, 
-                    {                                               //then send a stop signal to PLC
-                        string send_str = "Feil";
-                        byte[] send_data = Encoding.ASCII.GetBytes(send_str);
-                        await n.WriteAsync(send_data, 0, send_data.Length);
-                        PointCloudHelpers.plcPointCloudToPicture(functions.pc, map, "movement_error");
-                        Program.f.WriteTextSafe("Picture deviates too much from Baseline");
+                    
+                    if(a == 1)
+                    {
+                        if (dist > Program.f.errorNumberIn)  //If snapshot deviates from baseline, 
+                        {                  //then send a stop signal to PLC
+                            string send_str = "Feil";
+                            byte[] send_data = Encoding.ASCII.GetBytes(send_str);
+                            await n.WriteAsync(send_data, 0, send_data.Length);
+                            PointCloudHelpers.plcPointCloudToPicture(functions.pc, map, "movement_error");
+                            Program.f.WriteTextSafe("Picture deviates too much from Baseline");
+                        }
+                    }
+                    else if(a == 2)
+                        {
+                            if (dist > Program.f.errorNumberOut)  //If snapshot deviates from baseline, 
+                            {                  //then send a stop signal to PLC
+                                string send_str = "Feil";
+                                byte[] send_data = Encoding.ASCII.GetBytes(send_str);
+                                await n.WriteAsync(send_data, 0, send_data.Length);
+                                PointCloudHelpers.plcPointCloudToPicture(functions.pc, map, "movement_error");
+                                Program.f.WriteTextSafe("Picture deviates too much from Baseline");
+                            }
+                        }
+                    else
+                    {
+                        Program.f.WriteTextSafe("Haven't compared to any baseline");
                     }
                 }
             }
