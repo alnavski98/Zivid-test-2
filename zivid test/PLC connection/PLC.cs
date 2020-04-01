@@ -102,12 +102,16 @@ namespace zivid_test
                     else if (str1 == '3')
                     {
                         zivid_test.Program.f.WriteTextSafe("3. Start position with delay #1");
-                        
+                        dist = functions.snapshotDistance(blCylinderIn);
+                        map = PointCloudHelpers.thresholdMapPLC(blCylinderIn);
+                        a = 1;
                     }
                     else if (str1 == '4')
                     {
                         zivid_test.Program.f.WriteTextSafe("4. End position with delay #1");
-                        
+                        dist = functions.snapshotDistance(blCylinderOut);
+                        map = PointCloudHelpers.thresholdMapPLC(blCylinderOut);
+                        a = 2;
                     }
                     else if (str1 == '5')
                     {
