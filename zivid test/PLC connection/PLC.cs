@@ -12,23 +12,22 @@ namespace zivid_test
     public class PLC
     {
         public FileTransfer fileTransferer = new FileTransfer();
-        public bool J = true;
-        public bool K = true;
-        public bool L = true;
-        public bool M = true;
+        public bool connectToPLC = true;
+        public bool runOnce = true;
+        public bool isConnected = true;
         public char str1 = '0';
         public Baseline blCylinderIn = new Baseline();
         public Baseline blCylinderOut = new Baseline();
         public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
-        public static float distance;
+        public static float dist;
+        public string fileName = "Threshold movement 1.csv";
         //public CameraFunctions cameraFunctions = new CameraFunctions();
-        // asyncronous task is started
-        public async void RunServerAsync()
+
+        public async void RunServerAsync()  //Asyncronous task is started
         {
-            //(if K): makes it so this code run just one at the time (spamming connect PLS button)
-            if (K)
+            if (runOnce)  //If true makes it so this code runs just once
             {
-                K = false;
+                runOnce = false;
                 Int32 port = 2000; //Representing port as a 32bit number range -2,147,483,648 to 2,147,483,647
                 IPAddress localAddr = IPAddress.Parse("128.39.141.190");
                 var listner = new TcpListener(localAddr, port);
@@ -36,34 +35,30 @@ namespace zivid_test
                 Program.f.WriteTextSafe("Waiting for connection...");
                 try
                 {
-                    while (J) // while (J): connected to connect/disconnect buttons
+                    while (connectToPLC) // while (J): connected to connect/disconnect buttons
                     {
-                        //accepts a pending connection request as an asyncronous operation
-                        await Accept(await listner.AcceptTcpClientAsync());
-                        M = false;
+                        await Accept(await listner.AcceptTcpClientAsync());  //Accepts a pending connection request
+                        isConnected = false;                                           //as an asyncronous operation
                     }
                 }
                 finally // sets the variables back to original before closing listner-task
                 {
                     listner.Stop();
-                    K = true;
-                    M = true;
+                    runOnce = true;
+                    isConnected = true;
                 }
             }
-
         }
 
-        const int packet_length = 32;  // user defined packet length
+        const int packet_length = 32;  //User defined packet length
 
         async Task Accept(TcpClient client)
         {
-            // (if M) only writes "connected" once
-            if (M)
+            if (isConnected)  //If true only writes "connected" once
             {
                 Program.f.WriteTextSafe("Connected");
             }
-            // Creates an awaitable task that asynchronously yields back to the current context when awaited.
-            await Task.Yield();
+            await Task.Yield();  //Creates an awaitable task that asynchronously yields back to the current context when awaited.
             try
             {
                 using (client)
@@ -77,32 +72,46 @@ namespace zivid_test
                         bytesRead += chunkSize =
                             await n.ReadAsync(data, bytesRead, data.Length - bytesRead);
 
-                    // a picture will be taken when something is recieved from the PLC
                     CameraFunctions functions = new CameraFunctions();
-                    var dist = functions.snapshotDistance();
-                    // get data
-                    string str = Encoding.Default.GetString(data);
+                    var dist = 0.0f;  //A picture will be taken when something is recieved from the PLC
+                    
+                    string str = Encoding.Default.GetString(data); //Get data
                     Program.f.WriteTextSafe("[server] received :" + str[2]);
                     char str1 = str[2];
-                    if (str1 == '1')    //this could be where we logg whitch baseline is currently running
+
+                    float[,] map = new float[1920, 1200];
+                    Array.Clear(map, 0, map.Length);
+                    int a = 0;
+                    //PointCloud plcPc = new PointCloud();
+                    if (str1 == '1')    //This could be where we logg which baseline is currently running
                     {
                         zivid_test.Program.f.WriteTextSafe("1. Start position without delay");
-                        //blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
-                        //distance = PointCloudHelpers.calculateDistance(functions.pc, blCylinderIn);
+                        dist = functions.snapshotDistance(blCylinderIn);
+                        map = PointCloudHelpers.thresholdMapPLC(blCylinderIn);
+                        a = 1;
+                        //plcPc = functions.pc;
                     }
                     else if (str1 == '2')
                     {
                         zivid_test.Program.f.WriteTextSafe("2. End position without delay");
-                        //blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
-                        //distance = PointCloudHelpers.calculateDistance(functions.pc, blCylinderOut);
+                        dist = functions.snapshotDistance(blCylinderOut);
+                        map = PointCloudHelpers.thresholdMapPLC(blCylinderOut);
+                        a = 2;
+                        //plcPc = functions.pc;
                     }
                     else if (str1 == '3')
                     {
                         zivid_test.Program.f.WriteTextSafe("3. Start position with delay #1");
+                        dist = functions.snapshotDistance(blCylinderIn);
+                        map = PointCloudHelpers.thresholdMapPLC(blCylinderIn);
+                        a = 1;
                     }
                     else if (str1 == '4')
                     {
                         zivid_test.Program.f.WriteTextSafe("4. End position with delay #1");
+                        dist = functions.snapshotDistance(blCylinderOut);
+                        map = PointCloudHelpers.thresholdMapPLC(blCylinderOut);
+                        a = 2;
                     }
                     else if (str1 == '5')
                     {
@@ -112,18 +121,36 @@ namespace zivid_test
                     {
                         zivid_test.Program.f.WriteTextSafe("4. End position with delay #2");
                     }
-
-                    // To do
-                    // ...
-                    int a = 1;
-                    // if snapshot deviates from baseline, then send a stop signal to PLC
-                    if (/*CameraFunctions.distance*/ dist > 30000)
+                    
+                    if(a == 1)  //If cylinder is in compare distance with error number for in position
                     {
-                        string send_str = "Feil";
-                        byte[] send_data = Encoding.ASCII.GetBytes(send_str);
-                        await n.WriteAsync(send_data, 0, send_data.Length);
-                        Program.f.WriteTextSafe("Errornumber: " + dist);
-                        Program.f.WriteTextSafe("Picture deviates too much from Baseline");
+                        if (dist > Program.f.errorNumberIn)  //If snapshot deviates from baseline, 
+                        {                  //then send a stop signal to PLC
+                            string send_str = "Feil";
+                            byte[] send_data = Encoding.ASCII.GetBytes(send_str);
+                            await n.WriteAsync(send_data, 0, send_data.Length);
+                            var bitmap = PointCloudHelpers.plcPointCloudToPicture(functions.pc, map, "movement_error");
+                            Program.f2.Show();
+                            Program.f2.displayPicture(bitmap);  //New code
+                            Program.f.WriteTextSafe("Picture deviates too much from Baseline");
+                        }
+                    }
+                    else if(a == 2)  //Same but for error number for out postion
+                        {
+                            if (dist > Program.f.errorNumberOut)  //If snapshot deviates from baseline, 
+                            {                  //then send a stop signal to PLC
+                                string send_str = "Feil";
+                                byte[] send_data = Encoding.ASCII.GetBytes(send_str);
+                                await n.WriteAsync(send_data, 0, send_data.Length);
+                                var bitmap = PointCloudHelpers.plcPointCloudToPicture(functions.pc, map, "movement_error");
+                                Program.f2.Show();
+                                Program.f2.displayPicture(bitmap);  //New code
+                                Program.f.WriteTextSafe("Picture deviates too much from Baseline");
+                            }
+                        }
+                    else
+                    {
+                        Program.f.WriteTextSafe("Haven't compared to any baseline");
                     }
                 }
             }

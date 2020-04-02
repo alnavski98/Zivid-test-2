@@ -57,10 +57,17 @@
             this.label8 = new System.Windows.Forms.Label();
             this.BitmapTXT = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.errorNumberOutTXT = new System.Windows.Forms.NumericUpDown();
+            this.errorNumberInTXT = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.error_number_out_TXT = new System.Windows.Forms.Label();
+            this.btn_set_errornumber = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IrisTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCntTXT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorNumberOutTXT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorNumberInTXT)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_snapshot
@@ -260,7 +267,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(628, 155);
+            this.button1.Location = new System.Drawing.Point(462, 195);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(163, 35);
             this.button1.TabIndex = 17;
@@ -281,13 +288,10 @@
             // 
             // btn_apply_median_filter
             // 
-            this.btn_apply_median_filter.Location = new System.Drawing.Point(812, 155);
+            this.btn_apply_median_filter.Location = new System.Drawing.Point(0, 0);
             this.btn_apply_median_filter.Name = "btn_apply_median_filter";
-            this.btn_apply_median_filter.Size = new System.Drawing.Size(157, 35);
-            this.btn_apply_median_filter.TabIndex = 19;
-            this.btn_apply_median_filter.Text = "Apply median filter";
-            this.btn_apply_median_filter.UseVisualStyleBackColor = true;
-            this.btn_apply_median_filter.Click += new System.EventHandler(this.btn_apply_median_filter_Click);
+            this.btn_apply_median_filter.Size = new System.Drawing.Size(75, 23);
+            this.btn_apply_median_filter.TabIndex = 29;
             // 
             // label4
             // 
@@ -375,11 +379,69 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Bitmap filename";
             // 
+            // errorNumberOutTXT
+            // 
+            this.errorNumberOutTXT.Location = new System.Drawing.Point(807, 178);
+            this.errorNumberOutTXT.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.errorNumberOutTXT.Name = "errorNumberOutTXT";
+            this.errorNumberOutTXT.Size = new System.Drawing.Size(120, 26);
+            this.errorNumberOutTXT.TabIndex = 30;
+            // 
+            // errorNumberInTXT
+            // 
+            this.errorNumberInTXT.Location = new System.Drawing.Point(657, 178);
+            this.errorNumberInTXT.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.errorNumberInTXT.Name = "errorNumberInTXT";
+            this.errorNumberInTXT.Size = new System.Drawing.Size(120, 26);
+            this.errorNumberInTXT.TabIndex = 31;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(657, 154);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(114, 20);
+            this.label10.TabIndex = 32;
+            this.label10.Text = "In errornumber";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
+            // error_number_out_TXT
+            // 
+            this.error_number_out_TXT.AutoSize = true;
+            this.error_number_out_TXT.Location = new System.Drawing.Point(803, 155);
+            this.error_number_out_TXT.Name = "error_number_out_TXT";
+            this.error_number_out_TXT.Size = new System.Drawing.Size(126, 20);
+            this.error_number_out_TXT.TabIndex = 33;
+            this.error_number_out_TXT.Text = "Out errornumber";
+            // 
+            // btn_set_errornumber
+            // 
+            this.btn_set_errornumber.Location = new System.Drawing.Point(807, 210);
+            this.btn_set_errornumber.Name = "btn_set_errornumber";
+            this.btn_set_errornumber.Size = new System.Drawing.Size(149, 38);
+            this.btn_set_errornumber.TabIndex = 34;
+            this.btn_set_errornumber.Text = "Set errornumber";
+            this.btn_set_errornumber.UseVisualStyleBackColor = true;
+            this.btn_set_errornumber.Click += new System.EventHandler(this.btn_set_errornumber_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 664);
+            this.Controls.Add(this.btn_set_errornumber);
+            this.Controls.Add(this.error_number_out_TXT);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.errorNumberInTXT);
+            this.Controls.Add(this.errorNumberOutTXT);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.BitmapTXT);
             this.Controls.Add(this.label8);
@@ -409,11 +471,13 @@
             this.MaximumSize = new System.Drawing.Size(1980, 1000);
             this.MinimumSize = new System.Drawing.Size(1003, 720);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Zivid One and PLC";
             ((System.ComponentModel.ISupportInitialize)(this.ExposureTXT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IrisTXT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCntTXT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorNumberOutTXT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorNumberInTXT)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -447,6 +511,11 @@
         public System.Windows.Forms.DataVisualization.Charting.Chart chart2;
         private System.Windows.Forms.TextBox BitmapTXT;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown errorNumberOutTXT;
+        private System.Windows.Forms.NumericUpDown errorNumberInTXT;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label error_number_out_TXT;
+        private System.Windows.Forms.Button btn_set_errornumber;
         //private System.Windows.Forms.Label label9;
     }
 }

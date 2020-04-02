@@ -24,32 +24,26 @@ namespace zivid_test
     {
         private delegate void SafeCallDelegate(string text);
         public Baseline baselinePc = new Baseline();
+        //public Baseline baselinePc;
         public List<Baseline> baselines = new List<Baseline>();
         public PointCloud pc = new PointCloud();
-        /*
-        public PointCloud blCylinderOut = new PointCloud();
-        public PointCloud blCylinderIn = new PointCloud();
-        public PointCloud blCylinderOutSnap = new PointCloud();
-        public PointCloud blCylinderInSnap = new PointCloud();
-        */
-        public Baseline blCylinderIn = new Baseline();
-        public Baseline blCylinderOut = new Baseline();
         public FileTransfer fileTransferer = new FileTransfer();
-        //public Baseline blCylinderIn = new Baseline();
         public List<string> blFileNames = new List<string>() { "cylinderIn.txt", "cylinderOut.txt" };
         public bool runBaseline = false;
-        //private int baseLineCount = 0;
-        public string fileName = "Threshold data 5.csv";
+        public string fileName = "Height_differences.csv";
         public float distance;
         public PLC plc = new PLC();
-        //CameraFunctions functions = new CameraFunctions();
         public Graph graph = new Graph();
         public bool camConnected = false;
-        public bool camDisconnected; //= false;
+        public bool camDisconnected; 
         public bool graphErrorChart = false;
 
+        public int errorNumberIn;
+        public int errorNumberOut;
+           
         Form2 f2 = new Form2();
-        
+        CameraFunctions functions = new CameraFunctions();
+
         public Form1()
         {     
             InitializeComponent(); //Initializes form
@@ -67,34 +61,16 @@ namespace zivid_test
                 LoggTXT.AppendText(Environment.NewLine + text);
             }
         }
-       
         private void btn_snapshot_Click(object sender, EventArgs e)
         {
             //for (int i = 0; i < 10; i++)
             //{ 
-                //functions.snapshotDistance();
+
             var snaps = new List<PointCloud>();
             var snap = ZividCAM.snapshot();  //Takes snapshot from camera and stores in snap
             var pointCloud = PointCloudHelpers.floatToPointCloud(snap);
             pc = pointCloud; // PointCloudHelpers.calcBaseline(snaps);
-            int a = 1;
-            /*while(plc.str1 != 1 || plc.str1 != 2)
-            {
-                if(plc.str1 == 1)
-                {
-                    blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
-                    distance = PointCloudHelpers.calculateDistance(pc, blCylinderIn);
-                }
-                else if(plc.str1 == 2)
-                {
-                    blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
-                    distance = PointCloudHelpers.calculateDistance(pc, blCylinderOut);
-                }
-                //else
-                //{
-                //    WriteTextSafe("Invalid baseline ID, try again");
-                //}
-            }*/
+
             //if baseline is taken, calculate distance. else dont
             //if (baselines.Count() > 0)  //If amount of baselines in list > 0 run this
             //{
@@ -104,22 +80,14 @@ namespace zivid_test
                 //distance = PointCloudHelpers.calculateDistance(pc.coordinate3d, activeBaseline.First().pc.coordinate3d);
                 distance = PointCloudHelpers.calculateDistance(pc, activeBaseline.First());
             }*/
-            //if (plc.str1 == '1')  //If signal from plc is 1, calculate distance between pointcloud
-            //{                     //of picture taken with the "first" baseline pointcloud
             /*var fileTransferer = new FileTransfer();
             blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);*/
+
+            //distance = functions.snapshotDistance(baselinePc);
             distance = PointCloudHelpers.calculateDistance(pc, baselinePc);
+
             //}
-            /*else if (plc.str1 == '2')  //Same but with "second" baseline pointcloud
-            {
-                distance = PointCloudHelpers.calculateDistance(pc, baselines[1]);
-            }
-            else  //Else give message for invalid baseline ID
-            {
-                WriteTextSafe("Invalid baseline ID, cannot calculate distance." + Environment.NewLine
-                               + Environment.NewLine + "Use value of 1 or 2.");
-            }*/
-            FileTransfer.writeCSV(fileName, distance);
+            //FileTransfer.writeCSV(fileName, distance);
             //Console.WriteLine(distance);
             WriteTextSafe("Errornumber: " + distance);
             //}
@@ -189,7 +157,6 @@ namespace zivid_test
             if (ZividCAM.setExposure(int.Parse(ExposureTXT.Text)) || ZividCAM.setIris(ulong.Parse(IrisTXT.Text)))
             {
                 WriteTextSafe( "Successfully applied exposure time and/or iris");
-
             }
             else
             {
@@ -197,7 +164,6 @@ namespace zivid_test
             }
         }
        
-
         private void pictureCntTXT_ValueChanged(object sender, EventArgs e)
         {
 
@@ -222,36 +188,8 @@ namespace zivid_test
             //baselines.Add(avgPc);  //Stores baselines in a list
             //runBaseline = true;
 
-            /*if (plc.str1 == '0')
-            {
-                 WriteTextSafe("No baseline taken, sensor did not trigger");
-            }
-            else if (plc.str1 == '1')
-            {
-                baselines[0] = PointCloudHelpers.calcBaseline(snaps);
-                baselines[0].baseLineId = plc.str1; //Compare with baseline while cylinder is in
-            }
-            else if (plc.str1 == '2') 
-            {
-                baselines[1] = PointCloudHelpers.calcBaseline(snaps);
-                baselines[1].baseLineId = plc.str1; //Compare with baseline while cylinder is out
-            }*/
-            int a = 1;
             var baseline = new FileTransfer();
             baseline.writeToFile(baselinePc, blFileNames[1]);
-            int b = 2;
-            //if(baseLineCount == 0)  //If baseline count is 0 store pointcloud in cylinderIn.txt
-            //{
-                //var baseline = new FileTransfer();
-               // baseline.writeToFile(avgPc, blFileNames[0]);
-                //baseLineCount++;
-            //}
-            /*else if(baseLineCount == 1)  //If baseline count is 1 store pointcloud in cylinderOut.txt
-            {
-                var baseline = new FileTransfer();
-                baseline.writeToFile(avgPc, blFileNames[1]);
-                baseLineCount = 0;
-            }*/
 
             // var currentBaseLine = baselines.Where(t => t.pointCloudId = "BaseLineNr0").ToList();
          
@@ -264,7 +202,8 @@ namespace zivid_test
         private void btn_connect_PLS_Click(object sender, EventArgs e)
         {
 
-            plc.J = true;
+            plc.connectToPLC = true;
+            
             //PLC.cancel = false;
             plc.RunServerAsync();
         }
@@ -287,9 +226,9 @@ namespace zivid_test
         {
             try
             {
-                //var fileTransferer = new FileTransfer();
-                //blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
-                //blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
+                var fileTransferer = new FileTransfer();
+                plc.blCylinderIn = fileTransferer.readFromFile(blFileNames[0]);
+                plc.blCylinderOut = fileTransferer.readFromFile(blFileNames[1]);
             } catch (Exception ex)
             {
                 // could not load file
@@ -303,16 +242,27 @@ namespace zivid_test
             //PointCloudHelpers.PointCloudToPicture(myBaseline.pc);
         }
 
-        private void btn_apply_median_filter_Click(object sender, EventArgs e)
+        /*private void btn_apply_median_filter_Click(object sender, EventArgs e)
         {
             //PointCloudHelpers.MedianFiltering();
-        }
+        }*/
 
         private void Disconnect_PLS_Click(object sender, EventArgs e)
         {
-            plc.J = false;
+            plc.connectToPLC = false;
             //PLC.cancel = true;
             //plc.plcListner(); 
-        }   
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_set_errornumber_Click(object sender, EventArgs e)
+        {
+            errorNumberIn = int.Parse(errorNumberInTXT.Text);
+            errorNumberOut = int.Parse(errorNumberOutTXT.Text);
+        }
     }
 }

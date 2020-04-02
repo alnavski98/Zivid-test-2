@@ -47,7 +47,6 @@ namespace zivid_test
                 CAM.UpdateSettings(s =>
                 {
                     s.Iris = iris;
-
                 });
                 setIrisSuccessfull = true;
             }
@@ -140,7 +139,6 @@ namespace zivid_test
             bool assistModeSuccessfull = false;
             try
             {
-               
                 var suggestSettingsParameters = new Zivid.NET.CaptureAssistant.SuggestSettingsParameters(Duration.FromMilliseconds(1200), Zivid.NET.CaptureAssistant.AmbientLightFrequency.none);
                // Console.WriteLine("Running Capture Assistant with parameters: {0}", suggestSettingsParameters);
                 var settingsList = Zivid.NET.CaptureAssistant.SuggestSettings(CAM, suggestSettingsParameters);
