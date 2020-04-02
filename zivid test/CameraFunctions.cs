@@ -72,5 +72,14 @@ namespace zivid_test
             //Thread.Sleep(600);
             // }
         }
+        public PointCloud snapshotUniversal()
+        {
+            
+            //var snaps = new List<PointCloud>();
+            var snap = ZividCAM.snapshot();
+            var pointCloud = PointCloudHelpers.floatToPointCloud(snap);  //Converts point cloud array to PointCloud object
+            //snaps.Add(pointCloud);
+            return pointCloud;
+        }
     }
 }

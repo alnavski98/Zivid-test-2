@@ -121,7 +121,7 @@ namespace zivid_test
                         distanceList = distanceList.Where(t => !float.IsNaN(t)).ToList(); //Removes NaN points from distanceList
                         if (distanceList.Count() > 1)  //If amount of points in distanceList > 1 calculate average to put in pointCloudMap
                         {
-                            pointCloudMap[i, j] = distanceList.Average() + 2 * distanceList.StandardDeviation();
+                            pointCloudMap[i, j] = distanceList.Average() + 4 * distanceList.StandardDeviation();
                         }
                         else  //Else put 0.0f in pointCloudMap
                         {
@@ -252,7 +252,7 @@ namespace zivid_test
                         bmp.SetPixel(j, i, c);  //Color each pixel with scale of black and white,
                     }                           //or highlight errors with red
                 } // end for
-                bmp.Save(Path.Combine("C:\\Users\\Trym", filename) + ".png", ImageFormat.Png);
+                bmp.Save(Path.Combine("C:\\Users\\alnav", filename) + ".png", ImageFormat.Png);
             }
             catch(Exception ex)
             {
