@@ -130,9 +130,9 @@ namespace zivid_test
                             byte[] send_data = Encoding.ASCII.GetBytes(send_str);
                             await n.WriteAsync(send_data, 0, send_data.Length);
                             var bitmap = PointCloudHelpers.plcPointCloudToPicture(functions.pc, map, "movement_error");
+                            Program.f2.Show();
                             Program.f2.displayPicture(bitmap);  //New code
                             Program.f.WriteTextSafe("Picture deviates too much from Baseline");
-                            
                         }
                     }
                     else if(a == 2)  //Same but for error number for out postion
@@ -143,6 +143,7 @@ namespace zivid_test
                                 byte[] send_data = Encoding.ASCII.GetBytes(send_str);
                                 await n.WriteAsync(send_data, 0, send_data.Length);
                                 var bitmap = PointCloudHelpers.plcPointCloudToPicture(functions.pc, map, "movement_error");
+                                Program.f2.Show();
                                 Program.f2.displayPicture(bitmap);  //New code
                                 Program.f.WriteTextSafe("Picture deviates too much from Baseline");
                             }
