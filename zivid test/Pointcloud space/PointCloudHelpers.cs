@@ -320,6 +320,7 @@ namespace zivid_test
                         if (p.errorDistanceSq > plcPointCloudMap[i, j])  //For every point in the single snapshot pointcloud where distance from the
                         {                                             //single snapshot and baseline is greater than the "natural variation" in baseline
                             c = Color.FromArgb(255, 255, 0, 0);  //Color red
+
                         }
                         else
                         {

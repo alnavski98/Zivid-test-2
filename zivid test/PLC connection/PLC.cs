@@ -118,25 +118,28 @@ namespace zivid_test
                         zivid_test.Program.f.WriteTextSafe("4. End position with delay #2");
                     }
                     
-                    if(a == 1)
+                    if(a == 1)  //If cylinder is in compare distance with error number for in position
                     {
                         if (dist > Program.f.errorNumberIn)  //If snapshot deviates from baseline, 
                         {                  //then send a stop signal to PLC
                             string send_str = "Feil";
                             byte[] send_data = Encoding.ASCII.GetBytes(send_str);
                             await n.WriteAsync(send_data, 0, send_data.Length);
-                            PointCloudHelpers.plcPointCloudToPicture(functions.pc, map, "movement_error");
+                            var bitmap = PointCloudHelpers.plcPointCloudToPicture(functions.pc, map, "movement_error");
+                            Program.f2.displayPicture(bitmap);  //New code
                             Program.f.WriteTextSafe("Picture deviates too much from Baseline");
+                            
                         }
                     }
-                    else if(a == 2)
+                    else if(a == 2)  //Same but for error number for out postion
                         {
                             if (dist > Program.f.errorNumberOut)  //If snapshot deviates from baseline, 
                             {                  //then send a stop signal to PLC
                                 string send_str = "Feil";
                                 byte[] send_data = Encoding.ASCII.GetBytes(send_str);
                                 await n.WriteAsync(send_data, 0, send_data.Length);
-                                PointCloudHelpers.plcPointCloudToPicture(functions.pc, map, "movement_error");
+                                var bitmap = PointCloudHelpers.plcPointCloudToPicture(functions.pc, map, "movement_error");
+                                Program.f2.displayPicture(bitmap);  //New code
                                 Program.f.WriteTextSafe("Picture deviates too much from Baseline");
                             }
                         }
