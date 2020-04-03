@@ -63,13 +63,16 @@ namespace zivid_test
         }
         private void btn_snapshot_Click(object sender, EventArgs e)
         {
+            CameraFunctions cameraFunctions = new CameraFunctions();
             //for (int i = 0; i < 10; i++)
             //{ 
 
-            var snaps = new List<PointCloud>();
+            /*var snaps = new List<PointCloud>();
             var snap = ZividCAM.snapshot();  //Takes snapshot from camera and stores in snap
             var pointCloud = PointCloudHelpers.floatToPointCloud(snap);
-            pc = pointCloud; // PointCloudHelpers.calcBaseline(snaps);
+            pc = pointCloud; // PointCloudHelpers.calcBaseline(snaps);*/
+
+            var pc = cameraFunctions.snapshotUniversal();
 
             //if baseline is taken, calculate distance. else dont
             //if (baselines.Count() > 0)  //If amount of baselines in list > 0 run this
@@ -85,6 +88,7 @@ namespace zivid_test
 
             //distance = functions.snapshotDistance(baselinePc);
             distance = PointCloudHelpers.calculateDistance(pc, baselinePc);
+            //distance = PointCloudHelpers.calculateDistance(pc, baselinePc);
 
             //}
             //FileTransfer.writeCSV(fileName, distance);
@@ -172,13 +176,16 @@ namespace zivid_test
         public void btn_baseline_Click(object sender, EventArgs e)
         {
             var snaps = new List<PointCloud>();  //Creates list of objects from PointCloud class
-
+            CameraFunctions cameraFunctions = new CameraFunctions();
+            int a;
             for (int i = 0; i < int.Parse(pictureCntTXT.Text); i++)  //Loops as many times as the
             {                                                        //user requests a picture          
-                var snap = ZividCAM.snapshot();  //Stores array of a point cloud
+                /*var snap = ZividCAM.snapshot();  //Stores array of a point cloud
                 var pointCloud = PointCloudHelpers.floatToPointCloud(snap);  //Converts point cloud array to PointCloud object
                 snaps.Add(pointCloud);  //Adds point cloud to list of point clouds
-                Thread.Sleep(100);  //Pauses for 100ms
+                Thread.Sleep(100);  //Pauses for 100ms */
+                snaps.Add(cameraFunctions.snapshotUniversal());
+                
             }
 
             baselinePc = PointCloudHelpers.calcBaseline(snaps);  //Stores one baseline in baselinePc
@@ -188,8 +195,8 @@ namespace zivid_test
             //baselines.Add(avgPc);  //Stores baselines in a list
             //runBaseline = true;
 
-            var baseline = new FileTransfer();
-            baseline.writeToFile(baselinePc, blFileNames[1]);
+            //var baseline = new FileTransfer();
+            //baseline.writeToFile(baselinePc, blFileNames[1]);
 
             // var currentBaseLine = baselines.Where(t => t.pointCloudId = "BaseLineNr0").ToList();
          

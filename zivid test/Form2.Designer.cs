@@ -49,6 +49,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1898, 1050);
             this.Controls.Add(this.show_error_picture);
+            this.MaximumSize = new System.Drawing.Size(1920, 1200);
+            this.MinimumSize = new System.Drawing.Size(1918, 1018);
             this.Name = "Form2";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
