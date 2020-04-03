@@ -121,7 +121,7 @@ namespace zivid_test
                         distanceList = distanceList.Where(t => !float.IsNaN(t)).ToList(); //Removes NaN points from distanceList
                         if (distanceList.Count() > 1)  //If amount of points in distanceList > 1 calculate average to put in pointCloudMap
                         {
-                            pointCloudMap[i, j] = distanceList.Average() + 4 * distanceList.StandardDeviation();
+                            pointCloudMap[i, j] = distanceList.Average() + 10 * distanceList.StandardDeviation();
                         }
                         else  //Else put 0.0f in pointCloudMap
                         {
@@ -167,6 +167,29 @@ namespace zivid_test
         /// <returns>float value of total distance</returns>
         public static float calculateDistance(PointCloud pc, Baseline baseline)
         {
+            List<Point3> point3 = new List<Point3>();
+            int badPoints = 0;
+            for (int i = 0; i < pc.coordinate3d.Count(); i++)
+            {
+                int[] temp = new int[pc.coordinate3d[0].Count()];
+                Parallel.For(
+                        0, pc.coordinate3d[0].Count(), j =>
+                        {
+                            var length = p2pLengthSquared(pc.coordinate3d[i][j], baseline.pc.coordinate3d[i][j]);
+                            if(length > baseline.thresholdMap[i, j])
+                            {
+                                temp[j] = 1;
+                            }
+                            pc.coordinate3d[i][j].errorDistanceSq = length;
+                        }      
+                );
+                badPoints += temp.Sum();
+            }                        //taken with equivalent points in baseline "image"
+            return badPoints; //Return square root of totDist (for now returns
+        }                 //a non zero number even with baseline being the same as the picture)
+
+        /*public static float calculateDistance(PointCloud pc, Baseline baseline)
+        {
             var totDist = 0.0f;
             List<Point3> point3 = new List<Point3>();
             for (int i = 0; i < pc.coordinate3d.Count(); i++)
@@ -177,13 +200,14 @@ namespace zivid_test
                         {
                             length[j] = p2pLengthSquared(pc.coordinate3d[i][j], baseline.pc.coordinate3d[i][j]);
                             pc.coordinate3d[i][j].errorDistanceSq = length[j];
-                        }      
-                );                                              
+                        }
+                );
+
                 var nn = length.Where(t => !float.IsNaN(t));  //Removes NaN points from nn
                 totDist += nn.Sum(); //Sums up distances between points in "image"
             }                        //taken with equivalent points in baseline "image"
             return (float)Math.Sqrt(totDist); //Return square root of totDist (for now returns
-        }                 //a non zero number even with baseline being the same as the picture)
+        }                 //a non zero number even with baseline being the same as the picture)*/
 
         /// <summary>
         /// Converts a pointcloud object to a 2D "heatmap" 
@@ -333,6 +357,7 @@ namespace zivid_test
             }
             catch (Exception ex)
             {
+                int a = 1;
             }
             return bmp;
         }
