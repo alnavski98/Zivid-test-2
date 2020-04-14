@@ -242,12 +242,12 @@ namespace zivid_test
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /*private void button1_Click(object sender, EventArgs e)
         {
             //var fileTransferer = new FileTransfer();
             //var myBaseline = fileTransferer.readFromFile(blFileNames[0]);
             //PointCloudHelpers.PointCloudToPicture(myBaseline.pc);
-        }
+        }*/
 
         /*private void btn_apply_median_filter_Click(object sender, EventArgs e)
         {

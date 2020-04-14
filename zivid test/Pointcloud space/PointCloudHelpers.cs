@@ -121,7 +121,7 @@ namespace zivid_test
                         distanceList = distanceList.Where(t => !float.IsNaN(t)).ToList(); //Removes NaN points from distanceList
                         if (distanceList.Count() > 1)  //If amount of points in distanceList > 1 calculate average to put in pointCloudMap
                         {
-                            pointCloudMap[i, j] = distanceList.Average() + 10 * distanceList.StandardDeviation();
+                            pointCloudMap[i, j] = distanceList.Average() + 2 * distanceList.StandardDeviation();
                         }
                         else  //Else put 0.0f in pointCloudMap
                         {
@@ -171,16 +171,17 @@ namespace zivid_test
             int badPoints = 0;
             for (int i = 0; i < pc.coordinate3d.Count(); i++)
             {
+                float[] length = new float[pc.coordinate3d[0].Count()];
                 int[] temp = new int[pc.coordinate3d[0].Count()];
                 Parallel.For(
                         0, pc.coordinate3d[0].Count(), j =>
                         {
-                            var length = p2pLengthSquared(pc.coordinate3d[i][j], baseline.pc.coordinate3d[i][j]);
-                            if(length > baseline.thresholdMap[i, j])
+                            length[j] = p2pLengthSquared(pc.coordinate3d[i][j], baseline.pc.coordinate3d[i][j]);
+                            if(length[j] > baseline.thresholdMap[i, j])
                             {
                                 temp[j] = 1;
                             }
-                            pc.coordinate3d[i][j].errorDistanceSq = length;
+                            pc.coordinate3d[i][j].errorDistanceSq = length[j];
                         }      
                 );
                 badPoints += temp.Sum();
@@ -202,13 +203,12 @@ namespace zivid_test
                             pc.coordinate3d[i][j].errorDistanceSq = length[j];
                         }
                 );
-
                 var nn = length.Where(t => !float.IsNaN(t));  //Removes NaN points from nn
                 totDist += nn.Sum(); //Sums up distances between points in "image"
             }                        //taken with equivalent points in baseline "image"
             return (float)Math.Sqrt(totDist); //Return square root of totDist (for now returns
-        }                 //a non zero number even with baseline being the same as the picture)*/
-
+        }                 //a non zero number even with baseline being the same as the picture)
+        */
         /// <summary>
         /// Converts a pointcloud object to a 2D "heatmap" 
         /// in black and white
@@ -234,7 +234,7 @@ namespace zivid_test
                         }
                     );
             }
-
+            zValues = zValues.Where(t => !float.IsNaN(t)).ToList();
             var q2 = zValues.Median();
             var q3 = zValues.Where(t => t > q2).Median() * 1.5f;  //Interquartile Range
             var q1 = zValues.Where(t => t < q2).Median() * 1.5f;
@@ -242,7 +242,7 @@ namespace zivid_test
             var scale = 255.0f / (q3 - q1);  //Scales upper and lower z-value to RGB color scale
             var translation = (0 - q1);  //Adjusts so that the lowest z-value is the lowest RGB-value
                                          //and the highest z-value to be the highest RGB-value
-            zValues = zValues.Where(t => !float.IsNaN(t)).ToList();
+            //zValues = zValues.Where(t => !float.IsNaN(t)).ToList();
             
             try
             {
