@@ -46,9 +46,9 @@
             this.btn_connect_PLS = new System.Windows.Forms.Button();
             this.btn_disconnect = new System.Windows.Forms.Button();
             this.btn_load_baselines = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            //this.button1 = new System.Windows.Forms.Button();
             this.Disconnect_PLS = new System.Windows.Forms.Button();
-            this.btn_apply_median_filter = new System.Windows.Forms.Button();
+            //this.btn_apply_median_filter = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -267,13 +267,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(462, 195);
+            /*this.button1.Location = new System.Drawing.Point(462, 195);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(163, 35);
             this.button1.TabIndex = 17;
             this.button1.Text = "Test write image";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.button1_Click);*/
             // 
             // Disconnect_PLS
             // 
@@ -288,10 +288,10 @@
             // 
             // btn_apply_median_filter
             // 
-            this.btn_apply_median_filter.Location = new System.Drawing.Point(0, 0);
+            /*this.btn_apply_median_filter.Location = new System.Drawing.Point(0, 0);
             this.btn_apply_median_filter.Name = "btn_apply_median_filter";
             this.btn_apply_median_filter.Size = new System.Drawing.Size(75, 23);
-            this.btn_apply_median_filter.TabIndex = 29;
+            this.btn_apply_median_filter.TabIndex = 29;*/
             // 
             // label4
             // 
@@ -450,9 +450,9 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.btn_apply_median_filter);
+            //this.Controls.Add(this.btn_apply_median_filter);
             this.Controls.Add(this.Disconnect_PLS);
-            this.Controls.Add(this.button1);
+            //this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_load_baselines);
             this.Controls.Add(this.btn_disconnect);
             this.Controls.Add(this.btn_connect_PLS);
@@ -500,9 +500,9 @@
         private System.Windows.Forms.Button btn_connect_PLS;
         private System.Windows.Forms.Button btn_disconnect;
         private System.Windows.Forms.Button btn_load_baselines;
-        private System.Windows.Forms.Button button1;
+        //private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button Disconnect_PLS;
-        private System.Windows.Forms.Button btn_apply_median_filter;
+        //private System.Windows.Forms.Button btn_apply_median_filter;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
