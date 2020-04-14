@@ -276,7 +276,7 @@ namespace zivid_test
                         bmp.SetPixel(j, i, c);  //Color each pixel with scale of black and white,
                     }                           //or highlight errors with red
                 } // end for
-                bmp.Save(Path.Combine("C:\\Users\\alnav", filename) + ".png", ImageFormat.Png);
+                bmp.Save(Path.Combine("C:\\Users\\Trym", filename) + ".png", ImageFormat.Png);
             }
             catch(Exception ex)
             {

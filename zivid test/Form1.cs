@@ -91,7 +91,7 @@ namespace zivid_test
             //distance = PointCloudHelpers.calculateDistance(pc, baselinePc);
 
             //}
-            //FileTransfer.writeCSV(fileName, distance);
+            FileTransfer.writeCSV(fileName, distance);
             //Console.WriteLine(distance);
             WriteTextSafe("Errornumber: " + distance);
             //}
@@ -195,8 +195,8 @@ namespace zivid_test
             //baselines.Add(avgPc);  //Stores baselines in a list
             //runBaseline = true;
 
-            //var baseline = new FileTransfer();
-            //baseline.writeToFile(baselinePc, blFileNames[1]);
+            var baseline = new FileTransfer();
+            baseline.writeToFile(baselinePc, blFileNames[0]);
 
             // var currentBaseLine = baselines.Where(t => t.pointCloudId = "BaseLineNr0").ToList();
          
