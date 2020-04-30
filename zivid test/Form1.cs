@@ -93,7 +93,7 @@ namespace zivid_test
             //}
             FileTransfer.writeCSV(fileName, distance);
             //Console.WriteLine(distance);
-            WriteTextSafe("Errornumber: " + distance);
+            WriteTextSafe("Errorpoints: " + distance);
             //}
             /*else
             {

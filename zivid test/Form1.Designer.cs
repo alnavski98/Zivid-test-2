@@ -46,9 +46,7 @@
             this.btn_connect_PLS = new System.Windows.Forms.Button();
             this.btn_disconnect = new System.Windows.Forms.Button();
             this.btn_load_baselines = new System.Windows.Forms.Button();
-            //this.button1 = new System.Windows.Forms.Button();
             this.Disconnect_PLS = new System.Windows.Forms.Button();
-            //this.btn_apply_median_filter = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -265,16 +263,6 @@
             this.btn_load_baselines.UseVisualStyleBackColor = true;
             this.btn_load_baselines.Click += new System.EventHandler(this.btn_load_baselines_Click);
             // 
-            // button1
-            // 
-            /*this.button1.Location = new System.Drawing.Point(462, 195);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(163, 35);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Test write image";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);*/
-            // 
             // Disconnect_PLS
             // 
             this.Disconnect_PLS.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
@@ -285,13 +273,6 @@
             this.Disconnect_PLS.Text = "Disconnect PLC";
             this.Disconnect_PLS.UseVisualStyleBackColor = true;
             this.Disconnect_PLS.Click += new System.EventHandler(this.Disconnect_PLS_Click);
-            // 
-            // btn_apply_median_filter
-            // 
-            /*this.btn_apply_median_filter.Location = new System.Drawing.Point(0, 0);
-            this.btn_apply_median_filter.Name = "btn_apply_median_filter";
-            this.btn_apply_median_filter.Size = new System.Drawing.Size(75, 23);
-            this.btn_apply_median_filter.TabIndex = 29;*/
             // 
             // label4
             // 
@@ -359,9 +340,9 @@
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.label8.Location = new System.Drawing.Point(486, 237);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(315, 29);
+            this.label8.Size = new System.Drawing.Size(286, 29);
             this.label8.TabIndex = 26;
-            this.label8.Text = "Live chart of \"errornumbers\":";
+            this.label8.Text = "Live chart of \"errorpoints\":";
             // 
             // BitmapTXT
             // 
@@ -408,9 +389,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(657, 154);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(114, 20);
+            this.label10.Size = new System.Drawing.Size(103, 20);
             this.label10.TabIndex = 32;
-            this.label10.Text = "In errornumber";
+            this.label10.Text = "In errorpoints";
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // error_number_out_TXT
@@ -418,9 +399,9 @@
             this.error_number_out_TXT.AutoSize = true;
             this.error_number_out_TXT.Location = new System.Drawing.Point(803, 155);
             this.error_number_out_TXT.Name = "error_number_out_TXT";
-            this.error_number_out_TXT.Size = new System.Drawing.Size(126, 20);
+            this.error_number_out_TXT.Size = new System.Drawing.Size(115, 20);
             this.error_number_out_TXT.TabIndex = 33;
-            this.error_number_out_TXT.Text = "Out errornumber";
+            this.error_number_out_TXT.Text = "Out errorpoints";
             // 
             // btn_set_errornumber
             // 
@@ -428,7 +409,7 @@
             this.btn_set_errornumber.Name = "btn_set_errornumber";
             this.btn_set_errornumber.Size = new System.Drawing.Size(149, 38);
             this.btn_set_errornumber.TabIndex = 34;
-            this.btn_set_errornumber.Text = "Set errornumber";
+            this.btn_set_errornumber.Text = "Set errorpoints";
             this.btn_set_errornumber.UseVisualStyleBackColor = true;
             this.btn_set_errornumber.Click += new System.EventHandler(this.btn_set_errornumber_Click);
             // 
@@ -450,9 +431,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            //this.Controls.Add(this.btn_apply_median_filter);
             this.Controls.Add(this.Disconnect_PLS);
-            //this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_load_baselines);
             this.Controls.Add(this.btn_disconnect);
             this.Controls.Add(this.btn_connect_PLS);

@@ -20,7 +20,7 @@ namespace zivid_test.PLC_connection
             var chart = Program.f.chart2.ChartAreas[0];
             chart.AxisX.Minimum = (inc - 50);        //Determining where the axes start from and end at
             chart.AxisX.Maximum = (inc);
-            Program.f.chart2.Series["Errornumber"].Points.AddXY(inc, errorNumber);  //Adding new points in chart
+            Program.f.chart2.Series["Errorpoints"].Points.AddXY(inc, errorNumber);  //Adding new points in chart
             inc++;
 
             if(maxDistance < errorNumber)  //Updates scale of graph whenever new
@@ -49,12 +49,12 @@ namespace zivid_test.PLC_connection
                 chart.AxisY.Maximum = 10000;
                 chart.AxisX.Interval = 10;       // determining  the amount to step one unit on the axis.
                 
-                Program.f.chart2.Series.Add("Errornumber");
-                Program.f.chart2.Series["Errornumber"].ChartType = SeriesChartType.Line; //type of chart, lines between points
-                Program.f.chart2.Series["Errornumber"].Color = Color.Red;
+                Program.f.chart2.Series.Add("Errorpoints");
+                Program.f.chart2.Series["Errorpoints"].ChartType = SeriesChartType.Line; //type of chart, lines between points
+                Program.f.chart2.Series["Errorpoints"].Color = Color.Red;
                 Program.f.chart2.Series[0].IsValueShownAsLabel = false;
 
-                Program.f.chart2.Series["Errornumber"].Points.AddXY(inc, 0);  //adding new points in chart
+                Program.f.chart2.Series["Errorpoints"].Points.AddXY(inc, 0);  //adding new points in chart
             }
         }
     }
